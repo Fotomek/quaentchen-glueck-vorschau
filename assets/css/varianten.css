@@ -268,7 +268,15 @@ html[data-variante="c"] .zahl-wert{color:inherit}
 .kopf .btn-unterstuetzen{min-height:38px;padding:.4rem 1rem;font-size:.92rem}
 .nav-mobil summary{min-height:40px;min-width:44px;padding:.35rem .6rem;border:1px solid var(--linie);background:#fff;border-radius:10px;font-weight:500;font-size:.95rem;gap:.35rem}
 .nav-mobil[open] summary{background:var(--gruen-zart);border-color:var(--gruen-dunkel)}
-.nav-mobil ul{top:calc(100% + .35rem);width:min(78vw,280px);border-radius:12px;padding:.3rem;box-shadow:0 8px 24px rgba(7,79,55,.14)}
+/* 02.11. 14:00: Menüfenster so breit wie der längste Eintrag, rechts unter dem Burger */
+.nav-mobil ul{top:calc(100% + .35rem);right:0;left:auto;width:max-content;min-width:0;max-width:calc(100vw - 2rem);border-radius:12px;padding:.3rem;box-shadow:0 8px 24px rgba(7,79,55,.14)}
+.nav-mobil li a{white-space:nowrap}
+/* 02.11. 14:01: „Mithelfen“ hervorgehoben (hellgrüne Pille, fett, Text tiefgrün) */
+.nav-desktop a.nav-mithelfen{background:var(--gruen-hell);color:var(--gruen-tief);font-weight:700;border-radius:999px;padding-left:.8rem;padding-right:.8rem;margin:0 .2rem}
+.nav-desktop a.nav-mithelfen:hover{background:#A6D92E;color:var(--gruen-tief)}
+.nav-mobil li a.nav-mithelfen{background:var(--gruen-hell);color:var(--gruen-tief);font-weight:700;margin:.15rem 0}
+.nav-mobil li a.nav-mithelfen:hover{background:#A6D92E}
+.nav-mobil li+li a.nav-mithelfen,.nav-mobil li:has(a.nav-mithelfen)+li a{border-top-color:transparent}
 .nav-mobil li a{padding:.55rem .75rem;font-weight:500;font-size:1rem;border-radius:8px}
 .nav-mobil li+li a{border-top:1px solid #EEF2E8}
 @media (min-width:900px){.marke .marke-wort{height:24px}}
