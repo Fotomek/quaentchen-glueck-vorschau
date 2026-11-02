@@ -3,7 +3,7 @@
 html[data-variante="a"] [data-nur]:not([data-nur~="a"]),
 html[data-variante="b"] [data-nur]:not([data-nur~="b"]),
 html[data-variante="c"] [data-nur]:not([data-nur~="c"]){display:none!important}
-[id]{scroll-margin-top:84px}
+[id]{scroll-margin-top:76px}
 /* Platzhalter: Text steht wörtlich als [PLATZHALTER: ...] im HTML */
 .ph::before{content:none}
 .ph{font-weight:600;display:inline-block;line-height:1.45;padding:.2rem .55rem;max-width:100%}
@@ -255,6 +255,47 @@ html[data-variante="c"] .zahl-wert{color:inherit}
   html[data-variante="b"] .hero-bild{height:70%;min-height:220px}
   html[data-variante="b"] .wege{padding-top:3.25rem}
 }
+
+/* Runde 02.11.2026 13:48 (Feedback Thomas): schlanker Kopf, echte Sprungziele, kompakter Burger. Gilt für alle Varianten. */
+.kopf-inner{min-height:58px;gap:.75rem}
+.marke{gap:.45rem}
+.marke img{width:34px}
+.marke .marke-wort{height:22px}
+.nav-desktop ul{gap:.15rem}
+.nav-desktop a{display:block;font-weight:500;font-size:.92rem;padding:.4rem .55rem;border-radius:8px;color:var(--text)}
+.nav-desktop a:hover{background:var(--gruen-zart);text-decoration:none;color:var(--gruen-dunkel)}
+.nav-desktop a[aria-current="true"]{color:var(--gruen-dunkel);text-decoration:underline;text-underline-offset:.3em}
+.kopf .btn-unterstuetzen{min-height:38px;padding:.4rem 1rem;font-size:.92rem}
+.nav-mobil summary{min-height:40px;min-width:44px;padding:.35rem .6rem;border:1px solid var(--linie);background:#fff;border-radius:10px;font-weight:500;font-size:.95rem;gap:.35rem}
+.nav-mobil[open] summary{background:var(--gruen-zart);border-color:var(--gruen-dunkel)}
+.nav-mobil ul{top:calc(100% + .35rem);width:min(78vw,280px);border-radius:12px;padding:.3rem;box-shadow:0 8px 24px rgba(7,79,55,.14)}
+.nav-mobil li a{padding:.55rem .75rem;font-weight:500;font-size:1rem;border-radius:8px}
+.nav-mobil li+li a{border-top:1px solid #EEF2E8}
+@media (min-width:900px){.marke .marke-wort{height:24px}}
+@media (min-width:1024px){
+  .nav-mobil{display:none}
+  .nav-desktop{display:block}
+  .nav-desktop ul{display:flex;font-size:inherit;gap:.1rem}
+  .kopf .btn-unterstuetzen{display:inline-flex}
+  .marke{margin-right:auto}
+}
+@media (min-width:1024px) and (max-width:1179px){.nav-desktop a{padding:.4rem .4rem;font-size:.88rem}}
+/* Entwurfsleiste dünn; auf dem Handy nur der Hinweis, ohne Umschalter */
+.entwurf-leiste{padding:.2rem 0;font-size:.8rem}
+.entwurf-leiste a{padding:.05rem .45rem}
+@media (max-width:899px){.entwurf-leiste .schalter{display:none}}
+/* Neue Abschnitte */
+.zielgruppen{background:var(--creme)}
+.themen-liste{list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:1rem}
+.thema{background:#fff;border:1px solid var(--linie);border-radius:var(--radius);padding:1.1rem 1.2rem}
+.thema h3{font-size:1.3rem;margin-bottom:.3rem}
+.thema p{margin:0;color:var(--text-2)}
+.hilfe-anfragen{margin-top:1.75rem}
+.hilfe-anfragen h3{font-size:1.4rem}
+.aktuelles{background:#fff}
+@media (min-width:700px){.themen-liste{grid-template-columns:1fr 1fr}}
+html[data-variante="b"] .thema{border-radius:24px 24px 24px 8px}
+html[data-variante="b"] .thema:nth-child(even){border-radius:24px 8px 24px 24px}
 
 /* ===== Variante C (aus site/landingpage/variante-c/style.css, eingegrenzt) ===== */
 html[data-variante="c"] .abschnitt{padding:4rem 0}
