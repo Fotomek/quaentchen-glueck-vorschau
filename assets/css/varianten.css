@@ -407,3 +407,24 @@ html[data-variante="c"] .abschluss .btn{background:var(--gruen-hell);color:var(-
 @media (min-width:1080px){html[data-variante="c"] .kachel-1 .karte-text{justify-content:flex-end}}
 /* Runde 16:55: KI-Foto statt Bild-Platzhalter */
 html[data-variante="c"] .hero-foto .foto{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px 48px 6px 48px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
+
+/* 02.11.2026 14:10 (Feedback Thomas): Startbereich-Button „Mithelfen“ dezent auffälliger. Herz-Akzent, Hover/Fokus mit leichtem Anheben und grünem Schatten, Tipp-Rückmeldung, einmaliger sanfter Hinweis nach dem Laden. Ohne Bewegung bei prefers-reduced-motion. */
+.hero .btn-mithelfen{background:rgba(255,255,255,.9);transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease;box-shadow:0 2px 8px rgba(7,79,55,.10)}
+.hero .btn-mithelfen .mithelfen-herz{width:1.15em;height:1.15em;color:#3F7A05;transition:transform .25s ease,color .2s ease}
+.hero .btn-mithelfen:hover,.hero .btn-mithelfen:focus-visible{background:var(--gruen-hell);color:var(--gruen-tief);border-color:var(--gruen-dunkel);transform:translateY(-2px);box-shadow:0 10px 22px rgba(7,79,55,.22)}
+.hero .btn-mithelfen:hover .mithelfen-herz,.hero .btn-mithelfen:focus-visible .mithelfen-herz{color:var(--gruen-tief);transform:scale(1.15)}
+.hero .btn-mithelfen:focus-visible{outline:3px solid var(--gruen-dunkel);outline-offset:3px}
+.hero .btn-mithelfen:active{transform:translateY(0) scale(.98);box-shadow:0 3px 8px rgba(7,79,55,.18);background:#A6D92E;color:var(--gruen-tief)}
+@keyframes mithelfen-hinweis{0%{box-shadow:0 2px 8px rgba(7,79,55,.10),0 0 0 0 rgba(146,203,13,.55)}70%{box-shadow:0 2px 8px rgba(7,79,55,.10),0 0 0 12px rgba(146,203,13,0)}100%{box-shadow:0 2px 8px rgba(7,79,55,.10),0 0 0 0 rgba(146,203,13,0)}}
+@keyframes herz-schlag{0%,100%{transform:scale(1)}30%{transform:scale(1.18)}60%{transform:scale(1)}}
+@media (prefers-reduced-motion:no-preference){
+  .hero .btn-mithelfen{animation:mithelfen-hinweis 1.6s ease-out 1.2s 1}
+  .hero .btn-mithelfen:hover .mithelfen-herz{animation:herz-schlag .7s ease-out 1}
+}
+@media (prefers-reduced-motion:reduce){.hero .btn-mithelfen:hover,.hero .btn-mithelfen:focus-visible,.hero .btn-mithelfen:active{transform:none}.hero .btn-mithelfen .mithelfen-herz{transform:none!important}}
+/* Variante C: Button liegt auf dunklem Bild, weiße Rand-Optik bleibt */
+html[data-variante="c"] .hero .btn-mithelfen{background:rgba(255,255,255,.08);box-shadow:none}
+html[data-variante="c"] .hero .btn-mithelfen .mithelfen-herz{color:var(--gruen-hell)}
+html[data-variante="c"] .hero .btn-mithelfen:hover,html[data-variante="c"] .hero .btn-mithelfen:focus-visible{background:var(--gruen-hell);color:var(--gruen-tief);border-color:var(--gruen-hell);box-shadow:0 10px 22px rgba(0,0,0,.28)}
+html[data-variante="c"] .hero .btn-mithelfen:focus-visible{outline-color:#fff}
+html[data-variante="c"] .hero .btn-mithelfen:hover .mithelfen-herz,html[data-variante="c"] .hero .btn-mithelfen:focus-visible .mithelfen-herz{color:var(--gruen-tief)}
