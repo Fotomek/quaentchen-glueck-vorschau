@@ -1,0 +1,360 @@
+/* ===== Seite v1: gemeinsam für alle Varianten (von _build/generate.py erzeugt) ===== */
+/* Sichtbarkeit je Variante: data-nur="a", "b c" usw. */
+html[data-variante="a"] [data-nur]:not([data-nur~="a"]),
+html[data-variante="b"] [data-nur]:not([data-nur~="b"]),
+html[data-variante="c"] [data-nur]:not([data-nur~="c"]){display:none!important}
+[id]{scroll-margin-top:84px}
+/* Platzhalter: Text steht wörtlich als [PLATZHALTER: ...] im HTML */
+.ph::before{content:none}
+.ph{font-weight:600;display:inline-block;line-height:1.45;padding:.2rem .55rem;max-width:100%}
+.ph-block strong{letter-spacing:.04em}
+.karten,.zahlen-grid{list-style:none;padding:0}
+.karten{margin-bottom:0}
+.stimme blockquote{margin:0}
+.weg-inner>:last-child,.karte-text>:last-child{margin-bottom:0}
+.rechte-hinweis{margin:1rem 0 0;font-size:.92rem}
+/* Entwurfsleiste */
+.entwurf-leiste{background:#14231C;color:#F3F6EE;font-size:.88rem;line-height:1.4;padding:.45rem 0}
+.entwurf-inner{display:flex;flex-wrap:wrap;gap:.35rem 1.2rem;align-items:center}
+.entwurf-leiste a{color:#fff;display:inline-block;padding:.2rem .55rem;border-radius:999px;border:1px solid rgba(255,255,255,.35);text-decoration:none;margin-left:.15rem}
+.entwurf-leiste a[aria-current]{background:var(--gruen-hell);color:var(--gruen-tief);border-color:var(--gruen-hell);font-weight:600}
+.entwurf-leiste :focus-visible{outline-color:var(--gruen-hell)}
+html[data-entwurf="aus"] .entwurf-leiste{display:none}
+/* Spenden, Partner, Rechtliches */
+.spenden{background:var(--gruen-zart)}
+.partner{background:var(--creme);border-top:1px solid var(--linie)}
+.spenden .ph-block,.partner .ph-block{margin:1.25rem 0}
+.recht{background:#fff;border-top:1px solid var(--linie);padding:3rem 0}
+.recht h2{font-size:clamp(1.6rem,4vw,2.2rem)}
+.recht-liste{display:grid;gap:.25rem 1.5rem;margin:1rem 0 0}
+.recht-liste dt{font-weight:600;color:var(--gruen-dunkel);margin-top:.6rem}
+.recht-liste dd{margin:0}
+@media (min-width:700px){.recht-liste{grid-template-columns:14rem 1fr}.recht-liste dt{margin-top:0}}
+.fuss nav ul{gap:.45rem}
+
+/* ===== Variante A (aus site/landingpage/variante-a/style.css, eingegrenzt) ===== */
+html[data-variante="a"] .abschnitt{padding:4rem 0}
+html[data-variante="a"] .intro{font-size:1.12rem;color:var(--text-2);max-width:42rem}
+html[data-variante="a"] .zentriert{text-align:center;margin-top:2rem}
+html[data-variante="a"] .schmal{max-width:760px}
+html[data-variante="a"] .hero{position:relative;overflow:hidden;padding:2.5rem 0 3.5rem;text-align:center;background:
+  radial-gradient(60% 50% at 50% 0%, #fff 0%, rgba(255,255,255,0) 70%), var(--creme)}
+html[data-variante="a"] .hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+html[data-variante="a"] .hero-logo{width:min(48vw,200px);margin-bottom:1.25rem}
+html[data-variante="a"] .hero h1{max-width:14ch}
+html[data-variante="a"] .hero h1 .akzent{display:block;color:#3F7A05;font-size:1.05em;line-height:1.2;margin-top:.1em}
+html[data-variante="a"] .lead{font-size:1.18rem;color:var(--text-2);max-width:36rem}
+html[data-variante="a"] .btn-reihe{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:.5rem}
+html[data-variante="a"] .deko{position:absolute;opacity:.22;z-index:0}
+html[data-variante="a"] .deko-1{width:180px;left:-60px;top:40px;transform:rotate(-12deg)}
+html[data-variante="a"] .deko-2{width:240px;right:-90px;bottom:-40px;transform:rotate(18deg)}
+html[data-variante="a"] .wege{background:#fff}
+html[data-variante="a"] .wege h2{text-align:center}
+html[data-variante="a"] .wege-grid{display:grid;gap:1.25rem;margin-top:1.5rem}
+html[data-variante="a"] .weg{background:var(--creme);border:1px solid var(--linie);border-radius:var(--radius);padding:1.6rem}
+html[data-variante="a"] .weg-hilfe{background:var(--gruen-zart)}
+html[data-variante="a"] .weg-icon{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--gruen-dunkel);border:2px solid var(--gruen-hell);margin-bottom:.9rem}
+html[data-variante="a"] .weg-icon .icon{width:30px;height:30px}
+html[data-variante="a"] .zahlen-grid{list-style:none;padding:0;margin:1.5rem 0 1rem;display:grid;gap:1rem}
+html[data-variante="a"] .zahl{background:#fff;border-radius:var(--radius);padding:1rem;border:1px solid var(--linie)}
+html[data-variante="a"] .hinweis{font-size:.95rem}
+html[data-variante="a"] .bereiche{background:#fff}
+html[data-variante="a"] .karten{display:grid;gap:1.1rem;margin-top:1.75rem}
+html[data-variante="a"] .karte{background:var(--creme);border-radius:var(--radius);padding:1.5rem;border:1px solid var(--linie);display:flex;flex-direction:column}
+html[data-variante="a"] .karte p{color:var(--text-2);flex:1}
+html[data-variante="a"] .karte-icon{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:14px;background:var(--gruen-hell);color:var(--gruen-tief);margin-bottom:1rem}
+html[data-variante="a"] .mehr{font-weight:600;color:var(--gruen-dunkel);align-self:flex-start;padding:.35rem 0}
+html[data-variante="a"] .stimmen-grid{display:grid;gap:1rem;margin-top:1.5rem}
+html[data-variante="a"] .stimme{margin:0;position:relative;padding-top:.5rem}
+html[data-variante="a"] .stimme .zitat{width:40px;height:40px;color:var(--gruen-hell);stroke-width:2.6;margin-bottom:.4rem}
+html[data-variante="a"] .stimme blockquote{margin:0}
+html[data-variante="a"] .faq{background:#fff}
+html[data-variante="a"] .abschluss{background:var(--gruen-hell);padding:4rem 0;text-align:center}
+html[data-variante="a"] .abschluss-inner{display:flex;flex-direction:column;align-items:center}
+html[data-variante="a"] .abschluss h2{color:var(--gruen-tief);max-width:18ch}
+html[data-variante="a"] .abschluss .akzent{color:var(--gruen-dunkel)}
+html[data-variante="a"] .abschluss p{color:var(--gruen-tief);font-size:1.15rem;font-weight:600}
+html[data-variante="a"] .abschluss-klee{width:72px;margin-bottom:1rem}
+@media (min-width:700px){
+html[data-variante="a"] .wege-grid{grid-template-columns:1fr 1fr}
+html[data-variante="a"] .zahlen-grid{grid-template-columns:repeat(3,1fr)}
+html[data-variante="a"] .karten{grid-template-columns:repeat(2,1fr)}
+html[data-variante="a"] .stimmen-grid{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1080px){
+html[data-variante="a"] .abschnitt{padding:6rem 0}
+html[data-variante="a"] .hero{padding:4rem 0 5rem}
+html[data-variante="a"] .hero-logo{width:300px}
+html[data-variante="a"] .karten{grid-template-columns:repeat(3,1fr)}
+html[data-variante="a"] .deko-1{width:260px;left:4%;top:90px}
+html[data-variante="a"] .deko-2{width:320px;right:3%;bottom:20px}
+}
+@media (min-width:1080px){
+html[data-variante="a"] .hero h1{max-width:none}
+}
+/* Variante A: Anpassungen an das gemeinsame HTML */
+
+html[data-variante="a"] .hero-panel{display:flex;flex-direction:column;align-items:center}
+html[data-variante="a"] .zahlen-layout{display:flex;flex-direction:column}
+html[data-variante="a"] .zahlen-kopf{display:contents}
+html[data-variante="a"] .zahlen-grid{order:1}
+html[data-variante="a"] .zahlen-kopf .hinweis{order:2}
+html[data-variante="a"] .karte-text{display:flex;flex-direction:column;flex:1}
+html[data-variante="a"] .weg h3 .icon{display:none}
+
+/* ===== Variante B (aus site/landingpage/variante-b/style.css, eingegrenzt) ===== */
+html[data-variante="b"] .abschnitt{position:relative;padding:4rem 0}
+html[data-variante="b"] .intro{font-size:1.12rem;color:var(--text-2);max-width:42rem}
+html[data-variante="b"] .zentriert{text-align:center;margin-top:2rem}
+html[data-variante="b"] .schmal{max-width:760px}
+html[data-variante="b"] .welle{position:absolute;left:0;right:0;top:-1px;width:100%;height:44px;transform:translateY(-100%)}
+html[data-variante="b"] .hero{position:relative;min-height:calc(100svh - 68px - 80px);display:flex;align-items:flex-start;overflow:hidden;background:#FCFCF7}
+html[data-variante="b"] .hero-bild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center bottom}
+html[data-variante="b"] .hero-inner{position:relative;z-index:1;padding:1.75rem 0 9rem}
+html[data-variante="b"] .hero-panel{background:rgba(255,255,255,.93);border-radius:28px;padding:1.6rem 1.4rem;box-shadow:var(--schatten);max-width:640px}
+html[data-variante="b"] .badge{display:inline-block;background:var(--gruen-hell);color:var(--gruen-tief);font-weight:600;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;padding:.35rem .8rem;border-radius:999px;margin-bottom:1rem}
+html[data-variante="b"] .hero h1 .akzent{display:block;color:#3F7A05;font-size:1.05em;line-height:1.2}
+html[data-variante="b"] .lead{font-size:1.15rem;color:var(--text-2)}
+html[data-variante="b"] .btn-reihe{display:flex;flex-wrap:wrap;gap:.75rem}
+html[data-variante="b"] :is(.wege,html[data-variante="b"] .faq){background:var(--gruen-dunkel);color:#EAF4E0}
+html[data-variante="b"] :is(.wege,html[data-variante="b"] .faq) h2,html[data-variante="b"] :is(.wege,html[data-variante="b"] .faq) h3{color:#fff}
+html[data-variante="b"] .wege-grid{display:grid;gap:1.25rem;margin-top:1.5rem}
+html[data-variante="b"] .weg{display:flex;gap:1rem;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:28px;padding:1.4rem}
+html[data-variante="b"] .weg-icon{flex:none;display:grid;place-items:center;width:60px;height:60px;border-radius:46% 54% 60% 40% / 50% 42% 58% 50%;background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="b"] .weg-icon .icon{width:30px;height:30px}
+html[data-variante="b"] .zahlen{background:var(--creme)}
+html[data-variante="b"] .zahlen-grid{list-style:none;padding:0;margin:1.75rem 0 1rem;display:grid;gap:1.5rem}
+html[data-variante="b"] .zahl{display:flex;align-items:center;gap:1rem}
+html[data-variante="b"] .kreis{flex:none;display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#fff;border:3px solid var(--gruen-hell)}
+html[data-variante="b"] .kreis-klee{width:46px}
+html[data-variante="b"] .hinweis{font-size:.95rem}
+html[data-variante="b"] .bereiche{background:var(--gruen-zart)}
+html[data-variante="b"] .liste{list-style:none;padding:0;margin:1.75rem 0 0;display:grid;gap:1.1rem}
+html[data-variante="b"] .eintrag{display:flex;gap:1.1rem;align-items:flex-start;background:#fff;border-radius:28px 28px 28px 8px;padding:1.3rem}
+html[data-variante="b"] .eintrag:nth-child(even){border-radius:28px 8px 28px 28px}
+html[data-variante="b"] .eintrag p{color:var(--text-2);margin-bottom:.4rem}
+html[data-variante="b"] .blob{flex:none;display:grid;place-items:center;width:58px;height:58px;color:var(--gruen-dunkel);background:#DDEFB4;border-radius:58% 42% 50% 50% / 46% 55% 45% 54%}
+html[data-variante="b"] .blob .icon{width:30px;height:30px}
+html[data-variante="b"] .mehr{font-weight:600;color:var(--gruen-dunkel);display:inline-block;padding:.3rem 0}
+html[data-variante="b"] .stimmen{background:var(--creme)}
+html[data-variante="b"] .stimmen-reihe{display:grid;gap:1.25rem;margin-top:1.5rem}
+html[data-variante="b"] .stimme{margin:0}
+html[data-variante="b"] .sprechblase{position:relative;border-radius:24px 24px 24px 6px}
+html[data-variante="b"] .faq summary{color:#fff}
+html[data-variante="b"] .faq details{border-color:rgba(255,255,255,.22)}
+html[data-variante="b"] .faq summary::after{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="b"] .faq .antwort{color:#DCEBD2}
+html[data-variante="b"] .abschluss{position:relative;text-align:center;padding:4.5rem 0 11rem;background:#FCFCF7 url("../img/kleeblattwiese-800.webp") center bottom / cover no-repeat}
+html[data-variante="b"] .abschluss-inner{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.93);border-radius:28px;padding:2rem 1.25rem;max-width:720px}
+html[data-variante="b"] .abschluss h2{max-width:18ch}
+html[data-variante="b"] .abschluss .akzent{color:#3F7A05}
+html[data-variante="b"] .abschluss p{font-size:1.15rem;font-weight:600;color:var(--text-2)}
+@media (min-width:700px){
+html[data-variante="b"] .wege-grid{grid-template-columns:1fr 1fr}
+html[data-variante="b"] .zahlen-grid{grid-template-columns:repeat(3,1fr)}
+html[data-variante="b"] .zahl{flex-direction:column;align-items:flex-start}
+html[data-variante="b"] .liste{grid-template-columns:1fr 1fr}
+html[data-variante="b"] .stimmen-reihe{grid-template-columns:1fr 1fr}
+html[data-variante="b"] .welle{height:70px}
+}
+@media (min-width:1080px){
+html[data-variante="b"] .abschnitt{padding:6rem 0}
+html[data-variante="b"] .hero{min-height:620px;align-items:center}
+html[data-variante="b"] .hero-inner{padding:4rem 0 10rem}
+html[data-variante="b"] .hero-panel{padding:2.4rem 2.2rem}
+html[data-variante="b"] .abschluss{background-image:url("../img/kleeblattwiese-1600.webp");padding:6rem 0 14rem}
+}
+/* Variante B: Anpassungen an das gemeinsame HTML */
+
+html[data-variante="b"] .hero-bild{position:absolute;inset:0;background:#FCFCF7 url("../img/kleeblattwiese-800.webp") center bottom/cover no-repeat}
+@media (min-width:800px){html[data-variante="b"] .hero-bild{background-image:url("../img/kleeblattwiese-1600.webp")}}
+html[data-variante="b"] .wege h2,html[data-variante="b"] .wege h3,html[data-variante="b"] .faq h2{color:#fff}
+html[data-variante="b"] :is(.wege,.faq) :focus-visible{outline-color:var(--gruen-hell)}
+html[data-variante="b"] .wege .btn{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="b"] .weg h3 .icon{display:none}
+html[data-variante="b"] .zahlen-layout{display:flex;flex-direction:column}
+html[data-variante="b"] .zahlen-kopf{display:contents}
+html[data-variante="b"] .zahlen-grid{order:1}
+html[data-variante="b"] .zahlen-kopf .hinweis{order:2}
+html[data-variante="b"] .karte-text{flex:1}
+html[data-variante="b"] .partner{border-top:0}
+/* Feedback Thomas 01.11.2026 (Variante B):
+   1) Welle schließt sauber an: vorher 1px Lücke (top:-1px) -> dünne, unterbrochene Linie unter der Welle. Jetzt 2px Überlappung.
+   2) Kein Karten-/Fensterlook mehr: Text steht wie in Variante A direkt auf dem Hintergrund (keine Box, kein Schatten, kein Rand).
+   3) Ruhigerer Hintergrund: Wiese nur im unteren Teil, weichgezeichnet und entsättigt, darüber ein Verlauf aus Creme. Der Textbereich liegt auf ruhigem Creme. */
+html[data-variante="b"] .welle{top:2px}
+html[data-variante="b"] .hero{background:var(--creme)}
+html[data-variante="b"] .hero-bild{position:absolute;inset:auto 0 0 0;height:190px;overflow:hidden;pointer-events:none}
+html[data-variante="b"] .hero-bild::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,var(--creme) 0%,rgba(252,252,247,.82) 30%,rgba(252,252,247,.25) 75%,rgba(252,252,247,0) 100%)}
+html[data-variante="b"] .hero-panel{background:none;border-radius:0;box-shadow:none;padding:0}
+html[data-variante="b"] .hero-inner{padding:1.75rem 0 13rem}
+html[data-variante="b"] .abschluss{background:linear-gradient(to bottom,var(--creme) 0%,var(--creme) 55%,rgba(252,252,247,.55) 78%,rgba(252,252,247,0) 100%),url("../img/kleeblattwiese-800.webp") center bottom/cover no-repeat,var(--creme)}
+html[data-variante="b"] .abschluss-inner{background:none;border-radius:0;padding:0 1.25rem}
+@media (min-width:1080px){
+  html[data-variante="b"] .hero-bild{height:240px}
+  html[data-variante="b"] .hero-inner{padding:3.5rem 0 15rem}
+  html[data-variante="b"] .hero-panel{padding:0}
+  html[data-variante="b"] .abschluss{background:linear-gradient(to bottom,var(--creme) 0%,var(--creme) 55%,rgba(252,252,247,.55) 78%,rgba(252,252,247,0) 100%),url("../img/kleeblattwiese-1600.webp") center bottom/cover no-repeat,var(--creme)}
+}
+html[data-variante="b"] .hero-bild{background:none}
+html[data-variante="b"] .hero-bild::before{content:"";position:absolute;inset:-12px;background:url("../img/kleeblattwiese-800.webp") center bottom/cover no-repeat;filter:blur(2px) saturate(.8)}
+@media (min-width:800px){html[data-variante="b"] .hero-bild::before{background-image:url("../img/kleeblattwiese-1600.webp")}}
+/* Runde 16:55 (01.11.2026): mehr Kleeblattwiese (eigenes KI-Bild), weicher Verlauf in die helle Seitenfarbe.
+   Die Wiese liegt hinter der unteren Hälfte des Startbereichs, oben ruhig, Text auf ruhiger Fläche. Welle und "keine Karte" bleiben. */
+html[data-variante="b"] .hero-bild{inset:auto 0 0 0;height:60%;min-height:280px}
+html[data-variante="b"] .hero-bild::after{background:linear-gradient(to bottom,var(--creme) 0%,rgba(252,252,247,.72) 28%,rgba(252,252,247,.18) 68%,rgba(252,252,247,0) 100%)}
+html[data-variante="b"] .hero-inner{padding:1.75rem 0 12rem}
+html[data-variante="b"] .abschluss{background:linear-gradient(to bottom,var(--creme) 0%,var(--creme) 32%,rgba(252,252,247,.6) 58%,rgba(252,252,247,0) 85%),url("../img/ki/kleeblattwiese-hoch-720.webp") center bottom/cover no-repeat,var(--creme)}
+@media (min-width:700px){
+  html[data-variante="b"] .abschluss{background:linear-gradient(to bottom,var(--creme) 0%,var(--creme) 32%,rgba(252,252,247,.6) 58%,rgba(252,252,247,0) 85%),url("../img/ki/kleeblattwiese-breit-1280.webp") center bottom/cover no-repeat,var(--creme)}
+}
+@media (min-width:1080px){
+  html[data-variante="b"] .hero-bild{height:66%}
+  html[data-variante="b"] .hero-inner{padding:3.5rem 0 12rem}
+}
+html[data-variante="b"] .hero-bild::before{inset:-10px;background-image:url("../img/ki/kleeblattwiese-hoch-720.webp");filter:blur(1.5px) saturate(.9)}
+@media (min-width:700px){html[data-variante="b"] .hero-bild::before{background-image:url("../img/ki/kleeblattwiese-breit-1280.webp")}}
+
+/* Feedback Sarah 01.11.2026 18:42 (Variante B): Desktop-Startbereich mittig; weniger Leerraum unter "Mithelfen". */
+@media (min-width:900px){
+  html[data-variante="b"] .hero{min-height:0;align-items:center}
+  html[data-variante="b"] .hero-inner{padding:3.5rem 0 7.5rem}
+  html[data-variante="b"] .hero-panel{margin-inline:auto;max-width:760px;text-align:center}
+  html[data-variante="b"] .hero .lead{max-width:36rem;margin-inline:auto}
+  html[data-variante="b"] .hero .btn-reihe{justify-content:center}
+  html[data-variante="b"] .wege{padding-top:4.5rem}
+}
+@media (max-width:899px){
+  html[data-variante="b"] .hero{min-height:0}
+  html[data-variante="b"] .hero-inner{padding-bottom:9rem}
+}
+
+/* Runde 02.11.2026 13:24: Platzhalter gefüllt. "Beispiel"-Marken für Inhalte, die noch fehlen (gut sichtbar, alle Varianten). */
+.beispiel{display:inline-block;background:#FFF1B8;color:#4A3B00;border:1px dashed #8A6D00;border-radius:999px;font-size:.8rem;font-weight:600;letter-spacing:.02em;padding:.15rem .6rem;margin:0 .4rem .35rem 0;vertical-align:middle;font-style:normal}
+.beispiel-block{margin:1rem 0}
+.beispiel-block p{margin:.2rem 0 0}
+.beispiel-hinweis{font-size:.95rem}
+.zahl-wert{display:block;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);letter-spacing:var(--head-sperrung);font-size:2.4rem;line-height:1.05;color:var(--gruen-dunkel)}
+.zahl-text{display:block;color:var(--text-2)}
+.bedeutung-grid{display:grid;gap:1.75rem;align-items:center}
+.bedeutung-bild{margin:0}
+.bedeutung-bild img{display:block;width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--schatten)}
+.bedeutung-bild figcaption{font-size:.9rem;color:var(--text-2);margin-top:.5rem}
+.bedeutung-satz{font-weight:600;color:var(--gruen-dunkel)}
+.stimme-beispiel blockquote p{margin:.3rem 0 0}
+@media (min-width:900px){.bedeutung-grid{grid-template-columns:1fr 1fr;gap:3rem}}
+html[data-variante="b"] .bedeutung{background:var(--creme)}
+html[data-variante="b"] .bedeutung + .zahlen{padding-top:0}
+html[data-variante="b"] .stimme-beispiel{background:#fff;border-radius:24px 24px 24px 6px;padding:1.3rem;border:1px solid var(--linie)}
+html[data-variante="b"] .zahl .kreis{margin-bottom:.4rem}
+html[data-variante="b"] .zahlen .zahl-wert{color:var(--gruen-dunkel)}
+html[data-variante="c"] .zahl-wert{color:inherit}
+/* Wunsch Sarah 01.11.2026 19:35: auf dem Handy noch weniger Abstand unter "Mithelfen" (vorher 9rem Innenabstand unten). */
+@media (max-width:899px){
+  html[data-variante="b"] .hero-inner{padding-bottom:4.5rem}
+  html[data-variante="b"] .hero-bild{height:70%;min-height:220px}
+  html[data-variante="b"] .wege{padding-top:3.25rem}
+}
+
+/* ===== Variante C (aus site/landingpage/variante-c/style.css, eingegrenzt) ===== */
+html[data-variante="c"] .abschnitt{padding:4rem 0}
+html[data-variante="c"] .intro{font-size:1.12rem;color:var(--text-2);max-width:40rem}
+html[data-variante="c"] .rechts{margin-top:1.75rem}
+html[data-variante="c"] .hero{background:var(--gruen-dunkel);color:#EAF4E0}
+html[data-variante="c"] .hero h1,html[data-variante="c"] .hero h2{color:#fff}
+html[data-variante="c"] .hero{padding:2.5rem 0 3rem;overflow:hidden}
+html[data-variante="c"] .hero-grid{display:grid;gap:2rem;align-items:center}
+html[data-variante="c"] .badge{display:inline-block;border:2px solid var(--gruen-hell);color:var(--gruen-hell);font-weight:600;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;padding:.3rem .8rem;border-radius:6px;margin-bottom:1rem}
+html[data-variante="c"] .hero h1{font-size:clamp(2.6rem,11vw,5.2rem)}
+html[data-variante="c"] .hero h1 .akzent{color:var(--gruen-hell);font-size:1.02em;line-height:1.25}
+html[data-variante="c"] .lead{font-size:1.15rem;color:#DCEBD2;max-width:34rem}
+html[data-variante="c"] .btn-reihe{display:flex;flex-wrap:wrap;gap:.75rem}
+html[data-variante="c"] .hero-foto{position:relative}
+html[data-variante="c"] .bild-ph{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:center;text-align:center;border-radius:6px 48px 6px 48px;font-size:1rem}
+html[data-variante="c"] .hero-klee{position:absolute;width:96px;right:-14px;bottom:-30px}
+html[data-variante="c"] .wege{background:var(--creme);padding-top:3rem}
+html[data-variante="c"] .wege h2{margin-bottom:1.25rem}
+html[data-variante="c"] .wege-split{display:grid}
+html[data-variante="c"] .weg{padding:2.5rem 0}
+html[data-variante="c"] .weg-inner{width:min(100% - 2.5rem, 560px);margin-inline:auto}
+html[data-variante="c"] .weg-helfen{background:var(--gruen-tief);color:#EAF4E0}
+html[data-variante="c"] .weg-helfen h3{color:#fff}
+html[data-variante="c"] .weg-hilfe{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="c"] .weg-hilfe h3{color:var(--gruen-tief)}
+html[data-variante="c"] .weg h3{display:flex;align-items:center;gap:.6rem;font-size:1.9rem}
+html[data-variante="c"] .weg h3 .icon{width:34px;height:34px}
+html[data-variante="c"] .bereiche{background:var(--creme)}
+html[data-variante="c"] .kopfzeile{display:grid;gap:.5rem;margin-bottom:1.75rem}
+html[data-variante="c"] .bento{display:grid;gap:12px}
+html[data-variante="c"] .kachel{border-radius:6px 28px 6px 28px;padding:1.5rem;display:flex;flex-direction:column;background:#fff;border:1px solid var(--linie)}
+html[data-variante="c"] .kachel p{flex:1;color:var(--text-2)}
+html[data-variante="c"] .kachel-icon{display:inline-grid;place-items:center;width:50px;height:50px;border-radius:12px;background:var(--gruen-zart);color:var(--gruen-dunkel);margin-bottom:.9rem}
+html[data-variante="c"] .kachel-1,html[data-variante="c"] .kachel-6{background:var(--gruen-dunkel);border-color:var(--gruen-dunkel);color:#EAF4E0}
+html[data-variante="c"] .kachel-1 h3,html[data-variante="c"] .kachel-6 h3,html[data-variante="c"] .kachel-1 p,html[data-variante="c"] .kachel-6 p,html[data-variante="c"] .kachel-1 .mehr,html[data-variante="c"] .kachel-6 .mehr{color:#fff}
+html[data-variante="c"] .kachel-1 .kachel-icon,html[data-variante="c"] .kachel-6 .kachel-icon{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="c"] .kachel-1 :focus-visible,html[data-variante="c"] .kachel-6 :focus-visible{outline-color:var(--gruen-hell)}
+html[data-variante="c"] .kachel-3,html[data-variante="c"] .kachel-4{background:var(--gruen-hell);border-color:var(--gruen-hell)}
+html[data-variante="c"] .kachel-3 h3,html[data-variante="c"] .kachel-4 h3,html[data-variante="c"] .kachel-3 p,html[data-variante="c"] .kachel-4 p,html[data-variante="c"] .kachel-3 .mehr,html[data-variante="c"] .kachel-4 .mehr{color:var(--gruen-tief)}
+html[data-variante="c"] .kachel-3 .kachel-icon,html[data-variante="c"] .kachel-4 .kachel-icon{background:#fff}
+html[data-variante="c"] .mehr{font-weight:600;color:var(--gruen-dunkel);align-self:flex-start;padding:.3rem 0}
+html[data-variante="c"] .zahlen{background:#fff;border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)}
+html[data-variante="c"] .zahlen-layout{display:grid;gap:1.25rem}
+html[data-variante="c"] .zahl{border-top:4px solid var(--gruen-hell);padding-top:.8rem}
+html[data-variante="c"] .gross{display:block;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);letter-spacing:var(--head-sperrung);font-size:3.6rem;line-height:1;color:var(--gruen-dunkel);margin-bottom:.5rem}
+html[data-variante="c"] .stimmen{background:var(--creme)}
+html[data-variante="c"] .stimmen-layout{display:grid;gap:1.5rem}
+html[data-variante="c"] .stimmen-liste{display:grid;gap:1rem}
+html[data-variante="c"] .stimme{margin:0}
+html[data-variante="c"] .stimme blockquote{margin:0;border-left-width:8px;border-radius:6px 24px 6px 24px}
+html[data-variante="c"] .faq{background:#fff}
+html[data-variante="c"] .faq-grid{display:grid;gap:1rem}
+html[data-variante="c"] .abschluss{background:var(--gruen-dunkel);color:#EAF4E0;padding:4.5rem 0;text-align:left;position:relative;overflow:hidden}
+html[data-variante="c"] .abschluss h2{color:#fff;max-width:20ch}
+html[data-variante="c"] .abschluss .akzent{color:var(--gruen-hell)}
+html[data-variante="c"] .abschluss p{font-size:1.15rem;font-weight:600}
+@media (min-width:700px){
+html[data-variante="c"] .wege-split{grid-template-columns:1fr 1fr}
+html[data-variante="c"] .bento{grid-template-columns:repeat(2,1fr)}
+html[data-variante="c"] .zahlen-layout{grid-template-columns:repeat(3,1fr)}
+html[data-variante="c"] .zahlen-kopf{grid-column:1 / -1}
+html[data-variante="c"] .stimmen-liste{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1080px){
+html[data-variante="c"] .abschnitt{padding:6rem 0}
+html[data-variante="c"] .hero{padding:4.5rem 0 5rem}
+html[data-variante="c"] .hero-grid{grid-template-columns:1.15fr .85fr;gap:3.5rem}
+html[data-variante="c"] .weg{padding:4rem 0}
+html[data-variante="c"] .kopfzeile{grid-template-columns:1fr 1fr;align-items:end}
+html[data-variante="c"] .bento{grid-template-columns:repeat(4,1fr)}
+html[data-variante="c"] .kachel-1{grid-column:span 2;grid-row:span 2;justify-content:flex-end}
+html[data-variante="c"] .kachel-1 h3{font-size:2.3rem}
+html[data-variante="c"] .kachel-1 p{flex:0;font-size:1.15rem}
+html[data-variante="c"] .kachel-6{grid-column:1 / -1}
+html[data-variante="c"] .zahlen-layout{grid-template-columns:1.3fr 1fr 1fr 1fr;align-items:start}
+html[data-variante="c"] .zahlen-kopf{grid-column:auto}
+html[data-variante="c"] .stimmen-layout{grid-template-columns:1fr 1.4fr;align-items:start}
+html[data-variante="c"] .faq-grid{grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
+}
+/* Variante C: Anpassungen an das gemeinsame HTML */
+
+html[data-variante="c"] main{display:flex;flex-direction:column}
+html[data-variante="c"] main>.hero,html[data-variante="c"] main>.wege{order:-2}
+html[data-variante="c"] main>.bereiche{order:-1}
+html[data-variante="c"] .hero{background:var(--gruen-dunkel);color:#EAF4E0}
+html[data-variante="c"] .hero .btn-dunkel{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="c"] .hero .btn-rand{color:#fff;border-color:#fff}
+html[data-variante="c"] .hero .btn-rand:hover{background:rgba(255,255,255,.1)}
+html[data-variante="c"] .hero-foto .ph-block{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:center;text-align:center;border-radius:6px 48px 6px 48px}
+html[data-variante="c"] :is(.hero,.weg-helfen,.abschluss,.kachel-1,.kachel-6) :focus-visible{outline-color:var(--gruen-hell)}
+html[data-variante="c"] .wege{padding:3rem 0 0}
+html[data-variante="c"] .wege-wrap{width:100%}
+html[data-variante="c"] .weg-icon{display:none}
+html[data-variante="c"] .weg-helfen .btn{background:var(--gruen-hell);color:var(--gruen-tief)}
+html[data-variante="c"] .weg-hilfe .btn{background:var(--gruen-dunkel);color:#fff}
+html[data-variante="c"] .karte-text{display:flex;flex-direction:column;flex:1}
+html[data-variante="c"] .zahlen-grid{display:contents}
+html[data-variante="c"] .zahl{list-style:none}
+html[data-variante="c"] .abschluss .btn{background:var(--gruen-hell);color:var(--gruen-tief)}
+@media (min-width:1080px){html[data-variante="c"] .kachel-1 .karte-text{justify-content:flex-end}}
+/* Runde 16:55: KI-Foto statt Bild-Platzhalter */
+html[data-variante="c"] .hero-foto .foto{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px 48px 6px 48px;box-shadow:0 18px 40px rgba(0,0,0,.22)}
