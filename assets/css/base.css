@@ -7,6 +7,12 @@
    Wortmarke im Logo ≈ Asap wdth 75 % / wght 500, Sperrung −0,07 em; „e.V.“ ≈ wdth 85 % / wght 500; Claim ≈ Asap SemiBold, +0,03 em.
    Asap Condensed Bold bleibt nur als Rückfall stehen (war 40 % zu fett gegenüber dem Logo). */
 @font-face{font-family:"Asap Logo";src:url("../fonts/Asap-Variable-wdth75-100-wght400-700.woff2") format("woff2");font-weight:400 700;font-stretch:75% 100%;font-style:normal;font-display:swap}
+/* Hausschrift v1.100 (Neuaufbau 03.11.2026), Einbau 05.11.2026 auf Thomas' Auftrag.
+   Bold = Überschriften, Claim = Claim-Zeile, Script = Akzent („Glück“). Asap bleibt Fließtext.
+   Kaushan/Yellowtail bleiben als Umschalter-Rückfall in der Entwurfsleiste. */
+@font-face{font-family:"Quaentchen Sans";src:url("../fonts/QuaentchenSans-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Claim";src:url("../fonts/QuaentchenSansClaim-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Script";src:url("../fonts/QuaentchenScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Kaushan Script";src:url("../fonts/KaushanScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Yellowtail";src:url("../fonts/Yellowtail-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
@@ -22,23 +28,25 @@
   --text:#14231C;
   --text-2:#3A4A42;
   --linie:#D9E2CF;
-  /* Schriften */
-  --font-head:"Asap Logo","Asap Condensed","Arial Narrow",system-ui,sans-serif;
-  /* Werte wie im Logo-Schriftzug „Quäntchen“ */
-  --head-weight:500;
-  --head-stretch:75%;
-  --head-sperrung:-.04em;  /* Überschriften: etwas offener als das Logo, damit lesbar */
-  --logo-sperrung:-.07em;  /* Wortmarke im Kopf: wie im Logo */
+  /* Schriften: Hausschrift v1.100 für Kopf/Akzent/Claim, Asap für Fließtext */
+  --font-head:"Quaentchen Sans","Asap Condensed","Arial Narrow",system-ui,sans-serif;
+  --head-weight:700;
+  --head-stretch:normal;
+  --head-sperrung:-.02em;
+  --logo-sperrung:-.04em;
   --font-text:"Asap",system-ui,-apple-system,"Segoe UI",sans-serif;
-  /* Akzentschrift austauschbar: Kaushan Script (Standard) oder Yellowtail.
-     Umschalten: <html data-akzent="yellowtail"> oder --font-akzent direkt setzen. */
+  --font-claim:"Quaentchen Claim","Asap",system-ui,sans-serif;
+  /* Akzent: Hausschrift Script Standard; Kaushan/Yellowtail nur Entwurfs-Vergleich */
+  --akzent-script:"Quaentchen Script",cursive;
   --akzent-kaushan:"Kaushan Script",cursive;
   --akzent-yellowtail:"Yellowtail",cursive;
-  --font-akzent:var(--akzent-kaushan);
+  --font-akzent:var(--akzent-script);
   --radius:18px;
   --schatten:0 10px 30px rgba(7,79,55,.10);
   --max:1180px;
 }
+html[data-akzent="script"]{--font-akzent:var(--akzent-script)}
+html[data-akzent="kaushan"]{--font-akzent:var(--akzent-kaushan)}
 html[data-akzent="yellowtail"]{--font-akzent:var(--akzent-yellowtail)}
 
 *,*::before,*::after{box-sizing:border-box}
@@ -94,7 +102,7 @@ a{color:var(--gruen-dunkel);text-underline-offset:3px}
 @media (min-width:900px){.marke .marke-wort{height:30px}}
 .marke-text{font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);letter-spacing:var(--logo-sperrung);font-size:1.35rem;line-height:1;white-space:nowrap}
 .marke-text .akzent{color:#3F7A05;font-size:1.15em;margin-left:.08em}
-.marke-text small{font-family:var(--font-head);font-weight:500;font-stretch:85%;letter-spacing:-.02em;font-size:.6em;margin-left:.2em}
+.marke-text small{font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);letter-spacing:-.02em;font-size:.6em;margin-left:.2em}
 .nav-desktop{display:none}
 .nav-desktop ul,.nav-mobil ul{list-style:none;margin:0;padding:0}
 .nav-desktop a,.nav-mobil a{text-decoration:none;color:var(--text);font-weight:600}
@@ -142,7 +150,7 @@ body{padding-bottom:80px}
 .fuss .fuss-grid{display:grid;gap:2rem}
 .fuss-logo{background:#fff;border-radius:16px;padding:.8rem;width:180px}
 .fuss ul{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
-.fuss .claim{font-family:var(--font-text);font-weight:600;font-size:1.4rem;color:var(--gruen-hell);letter-spacing:.03em;text-transform:uppercase;margin-top:1rem}
+.fuss .claim{font-family:var(--font-claim);font-weight:400;font-size:1.4rem;color:var(--gruen-hell);letter-spacing:.03em;text-transform:uppercase;margin-top:1rem}
 .fuss .ph,.fuss .ph-block{color:#3B2F00}
 @media (min-width:800px){.fuss .fuss-grid{grid-template-columns:1.1fr 1fr 1.2fr;align-items:start}}
 
