@@ -288,10 +288,16 @@ html[data-variante="c"] .zahl-wert{color:inherit}
   .marke{margin-right:auto}
 }
 @media (min-width:1024px) and (max-width:1179px){.nav-desktop a{padding:.4rem .4rem;font-size:.88rem}}
-/* Entwurfsleiste dünn; auf dem Handy nur der Hinweis, ohne Umschalter */
+/* Entwurfsleiste dünn. 04.11.2026: Umschalter auch auf dem Handy sichtbar (kompakt, Hinweis + 2 Zeilen) */
 .entwurf-leiste{padding:.2rem 0;font-size:.8rem}
 .entwurf-leiste a{padding:.05rem .45rem}
-@media (max-width:899px){.entwurf-leiste .schalter{display:none}}
+@media (max-width:899px){
+  .entwurf-leiste{font-size:.78rem;padding:.3rem 0}
+  .entwurf-inner{gap:.25rem .6rem}
+  .entwurf-inner>strong{flex-basis:100%}
+  .entwurf-leiste .schalter{display:flex;align-items:center;flex-wrap:wrap;gap:.3rem;white-space:nowrap}
+  .entwurf-leiste a{margin-left:0;padding:.3rem .6rem;min-height:28px;display:inline-flex;align-items:center}
+}
 /* Neue Abschnitte */
 .zielgruppen{background:var(--creme)}
 .themen-liste{list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:1rem}
