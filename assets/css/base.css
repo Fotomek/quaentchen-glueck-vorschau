@@ -10,9 +10,9 @@
 /* Hausschrift v1.100 (Neuaufbau 03.11.2026), Einbau 05.11.2026 auf Thomas' Auftrag.
    Bold = Überschriften, Claim = Claim-Zeile, Script = Akzent („Glück“). Asap bleibt Fließtext.
    Kaushan/Yellowtail bleiben als Umschalter-Rückfall in der Entwurfsleiste. */
-@font-face{font-family:"Quaentchen Sans";src:url("../fonts/QuaentchenSans-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Claim";src:url("../fonts/QuaentchenSansClaim-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Script";src:url("../fonts/QuaentchenScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Sans";src:url("../fonts/QuaentchenSans-Bold.woff2?v=1100b") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Claim";src:url("../fonts/QuaentchenSansClaim-Regular.woff2?v=1100b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Script";src:url("../fonts/QuaentchenScript-Regular.woff2?v=1100b") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Kaushan Script";src:url("../fonts/KaushanScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Yellowtail";src:url("../fonts/Yellowtail-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
