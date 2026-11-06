@@ -3,6 +3,50 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* Erstlade-Kleeblatt: Original-Bildmarke, nur die erste Ansicht dieser Sitzung, höchstens 1 s.
+   Ohne dieses Script bleibt die Seite sichtbar (.qg-lader ist per CSS ausgeblendet).
+   Speicherfehler oder reduced-motion: kein Overlay. Es wird nicht auf Bilder oder Schriften gewartet. */
+(function(){
+  var root=document.documentElement,key='qg-klee-gesehen',fertig=false;
+  function weg(){
+    if(fertig)return;
+    fertig=true;
+    try{root.classList.remove('qg-erstladen')}catch(e){}
+    function wegEl(){try{var el=document.querySelector('.qg-lader');if(el&&el.parentNode)el.parentNode.removeChild(el)}catch(e){}}
+    if(document.body)wegEl();else document.addEventListener('DOMContentLoaded',wegEl);
+    try{performance.mark('qg-lader-ende');performance.measure('qg-lader','qg-lader-start','qg-lader-ende')}catch(e){}
+  }
+  try{
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    if(sessionStorage.getItem(key))return;
+    sessionStorage.setItem(key,'1');
+    try{performance.mark('qg-lader-start')}catch(e){}
+    root.classList.add('qg-erstladen');
+    var t0=Date.now();
+    setTimeout(weg,1000);
+    document.addEventListener('visibilitychange',function(){
+      if(document.visibilityState==='visible'&&Date.now()-t0>=1000)weg();
+    });
+    window.addEventListener('pageshow',function(ev){
+      if(ev.persisted||Date.now()-t0>=1000)weg();
+    });
+  }catch(e){weg()}
+})();
+</script>
+<style>
+/* Kritisch im Kopf, damit das Kleeblatt vor dem ersten Paint fest liegt und ohne Script keinen Platz einnimmt. */
+.qg-lader{display:none}
+html.qg-erstladen .qg-lader{
+  display:flex;position:fixed;inset:0;z-index:80;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background:#FCFCF7;pointer-events:none;animation:qg-lader-aus 1s linear forwards;
+}
+html.qg-erstladen .qg-lader .qg-klee{flex:none;width:clamp(4.25rem,20vw,6.75rem);max-width:42vw;min-width:0;height:auto;animation:qg-klee-hauch 1s ease-out}
+@keyframes qg-lader-aus{0%,62%{opacity:1;visibility:visible}88%,100%{opacity:0;visibility:hidden}}
+@keyframes qg-klee-hauch{from{transform:rotate(-7deg) scale(.94)}to{transform:rotate(6deg) scale(1)}}
+@media (prefers-reduced-motion:reduce){html.qg-erstladen .qg-lader{display:none!important;animation:none!important}}
+</style>
 <title>Quäntchen Glück e.V. | Gemeinsam statt einsam</title>
 <meta name="description" content="Gemeinsam statt einsam. Quäntchen Glück ist für alle Menschen da, unabhängig von Alter oder Lebenssituation. Manchmal kann schon ein kleiner Anstoß viel verändern.">
 <meta name="robots" content="noindex, nofollow">
@@ -20,6 +64,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 <link rel="stylesheet" href="assets/css/varianten.css?v=1211">
 </head>
 <body>
+<div class="qg-lader" aria-hidden="true"><img class="qg-klee" src="assets/img/quaentchen-glueck-logo-bildmarke.svg" width="755" height="712" alt="" decoding="sync" fetchpriority="high"></div>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <div class="entwurf-leiste" role="region" aria-label="Entwurfsansicht">
   <div class="wrap entwurf-inner">
