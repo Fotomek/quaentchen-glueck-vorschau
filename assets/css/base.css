@@ -7,12 +7,7 @@
    Wortmarke im Logo ≈ Asap wdth 75 % / wght 500, Sperrung −0,07 em; „e.V.“ ≈ wdth 85 % / wght 500; Claim ≈ Asap SemiBold, +0,03 em.
    Asap Condensed Bold bleibt nur als Rückfall stehen (war 40 % zu fett gegenüber dem Logo). */
 @font-face{font-family:"Asap Logo";src:url("../fonts/Asap-Variable-wdth75-100-wght400-700.woff2") format("woff2");font-weight:400 700;font-stretch:75% 100%;font-style:normal;font-display:swap}
-/* Hausschrift v1.100 (Neuaufbau 03.11.2026), Einbau 05.11.2026 auf Thomas' Auftrag.
-   Bold = Überschriften, Claim = Claim-Zeile, Script = Akzent („Glück“). Asap bleibt Fließtext.
-   Kaushan/Yellowtail bleiben als Umschalter-Rückfall in der Entwurfsleiste. */
-@font-face{font-family:"Quaentchen Sans";src:url("../fonts/QuaentchenSans-Bold.woff2?v=1200") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Claim";src:url("../fonts/QuaentchenSansClaim-Regular.woff2?v=1200") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Script";src:url("../fonts/QuaentchenScript-Regular.woff2?v=1200") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+/* Schriften ab 06.11.2026: Kaushan Script (Akzent/Glück), Asap Logo (Überschriften, wie Wortmarke), Asap (Claim/Fließtext), alle OFL. */
 @font-face{font-family:"Kaushan Script";src:url("../fonts/KaushanScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Yellowtail";src:url("../fonts/Yellowtail-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
@@ -28,16 +23,16 @@
   --text:#14231C;
   --text-2:#3A4A42;
   --linie:#D9E2CF;
-  /* Schriften: Hausschrift v1.100 für Kopf/Akzent/Claim, Asap für Fließtext */
-  --font-head:"Quaentchen Sans","Asap Condensed","Arial Narrow",system-ui,sans-serif;
+  /* Schriften: Asap Logo für Überschriften, Asap für Claim und Fließtext */
+  --font-head:"Asap Logo","Asap Condensed","Arial Narrow",system-ui,sans-serif;
   --head-weight:700;
-  --head-stretch:normal;
+  --head-stretch:85%;
   --head-sperrung:-.02em;
   --logo-sperrung:-.04em;
   --font-text:"Asap",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-claim:"Quaentchen Claim","Asap",system-ui,sans-serif;
-  /* Akzent: Hausschrift Script Standard; Kaushan/Yellowtail nur Entwurfs-Vergleich */
-  --akzent-script:"Quaentchen Script",cursive;
+  --font-claim:"Asap",system-ui,sans-serif;
+  /* Akzent: Kaushan Script; Umschalter Kaushan/Yellowtail bleibt */
+  --akzent-script:"Kaushan Script",cursive;
   --akzent-kaushan:"Kaushan Script",cursive;
   --akzent-yellowtail:"Yellowtail",cursive;
   --font-akzent:var(--akzent-script);
@@ -150,7 +145,7 @@ body{padding-bottom:80px}
 .fuss .fuss-grid{display:grid;gap:2rem}
 .fuss-logo{background:#fff;border-radius:16px;padding:.8rem;width:180px}
 .fuss ul{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
-.fuss .claim{font-family:var(--font-claim);font-weight:400;font-size:1.4rem;color:var(--gruen-hell);letter-spacing:.03em;text-transform:uppercase;margin-top:1rem}
+.fuss .claim{font-family:var(--font-claim);font-weight:600;font-size:1.4rem;color:var(--gruen-hell);letter-spacing:.03em;text-transform:uppercase;margin-top:1rem}
 .fuss .ph,.fuss .ph-block{color:#3B2F00}
 @media (min-width:800px){.fuss .fuss-grid{grid-template-columns:1.1fr 1fr 1.2fr;align-items:start}}
 
