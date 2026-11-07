@@ -255,6 +255,10 @@ html[data-variante="c"] .zahl-wert{color:inherit}
   html[data-variante="b"] .hero-bild{height:70%;min-height:220px}
   html[data-variante="b"] .wege{padding-top:3.25rem}
 }
+/* Variante B: dasselbe Symbolfoto unter dem Starttext. Rahmen bleibt 4:3, das Kleeblatt liegt im Bild, damit nichts über den Rand ragt. */
+html[data-variante="b"] .hero-foto{position:relative;width:min(100%,540px);margin:1.75rem auto 0}
+html[data-variante="b"] .hero-foto .foto{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:28px;box-shadow:var(--schatten)}
+html[data-variante="b"] .hero-klee{position:absolute;width:72px;right:12px;bottom:12px}
 
 /* Runde 02.11.2026 13:48 (Feedback Thomas): schlanker Kopf, echte Sprungziele, kompakter Burger. Gilt für alle Varianten. */
 .kopf-inner{min-height:58px;gap:.75rem}
