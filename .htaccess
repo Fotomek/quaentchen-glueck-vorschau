@@ -1,0 +1,5 @@
+# Wirkt auf Apache/STRATO. GitHub Pages ignoriert diese Datei.
+<Files "qg-kontakt.config.php">
+  Require all denied
+</Files>
+RedirectMatch 403 (?i)^/tests(/|$)
