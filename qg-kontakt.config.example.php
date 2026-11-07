@@ -10,7 +10,7 @@ declare(strict_types=1);
    Das Skript liest höchstens 16 KiB und weist längere oder falsch bezeichnete
    Bodies ab, auch ohne Content-Length. PHP post_max_size muss mindestens
    16K sein, 0 bedeutet für PHP unbegrenzt. LimitRequestBody mindestens 16384
-   bleibt zusätzlich sinnvoll und ist auf dem Zielhost noch nicht geprüft. */}
+   bleibt zusätzlich sinnvoll und ist auf dem Zielhost noch nicht geprüft. */
 return [
     'mail_to' => '',
     'mail_from' => '',
