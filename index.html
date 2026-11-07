@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-variante="b" data-akzent="script">
+<html lang="de" data-variante="b">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -53,14 +53,13 @@ html.qg-erstladen .qg-lader .qg-klee{flex:none;width:clamp(4.25rem,20vw,6.75rem)
 <meta name="theme-color" content="#074F37">
 <script>(function(){var d=document.documentElement,q;try{q=new URLSearchParams(location.search)}catch(x){return}
 var v=(q.get('v')||'').toLowerCase();if(/^[abc]$/.test(v))d.setAttribute('data-variante',v);
-var a=(q.get('akzent')||'').toLowerCase();if(a==='script'||a==='kaushan'||a==='yellowtail')d.setAttribute('data-akzent',a);
 if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/QuaentchenSans-Bold.woff2?v=1211" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/QuaentchenScript-Regular.woff2?v=1211" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Asap-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/base.css?v=1211">
+<link rel="preload" href="assets/fonts/Asap-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/KaushanScript-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/base.css?v=asap">
 <link rel="stylesheet" href="assets/css/varianten.css?v=1211">
 </head>
 <body>
@@ -70,7 +69,6 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
   <div class="wrap entwurf-inner">
     <strong>Entwurf, nicht veröffentlicht</strong>
     <span class="schalter">Variante: <a href="?v=a" data-v="a">A hell</a> <a href="?v=b" data-v="b">B Wiese</a> <a href="?v=c" data-v="c">C Kacheln</a></span>
-    <span class="schalter">Akzentschrift: <a href="?akzent=script" data-a="script">Hausschrift</a> <a href="?akzent=kaushan" data-a="kaushan">Kaushan</a> <a href="?akzent=yellowtail" data-a="yellowtail">Yellowtail</a></span>
   </div>
 </div>
 <header class="kopf">
@@ -335,11 +333,11 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
   </div>
 </footer>
 <aside class="leiste-unterstuetzen" aria-label="Spenden"><a class="btn btn-dunkel" href="#spenden">Jetzt unterstützen</a></aside>
-<script>(function(){var d=document.documentElement,v=d.getAttribute('data-variante'),a=d.getAttribute('data-akzent');
-var ls=document.querySelectorAll('.entwurf-leiste a[data-v],.entwurf-leiste a[data-a]');
-for(var i=0;i<ls.length;i++){var l=ls[i],nv=l.getAttribute('data-v')||v,na=l.getAttribute('data-a')||a;
-l.setAttribute('href','?v='+nv+'&akzent='+na);
-if((l.hasAttribute('data-v')&&nv===v)||(l.hasAttribute('data-a')&&na===a))l.setAttribute('aria-current','true');else l.removeAttribute('aria-current');}})();</script>
+<script>(function(){var d=document.documentElement,v=d.getAttribute('data-variante');
+var ls=document.querySelectorAll('.entwurf-leiste a[data-v]');
+for(var i=0;i<ls.length;i++){var l=ls[i],nv=l.getAttribute('data-v')||v;
+l.setAttribute('href','?v='+nv);
+if(nv===v)l.setAttribute('aria-current','true');else l.removeAttribute('aria-current');}})();</script>
 <script>(function(){var m=document.querySelector('.nav-mobil');if(!m)return;
 m.addEventListener('click',function(e){if(e.target.closest('a'))m.removeAttribute('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.removeAttribute('open');m.querySelector('summary').focus();}});

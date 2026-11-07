@@ -130,7 +130,7 @@ html[data-variante="b"] .kreis-klee{width:46px}
 html[data-variante="b"] .hinweis{font-size:.95rem}
 html[data-variante="b"] .bereiche{background:var(--gruen-zart)}
 html[data-variante="b"] .liste{list-style:none;padding:0;margin:1.75rem 0 0;display:grid;gap:1.1rem}
-html[data-variante="b"] .eintrag{display:flex;gap:1.1rem;align-items:flex-start;background:#fff;border-radius:28px 28px 28px 8px;padding:1.3rem}
+html[data-variante="b"] .eintrag{display:flex;gap:1.1rem;align-items:flex-start;background:#fff;border-radius:28px 28px 28px 8px;padding:1.3rem;min-width:0}
 html[data-variante="b"] .eintrag:nth-child(even){border-radius:28px 8px 28px 28px}
 html[data-variante="b"] .eintrag p{color:var(--text-2);margin-bottom:.4rem}
 html[data-variante="b"] .blob{flex:none;display:grid;place-items:center;width:58px;height:58px;color:var(--gruen-dunkel);background:#DDEFB4;border-radius:58% 42% 50% 50% / 46% 55% 45% 54%}
@@ -176,7 +176,7 @@ html[data-variante="b"] .zahlen-layout{display:flex;flex-direction:column}
 html[data-variante="b"] .zahlen-kopf{display:contents}
 html[data-variante="b"] .zahlen-grid{order:1}
 html[data-variante="b"] .zahlen-kopf .hinweis{order:2}
-html[data-variante="b"] .karte-text{flex:1}
+html[data-variante="b"] .karte-text{flex:1;min-width:0}
 html[data-variante="b"] .partner{border-top:0}
 /* Feedback Thomas 01.11.2026 (Variante B):
    1) Welle schließt sauber an: vorher 1px Lücke (top:-1px) -> dünne, unterbrochene Linie unter der Welle. Jetzt 2px Überlappung.
