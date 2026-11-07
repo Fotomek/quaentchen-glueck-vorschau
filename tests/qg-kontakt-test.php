@@ -170,7 +170,7 @@ check($errors === 0 && $allows === 5 && $limits === 3 && is_array($parallelState
 
 $html = file_get_contents(dirname(__DIR__) . '/index.html');
 check(is_string($html) && !str_contains($html, 'sessionStorage.getItem') && !str_contains($html, 'sessionStorage.setItem') && !str_contains($html, 'localStorage.getItem') && !str_contains($html, 'localStorage.setItem'), 'Seite ohne Speicherzugriff');
-check(is_string($html) && !str_contains($html, 'mailto:') && !str_contains($html, 'tel:') && !str_contains($html, 'p.andersen') && !str_contains($html, '+49 179'), 'Kartenkontakte nicht veröffentlicht');
+check(is_string($html) && substr_count($html, 'tel:+491797656862') >= 2 && substr_count($html, '+49 179 765 68 62') >= 2 && !str_contains($html, 'mailto:') && !str_contains($html, 'p.andersen'), 'Kartentelefon sichtbar, Mail nicht');
 check(is_string($html) && str_contains($html, 'Websitefreigabe') && str_contains($html, 'nicht das Ziel des Formulars'), 'Kartenlücke benannt, nicht als Freigabe');
 check(is_string($html) && str_contains($html, '20:30 bestätigt, dass die Telefonnummer') && str_contains($html, 'Kartenoriginal') && str_contains($html, 'Postfach der Kartenmail ist nicht bestätigt') && str_contains($html, 'anderen Postfachs') && !str_contains($html, 'megaclean') && !str_contains($html, 'Telefonnummer von P'), 'Kartentelefon bestätigt, Postfach und andere Bestätigung getrennt');
 check(is_string($html) && !str_contains($html, 'info@') && !str_contains($html, 'gmail') && !str_contains($html, 'Hundshagen') && !str_contains($html, 'VR 34726') && !str_contains($html, 'VR34726'), 'keine unbelegten Kontakte oder Vorstände');

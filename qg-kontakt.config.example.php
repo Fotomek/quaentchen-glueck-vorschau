@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 /* Serverseitig als qg-kontakt.config.php speichern, nicht ins Git.
    mail_to erst setzen, wenn eine Mailbox als Formularempfänger bestätigt ist.
-   Kartentelefon nicht eintragen: die Nummer ist bestätigt, aber nicht veröffentlicht
-   und nicht der Formularempfänger. Die Kartenmail bleibt unbestätigt.
+   Kartentelefon nicht eintragen: es ist nicht der Formularempfänger.
+   Die Kartenmail bleibt unbestätigt.
    mail_from muss zum versendenden Host passen und eine reine Adresse sein.
    allowed_origins sind spätere HTTPS-Ursprünge, nicht die GitHub-Vorschau.
    Das Skript liest höchstens 16 KiB und weist längere oder falsch bezeichnete
