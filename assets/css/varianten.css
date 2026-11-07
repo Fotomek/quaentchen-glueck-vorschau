@@ -255,10 +255,9 @@ html[data-variante="c"] .zahl-wert{color:inherit}
   html[data-variante="b"] .hero-bild{height:70%;min-height:220px}
   html[data-variante="b"] .wege{padding-top:3.25rem}
 }
-/* Variante B: dasselbe Symbolfoto unter dem Starttext. Rahmen bleibt 4:3, das Kleeblatt liegt im Bild, damit nichts über den Rand ragt. */
-html[data-variante="b"] .hero-foto{position:relative;width:min(100%,540px);margin:1.75rem auto 0}
-html[data-variante="b"] .hero-foto .foto{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:28px;box-shadow:var(--schatten)}
-html[data-variante="b"] .hero-klee{position:absolute;width:72px;right:12px;bottom:12px}
+/* Symbolfoto einmal unter „Wen wir unterstützen“, nicht mehr über der Wiese. Ohne das rechte Deko-Kleeblatt. */
+.symbolfoto{margin:1.5rem auto 0;width:min(100%,540px)}
+.symbolfoto img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:28px;box-shadow:var(--schatten)}
 
 /* Runde 02.11.2026 13:48 (Feedback Thomas): schlanker Kopf, echte Sprungziele, kompakter Burger. Gilt für alle Varianten. */
 .kopf-inner{min-height:58px;gap:.75rem}
@@ -381,7 +380,7 @@ html[data-variante="c"] .stimmen-liste{grid-template-columns:1fr 1fr}
 @media (min-width:1080px){
 html[data-variante="c"] .abschnitt{padding:6rem 0}
 html[data-variante="c"] .hero{padding:4.5rem 0 5rem}
-html[data-variante="c"] .hero-grid{grid-template-columns:1.15fr .85fr;gap:3.5rem}
+html[data-variante="c"] .hero-grid{grid-template-columns:minmax(0,46rem);gap:3.5rem}
 html[data-variante="c"] .weg{padding:4rem 0}
 html[data-variante="c"] .kopfzeile{grid-template-columns:1fr 1fr;align-items:end}
 html[data-variante="c"] .bento{grid-template-columns:repeat(4,1fr)}
