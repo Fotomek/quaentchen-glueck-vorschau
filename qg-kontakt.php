@@ -61,6 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+$guard = qg_kontakt_request_guard($_SERVER, qg_kontakt_ini_bytes((string)ini_get('post_max_size')));
+if ($guard !== null) {
+    qg_kontakt_respond($guard['status'], $guard['body']);
+    exit;
+}
+
 $result = qg_kontakt_handle($_POST, $_SERVER, [
     'csrf' => (string)($_SESSION['qg_csrf'] ?? ''),
     'issued' => (int)($_SESSION['qg_issued'] ?? 0),
@@ -68,4 +74,10 @@ $result = qg_kontakt_handle($_POST, $_SERVER, [
     $headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $reply . "\r\n" . 'Content-Type: text/plain; charset=UTF-8';
     return mail($to, $subject, $text, $headers);
 }, time());
+if ($result['status'] === 200) {
+    $session = [];
+    $result['body'] = qg_kontakt_bind_token($result['body'], $session, time());
+    $_SESSION['qg_csrf'] = $session['csrf'];
+    $_SESSION['qg_issued'] = $session['issued'];
+}
 qg_kontakt_respond($result['status'], $result['body']);
