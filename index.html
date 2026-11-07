@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
-/* Erstlade-Kleeblatt: Original-Bildmarke, nur die erste Ansicht dieser Sitzung, höchstens 1 s.
+/* Erstlade-Kleeblatt: bei jedem Aufruf, höchstens 1 s, ohne Cookie und ohne Speicher.
    Ohne dieses Script bleibt die Seite sichtbar (.qg-lader ist per CSS ausgeblendet).
-   Speicherfehler oder reduced-motion: kein Overlay. Es wird nicht auf Bilder oder Schriften gewartet. */
+   reduced-motion: kein Overlay. Es wird nicht auf Bilder oder Schriften gewartet. */
 (function(){
-  var root=document.documentElement,key='qg-klee-gesehen',fertig=false;
+  var root=document.documentElement,fertig=false;
   function weg(){
     if(fertig)return;
     fertig=true;
@@ -19,8 +19,6 @@
   }
   try{
     if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    if(sessionStorage.getItem(key))return;
-    sessionStorage.setItem(key,'1');
     try{performance.mark('qg-lader-start')}catch(e){}
     root.classList.add('qg-erstladen');
     var t0=Date.now();
@@ -282,30 +280,71 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
     <a class="btn btn-dunkel" href="#wege">Mithelfen</a>
   </div>
 </section>
+<section id="kontakt" class="abschnitt kontakt" aria-labelledby="kontakt-h">
+  <div class="wrap schmal">
+    <h2 id="kontakt-h">Kontakt</h2>
+    <p>Quäntchen Glück e.V.<br>Gerstenweg 84<br>12683 Berlin</p>
+    <p>Diese Anschrift hat der Verein am 1. November 2026 bestätigt. Ein amtlicher Nachweis, dass sie auch der Registersitz ist, liegt hier nicht vor.</p>
+    <p>Geschäftliche Angaben von der Vereinsvisitenkarte, geprüft am 1. November 2026. Das Telefon entspricht einem Vereinskontakt von 2019. Der Abgleich vom 7. November 2026 übernimmt die Karte als Kontaktangabe. Er belegt nicht, dass das Postfach heute Nachrichten annimmt, und nicht, dass diese Adresse Formularanfragen empfangen soll.</p>
+    <p><a href="tel:+491797656862">+49 179 765 68 62</a><br><a href="mailto:p.andersen@quäntchenglück.de">p.andersen@quäntchenglück.de</a></p>
+    <p>Telefon und E-Mail sind dokumentierte Kartenangaben ohne geprüften Betrieb. Das Formular verwendet sie nicht als Empfänger.</p>
+    <form class="kontakt-form" id="kontakt-form" action="qg-kontakt.php" method="post" novalidate>
+      <p id="kontakt-status" class="kontakt-status" role="status">Diese Vorschau auf GitHub Pages verschickt keine Nachricht. Das Formular ist für einen späteren PHP-Server vorbereitet. Empfänger und Absender sind noch nicht eingerichtet.</p>
+      <div id="kontakt-fehler" class="kontakt-fehler" role="alert" hidden></div>
+      <input type="hidden" name="csrf" value="">
+      <input type="hidden" name="ts" value="">
+      <p class="kontakt-hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+      <p><label for="kontakt-name">Name, optional</label><input id="kontakt-name" name="name" type="text" maxlength="80" autocomplete="name"></p>
+      <p><label for="kontakt-mail">E-Mail</label><input id="kontakt-mail" name="email" type="email" required maxlength="120" autocomplete="email" aria-describedby="kontakt-pflicht"></p>
+      <p><label for="kontakt-tel">Telefon, optional</label><input id="kontakt-tel" name="phone" type="tel" maxlength="40" autocomplete="tel"></p>
+      <p><label for="kontakt-anliegen">Anliegen</label><select id="kontakt-anliegen" name="anliegen" required><option value="">Bitte wählen</option><option value="hilfe">Ich brauche Hilfe</option><option value="mithelfen">Ich möchte helfen</option><option value="allgemein">Allgemeine Frage</option></select></p>
+      <p><label for="kontakt-nachricht">Nachricht</label><textarea id="kontakt-nachricht" name="message" required minlength="10" maxlength="2000" rows="6" aria-describedby="kontakt-hinweis"></textarea></p>
+      <p id="kontakt-hinweis">Wir verwenden deine Angaben, um deine Anfrage zu bearbeiten und dir zu antworten. Bitte sende zunächst keine Gesundheitsdaten oder andere besonders sensiblen Informationen. Weitere Informationen stehen in der <a href="#datenschutz">Datenschutzerklärung</a>.</p>
+      <p id="kontakt-pflicht">Pflicht sind E-Mail, Anliegen und Nachricht. Name und Telefon musst du nicht angeben.</p>
+      <button class="btn btn-dunkel" type="submit">Nachricht senden</button>
+    </form>
+  </div>
+</section>
 </main>
 
 <div class="rechtliches">
   <section id="impressum" class="abschnitt recht" aria-labelledby="impressum-h">
     <div class="wrap schmal">
       <h2 id="impressum-h">Impressum</h2>
-      <p class="beispiel-hinweis"><span class="beispiel">Beispiel, wird noch ergänzt</span> Die Angaben in diesem Impressum sind ein Entwurf und werden vor der Veröffentlichung vom Verein geprüft.</p>
+      <p>Angaben, die für diese Vorschau belegt sind, nach § 5 DDG. Was fehlt, ist als Lücke benannt und nicht durch eine Vermutung ersetzt. Das ist keine Rechtsberatung und kein freigegebenes Impressum für den öffentlichen Betrieb.</p>
       <dl class="recht-liste">
         <dt>Verein</dt><dd>Quäntchen Glück e.V.</dd>
-        <dt>Anschrift</dt><dd>Gerstenweg 84, 12683 Berlin</dd>
-        <dt>Vertreten durch den Vorstand</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
-        <dt>Registereintrag</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
-        <dt>Kontakt</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
-        <dt>Verantwortlich für den Inhalt</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
-        <dt>Bildnachweis</dt><dd>Logo: Quäntchen Glück e.V. Icons und Kleeblätter: eigene Zeichnung. Foto Aushang: Quäntchen Glück e.V. Kleeblattwiese: mit KI erzeugt (eigene Erstellung, 2026). Foto „Hoffnung in kleinen Händen“: symbolische KI-Darstellung, keine Aufnahme einer Vereinsaktion. </dd>
+        <dt>Anschrift</dt><dd>Gerstenweg 84, 12683 Berlin. Vom Verein am 1. November 2026 bestätigt. Ob das auch der Registersitz ist, ist hier nicht amtlich belegt.</dd>
+        <dt>Vertreten durch den Vorstand</dt><dd>Nicht genannt. Visitenkarte und ältere Angaben widersprechen sich. Ein aktueller amtlicher Registerauszug fehlt. Deshalb steht hier niemand als aktueller Vorstand.</dd>
+        <dt>Registereintrag</dt><dd>Ein aktueller Auszug liegt nicht vor. Ältere Drittangaben werden nicht als heutige Eintragung übernommen.</dd>
+        <dt>Elektronische Kontaktaufnahme</dt><dd><a href="mailto:p.andersen@quäntchenglück.de">p.andersen@quäntchenglück.de</a>, Telefon <a href="tel:+491797656862">+49 179 765 68 62</a>. Beides steht auf der Vereinsvisitenkarte, geprüft am 1. November 2026. Das Telefon entspricht einem Vereinskontakt von 2019. Der Betrieb des Postfachs ist nicht geprüft. Die Adresse ist nicht das Ziel des Formulars.</dd>
+        <dt>Domain und Tarif</dt><dd>www.quäntchenglück.de, STRATO Hosting Plus, Angabe vom 7. November 2026. Ob QG ein eigenes Paket hat, ist nicht geklärt. Diese Vorschau läuft über GitHub Pages, nicht über diesen Tarif.</dd>
+        <dt>Verantwortlich für den Inhalt</dt><dd>Nicht benannt, solange der aktuelle Vorstand nicht belegt ist.</dd>
+        <dt>Diese Vorschau</dt><dd>Nicht öffentlich für Suchmaschinen vorgesehen. Auslieferung dieser Fassung: GitHub Pages. Die Domain liegt nach Angabe des Vereins bei STRATO. STRATO ist damit nicht der Host dieser Seitenfassung.</dd>
+        <dt>Bildnachweis</dt><dd>Logo: Quäntchen Glück e.V. Icons und Kleeblätter: eigene Zeichnung. Foto Aushang: Quäntchen Glück e.V. Kleeblattwiese: mit KI erzeugt (eigene Erstellung, 2026). Foto „Hoffnung in kleinen Händen“: symbolische KI-Darstellung, keine Aufnahme einer Vereinsaktion.</dd>
       </dl>
+      <p>Vor einem öffentlichen Start fehlen damit: aktueller Registerauszug mit Vertretungsregel, benannte verantwortliche Person und eine bestätigte elektronische Erreichbarkeit.</p>
     </div>
   </section>
   <section id="datenschutz" class="abschnitt recht" aria-labelledby="datenschutz-h">
     <div class="wrap schmal">
       <h2 id="datenschutz-h">Datenschutz</h2>
-      <p>Stand dieses Entwurfs: Die Seite setzt keine Cookies, nutzt kein Tracking und lädt keine Inhalte von fremden Servern. Schriften und Bilder liegen auf dem eigenen Server.</p>
-      <div class="beispiel-block"><span class="beispiel">Beispiel, wird noch ergänzt</span><p>Die vollständige Datenschutzerklärung ergänzen wir vor der Veröffentlichung.</p></div>
-      <p>Hosting: <span class="beispiel">Beispiel, wird noch ergänzt</span></p>
+      <p>Dieser Text beschreibt nur die hier sichtbare Vorschau und das vorbereitete, hier nicht aktive Formular. Er ist keine Rechtsberatung. Quellen: <a href="https://www.gesetze-im-internet.de/ddg/__5.html">§ 5 DDG</a>, <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679">DSGVO</a>, <a href="https://www.gesetze-im-internet.de/ttdsg/__25.html">§ 25 TDDDG</a>.</p>
+      <h3>Verantwortlicher</h3>
+      <p>Quäntchen Glück e.V., Gerstenweg 84, 12683 Berlin. Datenschutzanfragen können an die im Impressum genannte Kartenadresse gehen. Ob das Postfach sie annimmt, ist nicht geprüft. Eine gesonderte Datenschutzadresse ist nicht benannt. Ein Datenschutzbeauftragter ist hier nicht benannt und wird nicht erfunden.</p>
+      <h3>Diese Vorschau</h3>
+      <p>Die Seitenfassung wird über GitHub Pages ausgeliefert. GitHub beschreibt dafür eine internationale Verarbeitung, einschließlich der USA, und nennt Transfermechanismen in seiner <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Datenschutzerklärung</a>. Welche Vertragsrolle und welche konkrete Übermittlungsgrundlage für diesen Auftritt gelten, ist nicht geprüft. Eine feste Speicherdauer der Pages-Protokolle wird hier nicht behauptet.</p>
+      <p>Die Seite setzt keine Cookies und kein Tracking. Schriften und Bilder liegen auf demselben Host. Es gibt keine Verbindung zu Google Fonts und keine Analysewerkzeuge. Die Domain bei STRATO ist nicht der Host dieser Fassung. Angaben zu STRATO gelten erst, wenn der Versand dort tatsächlich läuft.</p>
+      <h3>Ladezeichen</h3>
+      <p>Das Kleeblatt beim Öffnen bleibt sichtbar, höchstens eine Sekunde, bei jedem Aufruf. Es speichert nichts: kein Cookie, kein sessionStorage, kein localStorage. Bei reduzierter Bewegung und ohne Skript erscheint es nicht. Eine Ausnahme nach § 25 Abs. 2 TDDDG wird dafür nicht in Anspruch genommen, weil kein Speicherzugriff mehr stattfindet.</p>
+      <h3>Kontaktformular</h3>
+      <p>In dieser Vorschau wird keine Nachricht verschickt. GitHub Pages führt das vorgesehene PHP-Skript nicht aus. Empfänger und Absender sind serverseitig noch leer. Solange das so bleibt, nimmt auch das Skript selbst keine Nachricht an.</p>
+      <p>Wenn der Versand später auf einem PHP-Server aktiv ist, sind E-Mail, Anliegen und Nachricht nötig. Name und Telefon sind freiwillig. Dateien werden nicht hochgeladen. Bitte keine Gesundheitsdaten senden. Der Zweck ist, die Anfrage zu beantworten. Grundlage ist für eine allgemeine Anfrage Art. 6 Abs. 1 lit. f DSGVO, das Interesse des Vereins, auf die Anfrage zu reagieren. Art. 6 Abs. 1 lit. b DSGVO nur, wenn die Anfrage tatsächlich einen Vertrag betrifft. Eine Einwilligung wird dafür nicht abgefragt und ersetzt die Grundlage nicht.</p>
+      <p>Das Skript soll den Inhalt nicht speichern, sondern nur per E-Mail weitergeben. Wohin die Mail geht, welche Weiterleitungen bestehen und wann Postfach oder Sicherungskopien gelöscht werden, ist noch nicht festgelegt. Eine pauschale Frist wird nicht behauptet. Für die Missbrauchsbegrenzung kann das Skript einen Hash der IP-Adresse und einen Zähler bis zu einer Stunde ablegen, ohne den Nachrichtentext. Der Hash ist kein Ersatz für eine festgelegte Löschregel des Postfachs.</p>
+      <p>Erst wenn das Skript auf dem PHP-Server läuft, setzt es ein Sitzungscookie, nur um das Formular-Token diesem Browser zuzuordnen. Diese Vorschau setzt das Cookie nicht, weil der Aufruf hier fehlschlägt.</p>
+      <p>Falls der Versand später über STRATO läuft, nennt STRATO für eigene Sicherheitsprotokolle der IP-Adresse höchstens sieben Tage. Das gilt nicht für Nachrichten, Postfächer oder alle Sicherungen. Ob für das konkrete Paket ein Auftragsverarbeitungsvertrag gilt, ist nicht geprüft.</p>
+      <h3>Deine Rechte</h3>
+      <p>Du kannst Auskunft, Berichtigung, Löschung und Einschränkung verlangen und der Verarbeitung widersprechen, soweit die Voraussetzungen vorliegen. Datenübertragbarkeit gilt nur, wo sie rechtlich greift. Beschwerde ist bei einer Aufsichtsbehörde möglich, für Berlin bei der Berliner Beauftragten für Datenschutz und Informationsfreiheit. Eine automatisierte Entscheidung findet nicht statt.</p>
     </div>
   </section>
 </div>
@@ -316,9 +355,11 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
       <img class="fuss-logo" src="assets/img/quaentchen-glueck-logo.svg" width="320" height="284" alt="Logo Quäntchen Glück e.V., Gemeinsam statt einsam">
     </div>
     <nav aria-label="Seiten im Fußbereich"><ul><li><a href="#inhalt">Startseite</a></li><li><a href="#ueber-uns">Über uns</a></li><li><a href="#bereiche">Projekte</a></li><li><a href="#wen-wir-unterstuetzen">Wen wir unterstützen</a></li><li><a href="#wege">Mithelfen</a></li><li><a href="#aktuelles">Aktuelles</a></li><li><a href="#fragen">Fragen</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#impressum">Impressum</a></li><li><a href="#datenschutz">Datenschutz</a></li></ul></nav>
-    <div id="kontakt">
+    <div id="anschrift">
       <p class="claim">Gemeinsam statt einsam</p>
-      <p>Quäntchen Glück e.V.<br>Gerstenweg 84<br>12683 Berlin</p><p>E-Mail und Telefon: <span class="beispiel">Beispiel, wird noch ergänzt</span></p>
+      <p>Quäntchen Glück e.V.<br>Gerstenweg 84<br>12683 Berlin</p>
+      <p><a href="tel:+491797656862">+49 179 765 68 62</a><br><a href="mailto:p.andersen@quäntchenglück.de">p.andersen@quäntchenglück.de</a></p>
+      <p>Kartenangaben ohne geprüften Betrieb. Der <a href="#kontakt">Kontakt</a> nennt Quelle und Alter.</p>
     </div>
   </div>
 </footer>
@@ -328,6 +369,62 @@ var ls=document.querySelectorAll('.entwurf-leiste a[data-v]');
 for(var i=0;i<ls.length;i++){var l=ls[i],nv=l.getAttribute('data-v')||v;
 l.setAttribute('href','?v='+nv);
 if(nv===v)l.setAttribute('aria-current','true');else l.removeAttribute('aria-current');}})();</script>
+<script>(function(){
+  var form=document.getElementById('kontakt-form');
+  if(!form)return;
+  var status=document.getElementById('kontakt-status');
+  var fehler=document.getElementById('kontakt-fehler');
+  var backend=false;
+  function say(text){if(status)status.textContent=text;}
+  function showErrors(list){
+    if(!fehler)return;
+    fehler.hidden=list.length===0;
+    fehler.textContent=list.join(' ');
+  }
+  function preview(){
+    backend=false;
+    say('Diese Vorschau auf GitHub Pages verschickt keine Nachricht. Das Formular ist für einen späteren PHP-Server vorbereitet. Empfänger und Absender sind noch nicht eingerichtet.');
+  }
+  fetch('qg-kontakt.php?token=1',{headers:{'Accept':'application/json'},credentials:'same-origin'}).then(function(r){
+    if(!r.ok)throw new Error('kein backend');
+    return r.json();
+  }).then(function(data){
+    if(!data||!data.csrf)throw new Error('kein token');
+    backend=true;
+    form.elements.csrf.value=data.csrf;
+    form.elements.ts.value=String(Math.floor(Date.now()/1000));
+    if(!data.configured)say('Der Server nimmt noch keine Nachricht an, weil Empfänger und Absender fehlen. Es wird nichts verschickt.');
+    else say('Du kannst die Nachricht senden. Die Empfängeradresse steht nicht auf dieser Seite.');
+  }).catch(preview);
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    showErrors([]);
+    if(!backend){preview();return;}
+    var mail=form.elements.email.value.trim();
+    var msg=form.elements.message.value.trim();
+    var anliegen=form.elements.anliegen.value;
+    var lokal=[];
+    if(!mail)lokal.push('Bitte eine E-Mail angeben.');
+    if(!anliegen)lokal.push('Bitte ein Anliegen wählen.');
+    if(msg.length<10)lokal.push('Die Nachricht ist noch zu kurz.');
+    if(lokal.length){showErrors(lokal);return;}
+    say('Die Nachricht wird gesendet.');
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'},credentials:'same-origin'}).then(function(r){
+      return r.json().then(function(data){return {ok:r.ok,data:data};}).catch(function(){return {ok:false,data:null};});
+    }).then(function(res){
+      if(res.ok&&res.data&&res.data.ok===true&&res.data.dry_run!==true){
+        say('Der Server hat die Nachricht zum Versand angenommen. Das ist noch keine Zustellbestätigung.');
+        form.reset();
+        backend=false;
+        preview();
+        return;
+      }
+      var text=(res.data&&res.data.errors&&res.data.errors.length)?res.data.errors.join(' '):'Die Nachricht wurde nicht angenommen. In dieser Vorschau wird nichts verschickt.';
+      showErrors([text]);
+      say('Die Nachricht wurde nicht verschickt.');
+    }).catch(function(){showErrors(['Die Nachricht wurde nicht verschickt.']);say('Diese Vorschau verschickt keine Nachricht.');});
+  });
+})();</script>
 <script>(function(){var m=document.querySelector('.nav-mobil');if(!m)return;
 m.addEventListener('click',function(e){if(e.target.closest('a'))m.removeAttribute('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.removeAttribute('open');m.querySelector('summary').focus();}});

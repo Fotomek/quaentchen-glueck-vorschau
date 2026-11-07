@@ -139,3 +139,12 @@ body{padding-bottom:80px}
 @media (min-width:800px){.fuss .fuss-grid{grid-template-columns:1.1fr 1fr 1.2fr;align-items:start}}
 
 .icon{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.kontakt-form p{margin:0 0 1rem}
+.kontakt-form label{display:block;font-weight:600;margin-bottom:.35rem}
+.kontakt-form input,.kontakt-form select,.kontakt-form textarea{width:100%;max-width:100%;box-sizing:border-box;font:inherit;color:inherit;background:#fff;border:1px solid var(--linie);border-radius:12px;padding:.7rem .8rem}
+.kontakt-form input:focus-visible,.kontakt-form select:focus-visible,.kontakt-form textarea:focus-visible{outline:3px solid var(--gruen-dunkel);outline-offset:2px}
+.kontakt-status,.kontakt-fehler{padding:.8rem 1rem;border-radius:12px}
+.kontakt-status{background:var(--gruen-zart)}
+.kontakt-fehler{background:#FFF1B8;color:#3B2F00}
+.kontakt-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
