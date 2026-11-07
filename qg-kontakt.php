@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$guard = qg_kontakt_request_guard($_SERVER, qg_kontakt_ini_bytes((string)ini_get('post_max_size')));
+$guard = qg_kontakt_request_guard($_SERVER, qg_kontakt_ini_bytes((string)ini_get('post_max_size')), qg_kontakt_read_body(QG_KONTAKT_MAX_BODY), qg_kontakt_post_bytes($_POST));
 if ($guard !== null) {
     qg_kontakt_respond($guard['status'], $guard['body']);
     exit;

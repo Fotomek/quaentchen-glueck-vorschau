@@ -1,6 +1,14 @@
 <?php
 declare(strict_types=1);
 
+if (PHP_SAPI !== 'cli') {
+    http_response_code(403);
+    header('Content-Type: text/plain; charset=utf-8');
+    header('X-Robots-Tag: noindex, nofollow');
+    echo 'nicht verfügbar';
+    return;
+}
+
 require dirname(__DIR__) . '/qg-kontakt-lib.php';
 
 $failed = 0;
@@ -43,11 +51,19 @@ $asArray = qg_kontakt_validate(['email' => ['ada@example.org'], 'anliegen' => 'h
 check($asArray['ok'] === false && !isset($asArray['data']), 'Array-Eingabe wird abgelehnt');
 check(qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => ['hilfe'], 'message' => '1234567890'])['ok'] === false, 'Array-Anliegen wird abgelehnt');
 
-check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '16384'], 8 * 1024 * 1024) === null, 'Body an der Grenze erlaubt');
-$tooBig = qg_kontakt_request_guard(['CONTENT_LENGTH' => '16385'], 8 * 1024 * 1024);
+$edge = str_repeat('a', 16384);
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '16384'], 8 * 1024 * 1024, $edge) === null, 'Body an der Grenze erlaubt');
+$tooBig = qg_kontakt_request_guard(['CONTENT_LENGTH' => '16385'], 8 * 1024 * 1024, str_repeat('a', 16385));
 check($tooBig !== null && $tooBig['status'] === 413, 'Body über 16 KiB abgelehnt');
-check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '10'], 1024)['status'] === 503, 'zu kleines post_max_size sperrt');
-check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '10'], 0) === null, 'post_max_size 0 gilt als unbegrenzt');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '10'], 1024, str_repeat('a', 10))['status'] === 503, 'zu kleines post_max_size sperrt');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '10'], 0, str_repeat('a', 10)) === null, 'post_max_size 0 gilt als unbegrenzt');
+check(qg_kontakt_request_guard([], 0, str_repeat('a', 100)) === null, 'ohne Content-Length bleibt der gemessene Body unter der Grenze');
+check(qg_kontakt_request_guard([], 0, str_repeat('a', 16385))['status'] === 413, 'ohne Content-Length stoppt über 16 KiB');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => 'nein'], 0, 'abc')['status'] === 413, 'falsche Content-Length wird abgelehnt');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '3'], 0, 'abcd')['status'] === 413, 'Content-Length ungleich gelesenen Bytes wird abgelehnt');
+check(strlen(qg_kontakt_read_body(8)) <= 9, 'Bodylesen im CLI bleibt begrenzt');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '313'], 0, '', 80) === null, 'bereits gelesener kleiner Multipart-Body bleibt erlaubt');
+check(qg_kontakt_request_guard(['CONTENT_LENGTH' => '313'], 0, '', 17000)['status'] === 413, 'bereits gelesene Felder über 16 KiB werden abgelehnt');
 check(qg_kontakt_ini_bytes('16K') === 16384 && qg_kontakt_ini_bytes('8M') === 8388608, 'Serverlimit wird gelesen');
 check(qg_kontakt_config_errors(['mail_to' => 'kein', 'mail_from' => 'website@example.org', 'rate_salt' => 'testsalt-testsalt', 'allowed_origins' => ['https://example.org']]) !== [], 'ungültiger Empfänger sperrt');
 check(qg_kontakt_config_errors(['mail_to' => 'verein@example.org', 'mail_from' => 'website@example.org', 'rate_salt' => 'testsalt-testsalt', 'allowed_origins' => ['http://example.org']]) !== [], 'öffentliches HTTP ist kein Ursprung');
@@ -156,6 +172,7 @@ $html = file_get_contents(dirname(__DIR__) . '/index.html');
 check(is_string($html) && !str_contains($html, 'sessionStorage.getItem') && !str_contains($html, 'sessionStorage.setItem') && !str_contains($html, 'localStorage.getItem') && !str_contains($html, 'localStorage.setItem'), 'Seite ohne Speicherzugriff');
 check(is_string($html) && !str_contains($html, 'mailto:') && !str_contains($html, 'tel:') && !str_contains($html, 'p.andersen') && !str_contains($html, '+49 179'), 'Kartenkontakte nicht veröffentlicht');
 check(is_string($html) && str_contains($html, 'Websitefreigabe') && str_contains($html, 'nicht das Ziel des Formulars'), 'Kartenlücke benannt, nicht als Freigabe');
+check(is_string($html) && str_contains($html, '20:30 bestätigt, dass die Telefonnummer') && str_contains($html, 'Kartenoriginal') && str_contains($html, 'Postfach der Kartenmail ist nicht bestätigt') && str_contains($html, 'anderen Postfachs') && !str_contains($html, 'megaclean') && !str_contains($html, 'Telefonnummer von P'), 'Kartentelefon bestätigt, Postfach und andere Bestätigung getrennt');
 check(is_string($html) && !str_contains($html, 'info@') && !str_contains($html, 'gmail') && !str_contains($html, 'Hundshagen') && !str_contains($html, 'VR 34726') && !str_contains($html, 'VR34726'), 'keine unbelegten Kontakte oder Vorstände');
 check(is_string($html) && !preg_match('/<form[^>]*action="qg-kontakt.php"/', $html) && !preg_match('/<form[^>]*method="post"/i', $html) && str_contains($html, 'onsubmit="return false"') && preg_match('/<button[^>]*id="kontakt-senden"[^>]*disabled/', $html) === 1, 'statisches Formular ist nicht sendbar');
 check(is_string($html) && str_contains($html, 'data.configured!==true') && str_contains($html, "fetch('qg-kontakt.php'"), 'Aktivierung nur nach konfiguriertem Backend');
@@ -164,13 +181,20 @@ $afterSuccess = $successAt === false ? '' : substr($html, $successAt, 700);
 check($successAt !== false && !str_contains($afterSuccess, 'preview(') && !str_contains($afterSuccess, 'lockPreview(') && str_contains($afterSuccess, 'csrf'), 'Erfolg bleibt stehen und übernimmt das neue Token');
 check(is_string($html) && str_contains($html, 'fehler&&!fehler.hidden'), 'Tokenabruf überschreibt keine Fehlermeldung');
 check(is_string($html) && str_contains($html, 'https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages') && str_contains($html, 'auch ohne Anmeldung bei GitHub') && !str_contains($html, 'bis zu einer Stunde'), 'Pages-IP-Log mit Quelle, ohne erfundene Frist');
-check(is_string($html) && str_contains($html, 'keinen eigenen Zeitplan') && str_contains($html, '16 KiB'), 'Bereinigung und Bodygrenze ehrlich beschrieben');
+check(is_string($html) && str_contains($html, 'keinen eigenen Zeitplan') && str_contains($html, 'Aufruf der Rateprüfung') && !str_contains($html, 'Bei jedem Aufruf löscht') && str_contains($html, '16 KiB') && str_contains($html, 'Längenangabe fehlt'), 'Bereinigung nur bei der Rateprüfung, Bodygrenze ohne Längenangabe');
+check(is_string($html) && str_contains($html, 'ist unbekannt') && str_contains($html, 'keinen zweiten Sendeversuch') && str_contains($html, '.catch(function(){unknown();})'), 'unklare Antwort ist kein Fehlversand und kein zweiter Versuch');
 $example = file_get_contents(dirname(__DIR__) . '/qg-kontakt.config.example.php');
 check(is_string($example) && !str_contains($example, 'p.andersen') && str_contains($example, "'mail_to' => ''") && str_contains($example, 'post_max_size') && str_contains($example, 'LimitRequestBody'), 'Beispielkonfiguration ohne Empfänger, mit Serverlimits');
 $router = file_get_contents(__DIR__ . '/qg-kontakt-router.php');
-check(is_string($router) && !str_contains($router, 'mail('), 'lokaler HTTP-Mock ruft mail nicht auf');
+check(is_string($router) && !str_contains($router, 'mail(') && str_contains($router, "getenv('QG_KONTAKT_DEV') === '1'") && str_contains($router, '127.0.0.1'), 'Mock nur mit Entwicklungsflag und Loopback, ohne mail');
+$worker = file_get_contents(__DIR__ . '/qg-kontakt-rate-worker.php');
+check(is_string($worker) && str_contains($worker, "PHP_SAPI !== 'cli'"), 'Worker ist CLI-only');
+check(str_contains((string)file_get_contents(__FILE__), "PHP_SAPI !== 'cli'"), 'Testlauf ist CLI-only');
+$htRoot = file_get_contents(dirname(__DIR__) . '/.htaccess');
+$htTests = file_get_contents(__DIR__ . '/.htaccess');
+check(is_string($htRoot) && str_contains($htRoot, '^/tests(/|$)') && is_string($htTests) && str_contains($htTests, 'Require all denied'), 'Webserver sperrt tests');
 $endpoint = file_get_contents(dirname(__DIR__) . '/qg-kontakt.php');
-check(is_string($endpoint) && str_contains($endpoint, 'qg_kontakt_request_guard') && str_contains($endpoint, 'qg_kontakt_bind_token'), 'Endpunkt prüft Body und erneuert Token');
+check(is_string($endpoint) && str_contains($endpoint, 'qg_kontakt_read_body') && str_contains($endpoint, 'qg_kontakt_bind_token'), 'Endpunkt begrenzt den Body und erneuert Token');
 
 function qg_http_start(string $cmd): array
 {
@@ -201,6 +225,23 @@ function qg_http_stop(array $server): void
         @unlink((string)$server['log']);
     }
 }
+function qg_raw_http(string $host, int $port, string $request): array
+{
+    $socket = @fsockopen($host, $port, $errno, $error, 3);
+    if ($socket === false) {
+        return ['status' => 0, 'body' => ''];
+    }
+    stream_set_timeout($socket, 3);
+    fwrite($socket, $request);
+    $raw = stream_get_contents($socket);
+    fclose($socket);
+    $parts = preg_split("/\r\n\r\n/", (string)$raw, 2);
+    $status = 0;
+    if (preg_match('/HTTP\/\d(?:\.\d)?\s+(\d+)/', $parts[0] ?? '', $match)) {
+        $status = (int)$match[1];
+    }
+    return ['status' => $status, 'body' => $parts[1] ?? ''];
+}
 function qg_curl(string $url, array $args = []): array
 {
     $cmd = array_merge(['curl', '-sS', '-D', '-', '--max-time', '5'], $args, [$url]);
@@ -230,11 +271,26 @@ if ($plain['port'] > 0) {
     check($big['status'] === 413, 'HTTP-Body über 16 KiB wird 413');
     $other = qg_curl($base . '/qg-kontakt.php', ['-X', 'PUT']);
     check($other['status'] === 405, 'fremde Methode bleibt 405');
+    foreach (['/tests/qg-kontakt-test.php', '/tests/qg-kontakt-rate-worker.php', '/tests/qg-kontakt-router.php'] as $blockedPath) {
+        $blocked = qg_curl($base . $blockedPath);
+        check($blocked['status'] === 403 && str_contains($blocked['body'], 'nicht verfügbar') && !str_contains($blocked['body'], 'ALLE_OK') && !str_contains($blocked['body'], 'mock'), 'HTTP sperrt ' . $blockedPath);
+    }
+    $smallBody = 'email=ada@example.org';
+    $noLength = "POST /qg-kontakt.php HTTP/1.1\r\nHost: 127.0.0.1:" . $plain['port'] . "\r\nTransfer-Encoding: chunked\r\nContent-Type: application/x-www-form-urlencoded\r\nAccept: application/json\r\nConnection: close\r\n\r\n" . dechex(strlen($smallBody)) . "\r\n" . $smallBody . "\r\n0\r\n\r\n";
+    $noLengthRes = qg_raw_http('127.0.0.1', $plain['port'], $noLength);
+    check($noLengthRes['status'] === 503, 'kleiner Body ohne Content-Length bleibt unter der Grenze');
+    $badLength = "POST /qg-kontakt.php HTTP/1.1\r\nHost: 127.0.0.1:" . $plain['port'] . "\r\nContent-Type: application/octet-stream\r\nContent-Length: nein\r\nAccept: application/json\r\nConnection: close\r\n\r\nabc";
+    $badLengthRes = qg_raw_http('127.0.0.1', $plain['port'], $badLength);
+    check(in_array($badLengthRes['status'], [0, 400, 413], true), 'falsche Content-Length wird nicht als Versand angenommen');
+    $huge = str_repeat('a', 17000);
+    $hugeReq = "POST /qg-kontakt.php HTTP/1.1\r\nHost: 127.0.0.1:" . $plain['port'] . "\r\nTransfer-Encoding: chunked\r\nContent-Type: application/octet-stream\r\nAccept: application/json\r\nConnection: close\r\n\r\n" . dechex(strlen($huge)) . "\r\n" . $huge . "\r\n0\r\n\r\n";
+    $hugeRes = qg_raw_http('127.0.0.1', $plain['port'], $hugeReq);
+    check($hugeRes['status'] === 413, 'großer Body ohne Content-Length wird 413');
 }
 qg_http_stop($plain);
 
 $mockDir = sys_get_temp_dir() . '/qg-kontakt-http-mock-' . getmypid();
-$mock = qg_http_start('QG_KONTAKT_MOCK_DIR=' . escapeshellarg($mockDir) . ' ' . PHP_BINARY . ' -S 127.0.0.1:0 -t ' . escapeshellarg($root) . ' ' . escapeshellarg($root . '/tests/qg-kontakt-router.php'));
+$mock = qg_http_start('QG_KONTAKT_DEV=1 QG_KONTAKT_MOCK_DIR=' . escapeshellarg($mockDir) . ' ' . PHP_BINARY . ' -S 127.0.0.1:0 -t ' . escapeshellarg($root) . ' ' . escapeshellarg($root . '/tests/qg-kontakt-router.php'));
 check($mock['port'] > 0, 'lokaler Mock-Server');
 if ($mock['port'] > 0) {
     $base = 'http://127.0.0.1:' . $mock['port'];
@@ -258,6 +314,8 @@ if ($mock['port'] > 0) {
     $sentBody = json_decode($sent['body'], true);
     $log = (string)@file_get_contents($mockDir . '/mailer.log');
     check($sent['status'] === 200 && is_array($sentBody) && $sentBody['ok'] === true && is_string($sentBody['csrf'] ?? null) && $sentBody['csrf'] !== ($tokenBody['csrf'] ?? '') && $log === "mock\n", 'lokaler Mock nimmt an und erneuert das Token');
+    $hidden = qg_curl($base . '/tests/qg-kontakt-router.php');
+    check($hidden['status'] === 403 && !str_contains($hidden['body'], 'mock'), 'Entwicklungsrouter gibt tests nicht frei');
     @unlink($cookie);
 }
 qg_http_stop($mock);

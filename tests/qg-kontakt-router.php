@@ -1,13 +1,26 @@
 <?php
 declare(strict_types=1);
 
-if (PHP_SAPI !== 'cli-server') {
-    http_response_code(404);
-    echo 'nur lokaler Test';
+$qgRemote = (string)($_SERVER['REMOTE_ADDR'] ?? '');
+$qgDev = PHP_SAPI === 'cli-server'
+    && getenv('QG_KONTAKT_DEV') === '1'
+    && ($qgRemote === '127.0.0.1' || $qgRemote === '::1');
+if (!$qgDev) {
+    http_response_code(403);
+    header('Content-Type: text/plain; charset=utf-8');
+    header('X-Robots-Tag: noindex, nofollow');
+    echo 'nicht verfügbar';
     return;
 }
 
 $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+if (preg_match('#^/tests(?:/|$)#', (string)$uri) === 1) {
+    http_response_code(403);
+    header('Content-Type: text/plain; charset=utf-8');
+    header('X-Robots-Tag: noindex, nofollow');
+    echo 'nicht verfügbar';
+    return true;
+}
 if ($uri !== '/qg-kontakt.php') {
     return false;
 }
@@ -51,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['ok' => false, 'errors' => ['Diese Adresse nimmt nur das Formular entgegen.']]);
     return true;
 }
-$guard = qg_kontakt_request_guard($_SERVER, qg_kontakt_ini_bytes((string)ini_get('post_max_size')));
+$guard = qg_kontakt_request_guard($_SERVER, qg_kontakt_ini_bytes((string)ini_get('post_max_size')), qg_kontakt_read_body(QG_KONTAKT_MAX_BODY), qg_kontakt_post_bytes($_POST));
 if ($guard !== null) {
     http_response_code($guard['status']);
     echo json_encode($guard['body'], JSON_UNESCAPED_UNICODE);

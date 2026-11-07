@@ -163,19 +163,69 @@ function qg_kontakt_ini_bytes(string $value): int
     };
 }
 
-function qg_kontakt_request_guard(array $server, int $postMaxBytes): ?array
+function qg_kontakt_read_body(int $max): string
+{
+    $stream = fopen('php://input', 'rb');
+    if ($stream === false) {
+        return str_repeat('x', $max + 1);
+    }
+    $data = '';
+    $cap = $max + 1;
+    while (strlen($data) < $cap) {
+        $part = fread($stream, $cap - strlen($data));
+        if ($part === false) {
+            fclose($stream);
+            return str_repeat('x', $max + 1);
+        }
+        if ($part === '') {
+            break;
+        }
+        $data .= $part;
+    }
+    fclose($stream);
+    return $data;
+}
+
+function qg_kontakt_post_bytes(array $post): int
+{
+    $total = 0;
+    $stack = [$post];
+    while ($stack) {
+        foreach (array_pop($stack) as $value) {
+            if (is_array($value)) {
+                $stack[] = $value;
+                continue;
+            }
+            if (is_string($value)) {
+                $total += strlen($value);
+                if ($total > QG_KONTAKT_MAX_BODY) {
+                    return $total;
+                }
+            }
+        }
+    }
+    return $total;
+}
+
+function qg_kontakt_request_guard(array $server, int $postMaxBytes, string $body, int $parsedBytes = 0): ?array
 {
     if ($postMaxBytes !== 0 && $postMaxBytes < QG_KONTAKT_MAX_BODY) {
         return ['status' => 503, 'body' => ['ok' => false, 'errors' => ['Der Versand ist noch nicht eingerichtet.']]];
     }
-    $raw = $server['CONTENT_LENGTH'] ?? '0';
-    if (is_int($raw)) {
-        $raw = (string)$raw;
+    if (array_key_exists('CONTENT_LENGTH', $server)) {
+        $raw = $server['CONTENT_LENGTH'];
+        if (is_int($raw)) {
+            $raw = (string)$raw;
+        }
+        if (!is_string($raw) || preg_match('/\A\d+\z/', $raw) !== 1) {
+            return ['status' => 413, 'body' => ['ok' => false, 'errors' => ['Die Anfrage ist zu groß.']]];
+        }
+        $declared = (int)$raw;
+        if ($declared > QG_KONTAKT_MAX_BODY || ($body !== '' && $declared !== strlen($body))) {
+            return ['status' => 413, 'body' => ['ok' => false, 'errors' => ['Die Anfrage ist zu groß.']]];
+        }
     }
-    if (!is_string($raw) || $raw === '') {
-        $raw = '0';
-    }
-    if (!preg_match('/\A\d+\z/', $raw) || (int)$raw > QG_KONTAKT_MAX_BODY) {
+    if (strlen($body) > QG_KONTAKT_MAX_BODY || $parsedBytes > QG_KONTAKT_MAX_BODY) {
         return ['status' => 413, 'body' => ['ok' => false, 'errors' => ['Die Anfrage ist zu groß.']]];
     }
     return null;
