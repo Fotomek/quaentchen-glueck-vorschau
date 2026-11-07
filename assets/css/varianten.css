@@ -130,7 +130,7 @@ html[data-variante="b"] .kreis-klee{width:46px}
 html[data-variante="b"] .hinweis{font-size:.95rem}
 html[data-variante="b"] .bereiche{background:var(--gruen-zart)}
 html[data-variante="b"] .liste{list-style:none;padding:0;margin:1.75rem 0 0;display:grid;gap:1.1rem}
-html[data-variante="b"] .eintrag{display:flex;gap:1.1rem;align-items:flex-start;background:#fff;border-radius:28px 28px 28px 8px;padding:1.3rem}
+html[data-variante="b"] .eintrag{display:flex;gap:1.1rem;align-items:flex-start;background:#fff;border-radius:28px 28px 28px 8px;padding:1.3rem;min-width:0}
 html[data-variante="b"] .eintrag:nth-child(even){border-radius:28px 8px 28px 28px}
 html[data-variante="b"] .eintrag p{color:var(--text-2);margin-bottom:.4rem}
 html[data-variante="b"] .blob{flex:none;display:grid;place-items:center;width:58px;height:58px;color:var(--gruen-dunkel);background:#DDEFB4;border-radius:58% 42% 50% 50% / 46% 55% 45% 54%}
@@ -176,7 +176,7 @@ html[data-variante="b"] .zahlen-layout{display:flex;flex-direction:column}
 html[data-variante="b"] .zahlen-kopf{display:contents}
 html[data-variante="b"] .zahlen-grid{order:1}
 html[data-variante="b"] .zahlen-kopf .hinweis{order:2}
-html[data-variante="b"] .karte-text{flex:1}
+html[data-variante="b"] .karte-text{flex:1;min-width:0}
 html[data-variante="b"] .partner{border-top:0}
 /* Feedback Thomas 01.11.2026 (Variante B):
    1) Welle schließt sauber an: vorher 1px Lücke (top:-1px) -> dünne, unterbrochene Linie unter der Welle. Jetzt 2px Überlappung.
@@ -255,6 +255,10 @@ html[data-variante="c"] .zahl-wert{color:inherit}
   html[data-variante="b"] .hero-bild{height:70%;min-height:220px}
   html[data-variante="b"] .wege{padding-top:3.25rem}
 }
+/* Variante B: dasselbe Symbolfoto unter dem Starttext. Rahmen bleibt 4:3, das Kleeblatt liegt im Bild, damit nichts über den Rand ragt. */
+html[data-variante="b"] .hero-foto{position:relative;width:min(100%,540px);margin:1.75rem auto 0}
+html[data-variante="b"] .hero-foto .foto{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:28px;box-shadow:var(--schatten)}
+html[data-variante="b"] .hero-klee{position:absolute;width:72px;right:12px;bottom:12px}
 
 /* Runde 02.11.2026 13:48 (Feedback Thomas): schlanker Kopf, echte Sprungziele, kompakter Burger. Gilt für alle Varianten. */
 .kopf-inner{min-height:58px;gap:.75rem}

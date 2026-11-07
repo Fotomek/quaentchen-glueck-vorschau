@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-variante="b" data-akzent="script">
+<html lang="de" data-variante="b">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -53,14 +53,14 @@ html.qg-erstladen .qg-lader .qg-klee{flex:none;width:clamp(4.25rem,20vw,6.75rem)
 <meta name="theme-color" content="#074F37">
 <script>(function(){var d=document.documentElement,q;try{q=new URLSearchParams(location.search)}catch(x){return}
 var v=(q.get('v')||'').toLowerCase();if(/^[abc]$/.test(v))d.setAttribute('data-variante',v);
-var a=(q.get('akzent')||'').toLowerCase();if(a==='script'||a==='kaushan'||a==='yellowtail')d.setAttribute('data-akzent',a);
 if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/QuaentchenSans-Bold.woff2?v=1211" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/QuaentchenScript-Regular.woff2?v=1211" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Asap-Variable-wdth75-100-wght400-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Asap-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/base.css?v=1211">
+<link rel="preload" href="assets/fonts/Asap-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/KaushanScript-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/base.css?v=ofl">
 <link rel="stylesheet" href="assets/css/varianten.css?v=1211">
 </head>
 <body>
@@ -70,7 +70,6 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
   <div class="wrap entwurf-inner">
     <strong>Entwurf, nicht veröffentlicht</strong>
     <span class="schalter">Variante: <a href="?v=a" data-v="a">A hell</a> <a href="?v=b" data-v="b">B Wiese</a> <a href="?v=c" data-v="c">C Kacheln</a></span>
-    <span class="schalter">Akzentschrift: <a href="?akzent=script" data-a="script">Hausschrift</a> <a href="?akzent=kaushan" data-a="kaushan">Kaushan</a> <a href="?akzent=yellowtail" data-a="yellowtail">Yellowtail</a></span>
   </div>
 </div>
 <header class="kopf">
@@ -103,8 +102,8 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
         <a class="btn btn-rand btn-mithelfen" href="#wege"><svg class="icon mithelfen-herz" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Mithelfen</a>
       </div>
       </div>
-    <div class="hero-foto" data-nur="c">
-      <img class="foto" src="assets/img/ki/gemeinsam-pflanzen-640.webp" srcset="assets/img/ki/gemeinsam-pflanzen-640.webp 640w, assets/img/ki/gemeinsam-pflanzen-1024.webp 1024w" sizes="(min-width:1080px) 540px, 92vw" width="1024" height="768" loading="lazy" decoding="async" alt="Mehrere Hände pflanzen gemeinsam eine junge Pflanze in ein Gartenbeet">
+    <div class="hero-foto" data-nur="b c">
+      <img class="foto" src="assets/img/ki/hoffnung-in-kleinen-haenden-640.webp" srcset="assets/img/ki/hoffnung-in-kleinen-haenden-640.webp 640w, assets/img/ki/hoffnung-in-kleinen-haenden-1024.webp 1024w" sizes="(min-width:1080px) 540px, 92vw" width="1024" height="768" loading="lazy" decoding="async" alt="Symbolische KI-Darstellung: Kinder- und Erwachsenenhände halten Erde mit einem kleinen Kleeblatt. Keine reale Vereinsaktion und keine echten Personen.">
       <svg class="hero-klee" viewBox="-60 -60 120 120" aria-hidden="true" focusable="false"><g fill="var(--gruen-hell)" stroke="#fff" stroke-width="3"><path d="M0 0C-30-18-33-48-16-53C-7-56 0-49 0-42C0-49 7-56 16-53C33-48 30-18 0 0Z" transform="rotate(45)"/><path d="M0 0C-30-18-33-48-16-53C-7-56 0-49 0-42C0-49 7-56 16-53C33-48 30-18 0 0Z" transform="rotate(135)"/><path d="M0 0C-30-18-33-48-16-53C-7-56 0-49 0-42C0-49 7-56 16-53C33-48 30-18 0 0Z" transform="rotate(225)"/><path d="M0 0C-30-18-33-48-16-53C-7-56 0-49 0-42C0-49 7-56 16-53C33-48 30-18 0 0Z" transform="rotate(315)"/></g></svg>
     </div>
   </div>
@@ -308,7 +307,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
         <dt>Registereintrag</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
         <dt>Kontakt</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
         <dt>Verantwortlich für den Inhalt</dt><dd><span class="beispiel">Beispiel, wird noch ergänzt</span></dd>
-        <dt>Bildnachweis</dt><dd>Logo: Quäntchen Glück e.V. Icons und Kleeblätter: eigene Zeichnung. Foto Aushang: Quäntchen Glück e.V. Kleeblattwiese und Foto „Gemeinsam pflanzen“: mit KI erzeugt (eigene Erstellung, 2026). </dd>
+        <dt>Bildnachweis</dt><dd>Logo: Quäntchen Glück e.V. Icons und Kleeblätter: eigene Zeichnung. Foto Aushang: Quäntchen Glück e.V. Kleeblattwiese: mit KI erzeugt (eigene Erstellung, 2026). Foto „Hoffnung in kleinen Händen“: symbolische KI-Darstellung, keine Aufnahme einer Vereinsaktion. </dd>
       </dl>
     </div>
   </section>
@@ -335,11 +334,11 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
   </div>
 </footer>
 <aside class="leiste-unterstuetzen" aria-label="Spenden"><a class="btn btn-dunkel" href="#spenden">Jetzt unterstützen</a></aside>
-<script>(function(){var d=document.documentElement,v=d.getAttribute('data-variante'),a=d.getAttribute('data-akzent');
-var ls=document.querySelectorAll('.entwurf-leiste a[data-v],.entwurf-leiste a[data-a]');
-for(var i=0;i<ls.length;i++){var l=ls[i],nv=l.getAttribute('data-v')||v,na=l.getAttribute('data-a')||a;
-l.setAttribute('href','?v='+nv+'&akzent='+na);
-if((l.hasAttribute('data-v')&&nv===v)||(l.hasAttribute('data-a')&&na===a))l.setAttribute('aria-current','true');else l.removeAttribute('aria-current');}})();</script>
+<script>(function(){var d=document.documentElement,v=d.getAttribute('data-variante');
+var ls=document.querySelectorAll('.entwurf-leiste a[data-v]');
+for(var i=0;i<ls.length;i++){var l=ls[i],nv=l.getAttribute('data-v')||v;
+l.setAttribute('href','?v='+nv);
+if(nv===v)l.setAttribute('aria-current','true');else l.removeAttribute('aria-current');}})();</script>
 <script>(function(){var m=document.querySelector('.nav-mobil');if(!m)return;
 m.addEventListener('click',function(e){if(e.target.closest('a'))m.removeAttribute('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&m.open){m.removeAttribute('open');m.querySelector('summary').focus();}});

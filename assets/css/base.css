@@ -3,18 +3,10 @@
 @font-face{font-family:"Asap";src:url("../fonts/Asap-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Asap";src:url("../fonts/Asap-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:"Asap Condensed";src:url("../fonts/AsapCondensed-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-/* Logo-Schrift (Angleich 01.11.2026): Asap variabel, Achsen wght 400–700 und wdth 75–100 %, Latin-Teilmenge, OFL (OFL-Asap.txt).
-   Wortmarke im Logo ≈ Asap wdth 75 % / wght 500, Sperrung −0,07 em; „e.V.“ ≈ wdth 85 % / wght 500; Claim ≈ Asap SemiBold, +0,03 em.
-   Asap Condensed Bold bleibt nur als Rückfall stehen (war 40 % zu fett gegenüber dem Logo). */
+/* Wie Commit 2c3d836 (PR 5): variable Asap als „Asap Logo“ für Überschriften, normale Asap für Fließtext. */
 @font-face{font-family:"Asap Logo";src:url("../fonts/Asap-Variable-wdth75-100-wght400-700.woff2") format("woff2");font-weight:400 700;font-stretch:75% 100%;font-style:normal;font-display:swap}
-/* Hausschrift v1.211 (06.11.2026).
-   Bold = Überschriften, Claim = Claim-Zeile, Script = Akzent („Glück“). Asap bleibt Fließtext.
-   Kaushan/Yellowtail bleiben als Umschalter-Rückfall in der Entwurfsleiste. */
-@font-face{font-family:"Quaentchen Sans";src:url("../fonts/QuaentchenSans-Bold.woff2?v=1211") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Claim";src:url("../fonts/QuaentchenSansClaim-Regular.woff2?v=1211") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Quaentchen Script";src:url("../fonts/QuaentchenScript-Regular.woff2?v=1211") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+/* Akzent nur Kaushan Script, lokal und OFL, wie in demselben Commit. */
 @font-face{font-family:"Kaushan Script";src:url("../fonts/KaushanScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Yellowtail";src:url("../fonts/Yellowtail-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
 :root{
   /* Logofarben (verbindlich) */
@@ -28,33 +20,25 @@
   --text:#14231C;
   --text-2:#3A4A42;
   --linie:#D9E2CF;
-  /* Schriften: Hausschrift v1.211 für Kopf/Akzent/Claim, Asap für Fließtext */
-  --font-head:"Quaentchen Sans","Asap Condensed","Arial Narrow",system-ui,sans-serif;
+  /* Schriften wie Commit 2c3d836: Asap Logo für Überschriften, Asap für Claim und Fließtext. */
+  --font-head:"Asap Logo","Asap Condensed","Arial Narrow",system-ui,sans-serif;
   --head-weight:700;
-  --head-stretch:normal;
+  --head-stretch:85%;
   --head-sperrung:-.02em;
   --logo-sperrung:-.04em;
   --font-text:"Asap",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --font-claim:"Quaentchen Claim","Asap",system-ui,sans-serif;
-  /* Akzent: Hausschrift Script Standard; Kaushan/Yellowtail nur Entwurfs-Vergleich */
-  --akzent-script:"Quaentchen Script",cursive;
-  --akzent-kaushan:"Kaushan Script",cursive;
-  --akzent-yellowtail:"Yellowtail",cursive;
-  --font-akzent:var(--akzent-script);
+  --font-claim:"Asap",system-ui,sans-serif;
+  --font-akzent:"Kaushan Script",cursive;
   --radius:18px;
   --schatten:0 10px 30px rgba(7,79,55,.10);
   --max:1180px;
 }
-html[data-akzent="script"]{--font-akzent:var(--akzent-script)}
-html[data-akzent="kaushan"]{--font-akzent:var(--akzent-kaushan)}
-html[data-akzent="yellowtail"]{--font-akzent:var(--akzent-yellowtail)}
-
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{margin:0;font-family:var(--font-text);font-weight:400;font-size:1.0625rem;line-height:1.6;color:var(--text);background:var(--creme);overflow-x:hidden}
 img,svg{max-width:100%;height:auto;display:block}
-h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);line-height:1.1;letter-spacing:var(--head-sperrung);word-spacing:.06em;margin:0 0 .5em;color:var(--gruen-dunkel)}
+h1,h2,h3{font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);line-height:1.1;letter-spacing:var(--head-sperrung);word-spacing:.06em;margin:0 0 .5em;color:var(--gruen-dunkel);hyphens:auto;overflow-wrap:break-word}
 h1{font-size:clamp(2.4rem,9vw,4.6rem)}
 h2{font-size:clamp(1.9rem,6vw,3rem)}
 h3{font-size:1.45rem}
