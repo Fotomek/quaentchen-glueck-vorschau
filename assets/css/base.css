@@ -3,9 +3,9 @@
 @font-face{font-family:"Asap";src:url("../fonts/Asap-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Asap";src:url("../fonts/Asap-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 @font-face{font-family:"Asap Condensed";src:url("../fonts/AsapCondensed-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-/* Freie Asap-Schnitte bleiben deklariert. Condensed und die variable Logo-Angleichung hängen an keiner aktiven Schriftwahl und werden nicht geladen. Die Logos sind Vektoren. */
+/* Wie Commit 2c3d836 (PR 5): variable Asap als „Asap Logo“ für Überschriften, normale Asap für Fließtext. */
 @font-face{font-family:"Asap Logo";src:url("../fonts/Asap-Variable-wdth75-100-wght400-700.woff2") format("woff2");font-weight:400 700;font-stretch:75% 100%;font-style:normal;font-display:swap}
-/* Aktive Schrift: Asap für Fließtext, Überschriften und Claim. Kaushan Script nur für die wenigen Akzentzeilen. Beide liegen lokal (OFL). */
+/* Akzent nur Kaushan Script, lokal und OFL, wie in demselben Commit. */
 @font-face{font-family:"Kaushan Script";src:url("../fonts/KaushanScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 
 :root{
@@ -20,11 +20,11 @@
   --text:#14231C;
   --text-2:#3A4A42;
   --linie:#D9E2CF;
-  /* Schriften: vorhandene Asap für Fließtext, Überschriften und Claim. Kaushan Script nur als Akzent. */
-  --font-head:"Asap","Segoe UI",system-ui,sans-serif;
-  --head-weight:600;
-  --head-stretch:normal;
-  --head-sperrung:0;
+  /* Schriften wie Commit 2c3d836: Asap Logo für Überschriften, Asap für Claim und Fließtext. */
+  --font-head:"Asap Logo","Asap Condensed","Arial Narrow",system-ui,sans-serif;
+  --head-weight:700;
+  --head-stretch:85%;
+  --head-sperrung:-.02em;
   --logo-sperrung:-.04em;
   --font-text:"Asap",system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-claim:"Asap",system-ui,sans-serif;
