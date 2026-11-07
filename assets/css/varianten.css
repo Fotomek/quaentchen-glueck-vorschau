@@ -77,7 +77,7 @@ html[data-variante="a"] .abschluss p{color:var(--gruen-tief);font-size:1.15rem;f
 html[data-variante="a"] .abschluss-klee{width:72px;margin-bottom:1rem}
 @media (min-width:700px){
 html[data-variante="a"] .wege-grid{grid-template-columns:1fr 1fr}
-html[data-variante="a"] .zahlen-grid{grid-template-columns:repeat(3,1fr)}
+html[data-variante="a"] .zahlen-grid{grid-template-columns:repeat(2,1fr)}
 html[data-variante="a"] .karten{grid-template-columns:repeat(2,1fr)}
 html[data-variante="a"] .stimmen-grid{grid-template-columns:1fr 1fr}
 }
@@ -151,7 +151,7 @@ html[data-variante="b"] .abschluss .akzent{color:#3F7A05}
 html[data-variante="b"] .abschluss p{font-size:1.15rem;font-weight:600;color:var(--text-2)}
 @media (min-width:700px){
 html[data-variante="b"] .wege-grid{grid-template-columns:1fr 1fr}
-html[data-variante="b"] .zahlen-grid{grid-template-columns:repeat(3,1fr)}
+html[data-variante="b"] .zahlen-grid{grid-template-columns:repeat(2,1fr)}
 html[data-variante="b"] .zahl{flex-direction:column;align-items:flex-start}
 html[data-variante="b"] .liste{grid-template-columns:1fr 1fr}
 html[data-variante="b"] .stimmen-reihe{grid-template-columns:1fr 1fr}
@@ -370,7 +370,7 @@ html[data-variante="c"] .abschluss p{font-size:1.15rem;font-weight:600}
 @media (min-width:700px){
 html[data-variante="c"] .wege-split{grid-template-columns:1fr 1fr}
 html[data-variante="c"] .bento{grid-template-columns:repeat(2,1fr)}
-html[data-variante="c"] .zahlen-layout{grid-template-columns:repeat(3,1fr)}
+html[data-variante="c"] .zahlen-layout{grid-template-columns:repeat(2,1fr)}
 html[data-variante="c"] .zahlen-kopf{grid-column:1 / -1}
 html[data-variante="c"] .stimmen-liste{grid-template-columns:1fr 1fr}
 }
@@ -385,7 +385,7 @@ html[data-variante="c"] .kachel-1{grid-column:span 2;grid-row:span 2;justify-con
 html[data-variante="c"] .kachel-1 h3{font-size:2.3rem}
 html[data-variante="c"] .kachel-1 p{flex:0;font-size:1.15rem}
 html[data-variante="c"] .kachel-6{grid-column:1 / -1}
-html[data-variante="c"] .zahlen-layout{grid-template-columns:1.3fr 1fr 1fr 1fr;align-items:start}
+html[data-variante="c"] .zahlen-layout{grid-template-columns:1.3fr 1fr 1fr;align-items:start}
 html[data-variante="c"] .zahlen-kopf{grid-column:auto}
 html[data-variante="c"] .stimmen-layout{grid-template-columns:1fr 1.4fr;align-items:start}
 html[data-variante="c"] .faq-grid{grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
