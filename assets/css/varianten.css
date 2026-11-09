@@ -442,7 +442,7 @@ html[data-variante="c"] .hero .btn-mithelfen:hover .mithelfen-herz,html[data-var
 
 /* Sarah-Runde 09.11.2026: zentrierte Texte, Beispiele, Mehr erfahren, dezentes Klee */
 .text-mitte,.text-mitte .wrap,.text-mitte .schmal{text-align:center}
-.text-mitte .themen-liste,.text-mitte .karten,.text-mitte .faq-liste{text-align:left}
+.text-mitte .themen-liste,.text-mitte .karten,.text-mitte .faq-liste,.text-mitte .karte,.text-mitte .karte-text,.text-mitte .thema,.text-mitte .eintrag{text-align:center}
 .text-mitte .btn-reihe,.text-mitte .hilfe-anfragen,.text-mitte .beispiel-foto{text-align:center}
 .text-mitte .kontakt-form{text-align:left;margin-inline:auto}
 .beispiel-foto{margin:1.5rem auto;max-width:min(100%,640px)}
@@ -470,3 +470,27 @@ html[data-variante="b"] .hero-bild{opacity:.55;filter:saturate(.7) brightness(1.
 .mission,.vielfalt,.gemeinsam-helfen{background:#fff}
 html[data-variante="b"] .mission{background:var(--creme)}
 html[data-variante="b"] .gemeinsam-helfen{background:var(--gruen-zart)}
+
+/* 09.11.2026: Texte mittig, eng, Überschriften wie „Große Wirkung.“, Flächen aus der bestehenden Grünpalette. Kontakt und Recht bleiben ausgenommen. */
+html[data-variante="b"] main .abschnitt:not(.kontakt){padding:2rem 0}
+html[data-variante="b"] main .abschnitt:not(.kontakt) :is(p,.intro,.lead){line-height:1.45;margin-bottom:.4rem}
+html[data-variante="b"] main .abschnitt:not(.kontakt) :is(h2,h3){font-family:var(--font-akzent);font-weight:400;font-stretch:normal;letter-spacing:0;word-spacing:normal;line-height:1.28;margin-bottom:.35rem;hyphens:manual}
+html[data-variante="b"] .wege,html[data-variante="b"] .wege .weg,html[data-variante="b"] .wege .weg-inner,html[data-variante="b"] .wege h2{text-align:center}
+html[data-variante="b"] .text-mitte .eintrag,html[data-variante="b"] .wege .weg{flex-direction:column;align-items:center}
+html[data-variante="b"] :is(#ueber-uns,#vielfalt,#wen-wir-unterstuetzen,#patenschaft,#aktionen,#partner){background:var(--weiss)}
+html[data-variante="b"] :is(#mission,#bereiche,#gemeinsam-helfen,#sponsoring,#aktuelles){background:var(--gruen-zart)}
+html[data-variante="b"] :is(#ueber-uns,#vielfalt,#wen-wir-unterstuetzen,#patenschaft,#aktionen,#partner) :is(h2,h3){color:var(--gruen-dunkel)}
+html[data-variante="b"] :is(#mission,#bereiche,#gemeinsam-helfen,#sponsoring,#aktuelles) :is(h2,h3){color:#3F7A05}
+html[data-variante="b"] .wege :is(h2,h3),html[data-variante="b"] .faq h2{font-family:var(--font-akzent);font-weight:400;font-stretch:normal;letter-spacing:0;word-spacing:normal;line-height:1.28;color:var(--gruen-hell)}
+html[data-variante="b"] .faq h2,html[data-variante="b"] .faq summary,html[data-variante="b"] .faq .antwort{text-align:center}
+html[data-variante="b"] .abschluss h2{font-family:var(--font-akzent);font-weight:400;font-stretch:normal;letter-spacing:0;word-spacing:normal;line-height:1.28;max-width:22ch;color:var(--gruen-dunkel)}
+html[data-variante="b"] .abschluss .akzent{color:#3F7A05}
+@media (max-width:700px){
+  html[data-variante="b"] main .abschnitt:not(.kontakt) :is(p,.intro,.lead){line-height:1.5}
+}
+html[data-variante="b"] .hero-panel{text-align:center;margin-inline:auto}
+html[data-variante="b"] .hero .btn-reihe{justify-content:center}
+html[data-variante="b"] .hero .lead{line-height:1.4;margin-bottom:.3rem}
+@media (min-width:900px){
+  html[data-variante="b"] .wege{padding-top:2.2rem}
+}
