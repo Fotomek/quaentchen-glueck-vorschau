@@ -494,3 +494,7 @@ html[data-variante="b"] .hero .lead{line-height:1.4;margin-bottom:.3rem}
 @media (min-width:900px){
   html[data-variante="b"] .wege{padding-top:2.2rem}
 }
+.patenschaft .themen-liste,.patenschaft .thema,.patenschaft .mehr-erfahren,.patenschaft .mehr-inhalt,.patenschaft details,.patenschaft li{text-align:center}
+.patenschaft .mehr-erfahren{display:block;width:100%;max-width:40rem;margin-inline:auto}
+.patenschaft .mehr-erfahren summary{justify-content:center;width:100%}
+@media (min-width:700px){.patenschaft .themen-liste{grid-template-columns:1fr}}
