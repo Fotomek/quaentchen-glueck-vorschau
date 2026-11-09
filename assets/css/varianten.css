@@ -450,7 +450,7 @@ html[data-variante="c"] .hero .btn-mithelfen:hover .mithelfen-herz,html[data-var
 .beispiel-foto figcaption{margin-top:.55rem;color:var(--text-2);font-size:.95rem}
 .foto-reihe{display:grid;gap:1rem;margin:1.5rem auto;max-width:920px}
 @media (min-width:800px){.foto-reihe{grid-template-columns:1fr 1fr;align-items:start}}
-.mehr-erfahren{margin:1rem auto;max-width:40rem;text-align:left}
+.mehr-erfahren{margin:1rem auto;max-width:40rem;text-align:center}
 .mehr-erfahren summary{cursor:pointer;font-weight:600;color:var(--gruen-dunkel);list-style:none;display:inline-flex;align-items:center;gap:.35rem}
 .mehr-erfahren summary::-webkit-details-marker{display:none}
 .mehr-erfahren summary::after{content:"+";display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--gruen-zart);font-size:1.1rem;line-height:1}
