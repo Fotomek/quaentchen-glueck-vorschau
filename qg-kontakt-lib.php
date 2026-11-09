@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 const QG_KONTAKT_ANLIEGEN = [
-    'hilfe' => 'Ich brauche Hilfe',
-    'mithelfen' => 'Ich möchte helfen',
-    'allgemein' => 'Allgemeine Frage',
+    'patenschaft' => 'Patenschaft',
+    'sponsoring' => 'Sponsoring',
+    'allgemein' => 'Allgemein',
 ];
 
 const QG_KONTAKT_MAX_BODY = 16384;

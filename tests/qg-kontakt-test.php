@@ -27,27 +27,27 @@ $valid = qg_kontakt_validate([
     'email' => 'ada@example.org',
     'name' => "Ada\n",
     'phone' => '',
-    'anliegen' => 'hilfe',
+    'anliegen' => 'allgemein',
     'message' => 'Bitte um einen Rückruf wegen einer allgemeinen Frage.',
 ]);
 check($valid['ok'] === true && $valid['data']['name'] === 'Ada', 'gültige Anfrage ohne Zeilenumbruch im Namen');
 $injected = qg_kontakt_validate([
     'email' => "ada@example.org\r\nBcc: x",
-    'anliegen' => 'hilfe',
+    'anliegen' => 'allgemein',
     'message' => 'Bitte um einen Rückruf wegen einer allgemeinen Frage.',
 ]);
 check($injected['ok'] === false, 'Mail-Header werden nicht übernommen');
-check(qg_kontakt_validate(['email' => 'nein', 'anliegen' => 'hilfe', 'message' => '1234567890'])['ok'] === false, 'ungültige E-Mail');
+check(qg_kontakt_validate(['email' => 'nein', 'anliegen' => 'allgemein', 'message' => '1234567890'])['ok'] === false, 'ungültige E-Mail');
 check(qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => 'geheim', 'message' => '1234567890'])['ok'] === false, 'unbekanntes Anliegen');
-check(qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => 'hilfe', 'message' => 'kurz'])['ok'] === false, 'zu kurze Nachricht');
+check(qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => 'allgemein', 'message' => 'kurz'])['ok'] === false, 'zu kurze Nachricht');
 
 $longMessage = str_repeat('a', 2001);
-$tooLong = qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => 'hilfe', 'message' => $longMessage]);
+$tooLong = qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => 'allgemein', 'message' => $longMessage]);
 check($tooLong['ok'] === false && !isset($tooLong['data']) && in_array('Die Nachricht ist zu lang.', $tooLong['errors'], true), 'Überlänge Nachricht wird abgelehnt');
-check(qg_kontakt_validate(['email' => str_repeat('a', 109) . '@example.org', 'anliegen' => 'hilfe', 'message' => '1234567890'])['ok'] === false, 'Überlänge E-Mail wird abgelehnt');
-check(qg_kontakt_validate(['email' => 'ada@example.org', 'name' => str_repeat('A', 81), 'anliegen' => 'hilfe', 'message' => '1234567890'])['ok'] === false, 'Überlänge Name wird abgelehnt');
-check(qg_kontakt_validate(['email' => 'ada@example.org', 'phone' => str_repeat('1', 41), 'anliegen' => 'hilfe', 'message' => '1234567890'])['ok'] === false, 'Überlänge Telefon wird abgelehnt');
-$asArray = qg_kontakt_validate(['email' => ['ada@example.org'], 'anliegen' => 'hilfe', 'message' => '1234567890']);
+check(qg_kontakt_validate(['email' => str_repeat('a', 109) . '@example.org', 'anliegen' => 'allgemein', 'message' => '1234567890'])['ok'] === false, 'Überlänge E-Mail wird abgelehnt');
+check(qg_kontakt_validate(['email' => 'ada@example.org', 'name' => str_repeat('A', 81), 'anliegen' => 'allgemein', 'message' => '1234567890'])['ok'] === false, 'Überlänge Name wird abgelehnt');
+check(qg_kontakt_validate(['email' => 'ada@example.org', 'phone' => str_repeat('1', 41), 'anliegen' => 'allgemein', 'message' => '1234567890'])['ok'] === false, 'Überlänge Telefon wird abgelehnt');
+$asArray = qg_kontakt_validate(['email' => ['ada@example.org'], 'anliegen' => 'allgemein', 'message' => '1234567890']);
 check($asArray['ok'] === false && !isset($asArray['data']), 'Array-Eingabe wird abgelehnt');
 check(qg_kontakt_validate(['email' => 'ada@example.org', 'anliegen' => ['hilfe'], 'message' => '1234567890'])['ok'] === false, 'Array-Anliegen wird abgelehnt');
 
@@ -171,7 +171,8 @@ check($errors === 0 && $allows === 5 && $limits === 3 && is_array($parallelState
 $html = file_get_contents(dirname(__DIR__) . '/index.html');
 check(is_string($html) && !str_contains($html, 'sessionStorage.getItem') && !str_contains($html, 'sessionStorage.setItem') && !str_contains($html, 'localStorage.getItem') && !str_contains($html, 'localStorage.setItem'), 'Seite ohne Speicherzugriff');
 check(is_string($html) && substr_count($html, 'tel:+491797656862') >= 2 && substr_count($html, '+49 179 765 68 62') >= 2 && !str_contains($html, 'mailto:') && !str_contains($html, 'p.andersen'), 'Kartentelefon sichtbar, Mail nicht');
-check(is_string($html) && str_contains($html, 'Vorschau – Angaben werden vor Veröffentlichung ergänzt') && str_contains($html, 'Gerstenweg 84') && !str_contains($html, 'Sarah') && !str_contains($html, '20:30') && !str_contains($html, 'Visitenkarte') && !str_contains($html, 'anderen Postfach') && !str_contains($html, 'widersprechen sich') && !str_contains($html, 'Websitefreigabe'), 'keine internen Prüfnotizen im sichtbaren Text');
+$ohneBildrechte = is_string($html) ? preg_replace('/\salt="[^"]*"|Fotos Patenschaft, Sponsoring und Mattis-Aktion: Sarah \/ Quäntchen Glück e\.V\. \(Vorschau\)\./', '', $html) : '';
+check(is_string($html) && str_contains($html, 'Vorschau: Angaben werden vor Veröffentlichung ergänzt') && str_contains($html, 'Gerstenweg 84') && is_string($ohneBildrechte) && !str_contains($ohneBildrechte, 'Sarah') && !str_contains($html, 'Bilder vom Stand folgen') && !str_contains($html, 'passende Aufnahmen') && !str_contains($html, '20:30') && !str_contains($html, 'Visitenkarte') && !str_contains($html, 'anderen Postfach') && !str_contains($html, 'widersprechen sich') && !str_contains($html, 'Websitefreigabe'), 'keine internen Prüfnotizen im sichtbaren Text');
 check(is_string($html) && !str_contains($html, 'info@') && !str_contains($html, 'gmail') && !str_contains($html, 'Hundshagen') && !str_contains($html, 'VR 34726') && !str_contains($html, 'VR34726'), 'keine unbelegten Kontakte oder Vorstände');
 check(is_string($html) && !preg_match('/<form[^>]*action="qg-kontakt.php"/', $html) && !preg_match('/<form[^>]*method="post"/i', $html) && str_contains($html, 'onsubmit="return false"') && preg_match('/<button[^>]*id="kontakt-senden"[^>]*disabled/', $html) === 1, 'statisches Formular ist nicht sendbar');
 check(is_string($html) && str_contains($html, 'data.configured!==true') && str_contains($html, "fetch('qg-kontakt.php'"), 'Aktivierung nur nach konfiguriertem Backend');
@@ -298,12 +299,12 @@ if ($mock['port'] > 0) {
     $tokenBody = json_decode($token['body'], true);
     check($token['status'] === 200 && is_array($tokenBody) && $tokenBody['configured'] === true && is_string($tokenBody['csrf'] ?? null), 'Mock-Token nur bei fertiger Testkonfiguration');
     sleep(3);
-    $bad = qg_curl($base . '/qg-kontakt.php', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json', '-H', 'Origin: ' . $base, '--data-urlencode', 'csrf=' . ($tokenBody['csrf'] ?? ''), '--data-urlencode', 'website=', '--data-urlencode', 'email[]=ada@example.org', '--data-urlencode', 'anliegen=hilfe', '--data-urlencode', 'message=1234567890']);
+    $bad = qg_curl($base . '/qg-kontakt.php', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json', '-H', 'Origin: ' . $base, '--data-urlencode', 'csrf=' . ($tokenBody['csrf'] ?? ''), '--data-urlencode', 'website=', '--data-urlencode', 'email[]=ada@example.org', '--data-urlencode', 'anliegen=allgemein', '--data-urlencode', 'message=1234567890']);
     check($bad['status'] === 400 && str_contains($bad['body'], 'Bitte nur Text'), 'HTTP lehnt Array-Mail ab');
     $token = qg_curl($base . '/qg-kontakt.php?token=1', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json']);
     $tokenBody = json_decode($token['body'], true);
     sleep(3);
-    $over = qg_curl($base . '/qg-kontakt.php', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json', '-H', 'Origin: ' . $base, '--data-urlencode', 'csrf=' . ($tokenBody['csrf'] ?? ''), '--data-urlencode', 'website=', '--data-urlencode', 'email=ada@example.org', '--data-urlencode', 'anliegen=hilfe', '--data-urlencode', 'message=' . str_repeat('a', 2001)]);
+    $over = qg_curl($base . '/qg-kontakt.php', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json', '-H', 'Origin: ' . $base, '--data-urlencode', 'csrf=' . ($tokenBody['csrf'] ?? ''), '--data-urlencode', 'website=', '--data-urlencode', 'email=ada@example.org', '--data-urlencode', 'anliegen=allgemein', '--data-urlencode', 'message=' . str_repeat('a', 2001)]);
     check($over['status'] === 400 && str_contains($over['body'], 'zu lang') && !str_contains($over['body'], '"ok":true'), 'HTTP lehnt Überlänge ab');
     $token = qg_curl($base . '/qg-kontakt.php?token=1', ['-b', $cookie, '-c', $cookie, '-H', 'Accept: application/json']);
     $tokenBody = json_decode($token['body'], true);

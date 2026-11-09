@@ -437,3 +437,36 @@ html[data-variante="c"] .hero .btn-mithelfen .mithelfen-herz{color:var(--gruen-h
 html[data-variante="c"] .hero .btn-mithelfen:hover,html[data-variante="c"] .hero .btn-mithelfen:focus-visible{background:var(--gruen-hell);color:var(--gruen-tief);border-color:var(--gruen-hell);box-shadow:0 10px 22px rgba(0,0,0,.28)}
 html[data-variante="c"] .hero .btn-mithelfen:focus-visible{outline-color:#fff}
 html[data-variante="c"] .hero .btn-mithelfen:hover .mithelfen-herz,html[data-variante="c"] .hero .btn-mithelfen:focus-visible .mithelfen-herz{color:var(--gruen-tief)}
+
+
+
+/* Sarah-Runde 09.11.2026: zentrierte Texte, Beispiele, Mehr erfahren, dezentes Klee */
+.text-mitte,.text-mitte .wrap,.text-mitte .schmal{text-align:center}
+.text-mitte .themen-liste,.text-mitte .karten,.text-mitte .faq-liste{text-align:left}
+.text-mitte .btn-reihe,.text-mitte .hilfe-anfragen,.text-mitte .beispiel-foto{text-align:center}
+.text-mitte .kontakt-form{text-align:left;margin-inline:auto}
+.beispiel-foto{margin:1.5rem auto;max-width:min(100%,640px)}
+.beispiel-foto img{display:block;width:100%;height:auto;border-radius:var(--radius,18px);border:1px solid var(--linie)}
+.beispiel-foto figcaption{margin-top:.55rem;color:var(--text-2);font-size:.95rem}
+.foto-reihe{display:grid;gap:1rem;margin:1.5rem auto;max-width:920px}
+@media (min-width:800px){.foto-reihe{grid-template-columns:1fr 1fr;align-items:start}}
+.mehr-erfahren{margin:1rem auto;max-width:40rem;text-align:center}
+.mehr-erfahren summary{cursor:pointer;font-weight:600;color:var(--gruen-dunkel);list-style:none;display:inline-flex;align-items:center;gap:.35rem}
+.mehr-erfahren summary::-webkit-details-marker{display:none}
+.mehr-erfahren summary::after{content:"+";display:inline-grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--gruen-zart);font-size:1.1rem;line-height:1}
+.mehr-erfahren[open] summary::after{content:"-"}
+.mehr-inhalt{margin-top:.75rem}
+.mehr-inhalt p{margin:0 0 .7rem}
+.deko-dezent .deko{opacity:.28;transform:scale(.85)}
+html[data-variante="b"] .hero-bild{opacity:.55;filter:saturate(.7) brightness(1.05)}
+.patenschaft .patenschaft-hinweis{margin-top:.75rem;color:var(--text-2);font-size:.95rem;max-width:40rem;margin-inline:auto}
+.patenschaft .thema p,.sponsoring p,.aktionen p{margin:0 0 .7rem}
+.recht-fuss{padding:1.5rem 0 2.5rem;border-top:1px solid var(--linie);background:var(--creme,#FCFCF7)}
+.recht-klapp{margin:0 0 .75rem;padding:.85rem 1rem;border:1px solid var(--linie);border-radius:14px;background:#fff;text-align:left}
+.recht-klapp summary{cursor:pointer;font-weight:700;color:var(--gruen-dunkel)}
+.recht-klapp-inhalt{margin-top:.85rem}
+.recht-klapp-inhalt h2{display:none}
+.zentriert{justify-content:center}
+.mission,.vielfalt,.gemeinsam-helfen{background:#fff}
+html[data-variante="b"] .mission{background:var(--creme)}
+html[data-variante="b"] .gemeinsam-helfen{background:var(--gruen-zart)}
