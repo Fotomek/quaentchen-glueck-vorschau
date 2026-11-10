@@ -7,9 +7,12 @@
   --ton:#E7F3C9;
   --weiss:#fff;
   --max:1120px;
+  --kopf-hoehe:calc(5.5rem + env(safe-area-inset-top));
+  --leiste-hoehe:calc(5rem + env(safe-area-inset-bottom));
 }
-html{scroll-padding-top:84px}
-[id]{scroll-margin-top:84px}
+html{scroll-padding-top:var(--kopf-hoehe);scroll-padding-bottom:var(--leiste-hoehe)}
+[id],h2,h3,.hilfe-band,.fuss,.ueber-visuell,.bruecke,.zitat,.schluss{scroll-margin-top:var(--kopf-hoehe)}
+.ueber-visuell,.bild-hinweis,.moment,.kachel,.pfad,.geschichte,.mehr,.hilfe-band,.fuss,.kontakt-karte{scroll-margin-bottom:var(--leiste-hoehe)}
 ::selection{background:#D7EEA4;color:var(--gruen-tief)}
 figure{margin:0}
 img{height:auto}
@@ -25,7 +28,7 @@ h1 .akzent,h2 .akzent{color:#3F7A05}
 html[data-entwurf="aus"] .entwurf-leiste{display:none}
 
 /* Kopf */
-.kopf{background:rgba(252,252,247,.94)}
+.kopf{background:rgba(252,252,247,.94);padding-top:env(safe-area-inset-top)}
 .kopf-inner{min-height:58px;gap:.6rem}
 .marke{gap:.45rem;margin-right:auto}
 .marke .marke-bild{width:34px;height:auto}
@@ -45,10 +48,14 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
   .marke .marke-wort{height:24px}
   .leiste-unterstuetzen{display:none}
   body{padding-bottom:0}
+  html{scroll-padding-bottom:0}
 }
 
-/* Untere Leiste: beide Wege, eine Zeile */
-body{padding-bottom:92px}
+/* Untere Leiste: beide Wege, eine Zeile. Abstand = Leistenhöhe plus Puffer,
+   damit aufgeklappte Texte und das Fußlogo nicht unter Leiste oder Kopf hängen. */
+@media (max-width:899px){
+  body{padding-bottom:calc(var(--leiste-hoehe) + 5rem)}
+}
 .leiste-unterstuetzen{gap:.5rem;padding:.55rem .7rem calc(.55rem + env(safe-area-inset-bottom))}
 .leiste-unterstuetzen .btn{width:auto;flex:1 1 0;min-width:0;padding:.6rem .45rem;font-size:.9rem}
 
@@ -65,6 +72,12 @@ body{padding-bottom:92px}
 .hero .btn-rand{background:rgba(252,252,247,.94)}
 .hero .btn-rand:hover{background:#fff}
 .btn-reihe{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:.3rem}
+@media (max-width:899px){
+  .hero-bild{height:46%;min-height:168px}
+  .hero-bild::before{inset:0;filter:none}
+  .hero-bild::after{background:linear-gradient(to bottom,var(--creme) 0%,var(--creme) 58%,rgba(252,252,247,.7) 78%,rgba(252,252,247,0) 100%)}
+  .hero-inner{padding-bottom:7.5rem}
+}
 @media (max-width:560px){
   .hero .btn-reihe{flex-direction:column;align-items:stretch;width:min(100%,22rem)}
   .hero .btn{width:100%}
@@ -123,8 +136,12 @@ body{padding-bottom:92px}
 }
 
 /* Zitat */
-.zitat{position:relative;overflow:hidden;background:var(--sand);padding:clamp(3.2rem,7vw,6.2rem) 0 clamp(3.4rem,7vw,6.5rem)}
-.zitat-klee{position:absolute;width:min(46vw,300px);right:-4%;bottom:-12%;opacity:.13;pointer-events:none}
+.zitat{position:relative;overflow:hidden;background:var(--sand);padding:clamp(3.2rem,7vw,6.2rem) 0 7.5rem}
+.zitat-klee{position:absolute;width:4.25rem;right:.8rem;bottom:.7rem;height:auto;opacity:.18;pointer-events:none}
+@media (min-width:700px){
+  .zitat{padding-bottom:clamp(4.5rem,10vw,6.5rem)}
+  .zitat-klee{width:min(16vw,190px);right:1.25rem;bottom:1rem}
+}
 .zitat-inner{position:relative;z-index:1}
 .zitat blockquote{margin:0 auto;max-width:20em}
 .zitat p{margin:0;text-align:center;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:92%;font-size:clamp(1.5rem,3vw,2.35rem);line-height:1.28;letter-spacing:-.02em;color:var(--gruen-dunkel)}
@@ -198,13 +215,13 @@ body{padding-bottom:92px}
 /* Wen wir unterstützen */
 .wen{background:var(--weiss)}
 .wen .intro{max-width:40rem;color:var(--text-2);font-size:1.08rem;line-height:1.6}
-.kacheln{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.8rem}
-.kachel{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;padding:1.15rem 1.1rem 1rem;background:var(--creme);border-radius:1.5rem 2rem 1.4rem 1.7rem;min-width:0}
+.kacheln{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.8rem;align-items:start}
+.kachel{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;padding:1.15rem 1.1rem 1rem;background:var(--creme);border-radius:1.5rem 2rem 1.4rem 1.7rem;min-width:0;height:auto}
 .kachel:nth-child(3n+2){background:var(--sand);border-radius:2rem 1.4rem 1.8rem 1.3rem}
 .kachel:nth-child(3n){background:var(--gruen-zart);border-radius:1.35rem 1.8rem 2rem 1.5rem}
 .kachel h3{font-size:1.22rem;margin:0}
-.kachel > p{margin:0;color:var(--text-2);flex:1}
-.kachel .mehr{margin-top:.85rem}
+.kachel > p{margin:0;color:var(--text-2);flex:none}
+.kachel .mehr{margin-top:.85rem;align-self:stretch}
 .kachel-icon{display:grid;place-items:center;width:54px;height:54px;margin-bottom:.35rem;color:var(--gruen-dunkel);background:#DDEFB4;border-radius:58% 42% 50% 50% / 46% 55% 45% 54%}
 .kachel-icon .icon{width:28px;height:28px}
 .hilfe-band{margin-top:1.1rem;padding:1.35rem 1.2rem 1.25rem;background:var(--gruen-dunkel);color:#F4F7F1;border-radius:1.6rem 2.4rem 1.6rem 2rem}
