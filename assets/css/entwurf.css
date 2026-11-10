@@ -114,7 +114,7 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .ueber-bild-sonne{left:0;top:0;width:86%;height:80%;border-radius:48% 52% 40% 60% / 36% 48% 52% 64%;transform:rotate(-2deg)}
 .ueber-bild-sonne img{object-position:center 42%}
 .ueber-bild-haende{right:0;bottom:4px;width:54%;height:62%;border-radius:50% 46% 54% 48% / 44% 50% 50% 56%;z-index:1;transform:rotate(3deg);box-shadow:0 0 0 8px var(--weiss),0 16px 34px rgba(7,79,55,.16)}
-.ueber-bild-haende img{object-position:center 40%}
+.ueber-bild-haende img{object-position:center 54%}
 .ueber-siegel{position:absolute;z-index:2;width:58px;height:auto;left:36%;bottom:16%;background:var(--weiss);border-radius:50%;padding:6px;box-shadow:0 6px 16px rgba(7,79,55,.12)}
 .bild-hinweis{margin:.7rem 0 0;color:var(--text);font-size:1rem;line-height:1.4}
 @media (prefers-reduced-motion:no-preference){
