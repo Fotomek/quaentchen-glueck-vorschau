@@ -58,7 +58,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 <link rel="preload" href="assets/fonts/Asap-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/KaushanScript-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/base.css?v=ofl">
-<link rel="stylesheet" href="assets/css/entwurf.css?v=redesign-3">
+<link rel="stylesheet" href="assets/css/entwurf.css?v=redesign-4">
 </head>
 <body>
 <div class="qg-lader" aria-hidden="true"><img class="qg-klee" src="assets/img/quaentchen-glueck-logo-bildmarke.svg" width="755" height="712" alt="" decoding="sync" fetchpriority="high"></div>
@@ -463,7 +463,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
     </div>
   </div>
 </footer>
-<aside class="leiste-unterstuetzen" aria-label="Helfen oder Hilfe bekommen"><a class="btn btn-dunkel" href="#mitmachen">Ich möchte helfen</a><a class="btn btn-hell" href="#kontakt" data-anliegen="allgemein">Ich brauche Hilfe</a></aside>
+<aside class="leiste-unterstuetzen ist-weg" aria-hidden="true" aria-label="Helfen oder Hilfe bekommen"><a class="btn btn-dunkel" href="#mitmachen">Ich möchte helfen</a><a class="btn btn-hell" href="#kontakt" data-anliegen="allgemein">Ich brauche Hilfe</a></aside>
 <script>(function(){
   var form=document.getElementById('kontakt-form');
   document.querySelectorAll('[data-anliegen]').forEach(function(a){
@@ -629,6 +629,76 @@ document.addEventListener('click',function(e){if(m.open&&!m.contains(e.target))m
     var el=document.getElementById(id);
     if(el)io.observe(el);
   });
+})();</script>
+<script>(function(){
+  var bar=document.querySelector('.leiste-unterstuetzen');
+  if(!bar)return;
+  var ziele=[
+    document.querySelector('.hero .btn-reihe'),
+    document.querySelector('.ueber-visuell'),
+    document.getElementById('kontakt'),
+    document.querySelector('.recht-fuss'),
+    document.querySelector('.fuss')
+  ].filter(Boolean);
+  function zeigen(weg){
+    bar.classList.toggle('ist-weg',weg);
+    if(weg)bar.setAttribute('aria-hidden','true');
+    else bar.removeAttribute('aria-hidden');
+  }
+  if(!('IntersectionObserver' in window)){zeigen(false);return;}
+  var treffer=new Set();
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting)treffer.add(en.target);
+      else treffer.delete(en.target);
+    });
+    zeigen(treffer.size>0);
+  },{threshold:0});
+  ziele.forEach(function(el){io.observe(el);});
+})();</script>
+<script>(function(){
+  var karten=[].slice.call(document.querySelectorAll('.kachel'));
+  if(karten.length<2)return;
+  var timer=0;
+  function zeile(karte){
+    return Math.round((karte.getBoundingClientRect().top+window.scrollY)/8)*8;
+  }
+  function angleichen(){
+    var inhalte=[];
+    karten.forEach(function(karte){
+      karte.style.minHeight='';
+      var offen=karte.querySelector('details.mehr');
+      var inhalt=karte.querySelector('.mehr-inhalt');
+      if(offen&&offen.open&&inhalt){
+        inhalt.style.display='none';
+        inhalte.push(inhalt);
+      }
+    });
+    var gruppen={};
+    karten.forEach(function(karte){
+      var key=String(zeile(karte));
+      (gruppen[key]||(gruppen[key]=[])).push(karte);
+    });
+    Object.keys(gruppen).forEach(function(key){
+      var reihe=gruppen[key];
+      if(reihe.length<2)return;
+      var max=0;
+      reihe.forEach(function(karte){max=Math.max(max,karte.offsetHeight);});
+      reihe.forEach(function(karte){karte.style.minHeight=max+'px';});
+    });
+    inhalte.forEach(function(inhalt){inhalt.style.display='';});
+  }
+  function planen(){
+    if(timer)clearTimeout(timer);
+    timer=setTimeout(angleichen,60);
+  }
+  karten.forEach(function(karte){
+    var details=karte.querySelector('details.mehr');
+    if(details)details.addEventListener('toggle',angleichen);
+  });
+  window.addEventListener('resize',planen);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(angleichen);
+  angleichen();
 })();</script>
 </body>
 </html>
