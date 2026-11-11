@@ -52,7 +52,7 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 }
 
 /* Untere Leiste: beide Wege, eine Zeile. Abstand = Leistenhöhe plus Puffer,
-   damit aufgeklappte Texte und das Fußlogo nicht unter Leiste oder Kopf hängen. */
+   damit aufgeklappte Texte nicht unter Leiste oder Kopf hängen. */
 @media (max-width:899px){
   body{padding-bottom:calc(var(--leiste-hoehe) + 5rem)}
 }
@@ -105,7 +105,6 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .ueber-text .ueber-kern{line-height:1.16;margin:0 0 1.15rem}
 .ueber-text .ueber-schluss{line-height:1.3;margin:1.35rem 0 0}
 .ueber-schluss{margin:1.35rem 0 0;padding-top:.2rem;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);font-size:clamp(1.35rem,2.2vw,1.7rem);line-height:1.3;letter-spacing:-.02em;color:var(--gruen-dunkel)}
-.ueber-schluss::before{content:"";display:block;width:36px;height:34px;margin:0 0 .65rem;background:url("../img/quaentchen-glueck-logo-bildmarke.svg") center/contain no-repeat}
 .ueber-schluss .akzent{font-size:1.12em;color:#3F7A05}
 
 .ueber-bilder{position:relative;height:320px;margin:0}
@@ -115,8 +114,7 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .ueber-bild-sonne img{object-position:center 42%}
 .ueber-bild-haende{right:0;bottom:4px;width:54%;height:62%;border-radius:50% 46% 54% 48% / 44% 50% 50% 56%;z-index:1;transform:rotate(3deg);box-shadow:0 0 0 8px var(--weiss),0 16px 34px rgba(7,79,55,.16)}
 .ueber-bild-haende img{object-position:center 54%}
-.ueber-siegel{position:absolute;z-index:2;width:58px;height:auto;left:36%;bottom:16%;background:var(--weiss);border-radius:50%;padding:6px;box-shadow:0 6px 16px rgba(7,79,55,.12)}
-.bild-hinweis{margin:.7rem 0 0;color:var(--text);font-size:1rem;line-height:1.4}
+.bild-hinweis{margin:.75rem 0 0;color:var(--text);font-size:.95rem;line-height:1.45}
 @media (prefers-reduced-motion:no-preference){
   .ueber-bild img{transition:transform .7s ease}
   .ueber-bild:hover img{transform:scale(1.045)}
@@ -127,32 +125,39 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
   .ueber-text{grid-column:1;grid-row:1;padding-top:.4rem}
   .ueber-visuell{grid-column:2;grid-row:1}
   .ueber-bilder{height:440px}
-  .ueber-siegel{width:68px;left:34%;bottom:18%}
 }
 
 /* Wiesenband zwischen Über uns und dem Zitat */
-.bruecke{position:relative;text-align:center;padding:4.2rem 1.25rem 4.6rem;background:
+.bruecke{position:relative;text-align:center;padding:4.2rem 1.25rem .85rem;background:var(--sand)}
+.bruecke::before{content:"";position:absolute;z-index:0;left:0;right:0;top:0;bottom:2.6rem;background:
   linear-gradient(to bottom,var(--weiss) 0%,rgba(252,252,247,.55) 16%,rgba(252,252,247,.28) 48%,rgba(247,241,230,.72) 82%,var(--sand) 100%),
-  url("../img/ki/kleeblattwiese-hoch-720.webp") center 62%/cover no-repeat}
-.bruecke p{margin:0 auto;max-width:16em;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);font-size:clamp(1.45rem,3vw,2.05rem);line-height:1.25;letter-spacing:-.02em;color:var(--gruen-dunkel)}
+  url("../img/ki/kleeblattwiese-hoch-720.webp") center 62%/cover no-repeat;pointer-events:none}
+.bruecke p{position:relative;z-index:1;margin:0 auto;max-width:16em;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);font-size:clamp(1.45rem,3vw,2.05rem);line-height:1.25;letter-spacing:-.02em;color:var(--gruen-dunkel)}
+.bruecke .bild-hinweis{max-width:36rem;margin:1.7rem auto 0;padding:0;font-family:var(--font-text);font-weight:600;font-stretch:normal;font-size:.95rem;line-height:1.45;letter-spacing:0;color:var(--gruen-dunkel);background:transparent;display:block}
 @media (min-width:700px){
-  .bruecke{background:
+  .bruecke{padding:5rem 1.25rem .95rem}
+  .bruecke::before{background:
     linear-gradient(to bottom,var(--weiss) 0%,rgba(252,252,247,.55) 16%,rgba(252,252,247,.28) 48%,rgba(247,241,230,.72) 82%,var(--sand) 100%),
-    url("../img/ki/kleeblattwiese-breit-1280.webp") center 70%/cover no-repeat;
-    padding:5rem 1.25rem 5.4rem}
+    url("../img/ki/kleeblattwiese-breit-1280.webp") center 70%/cover no-repeat}
 }
 
-/* Zitat */
-.zitat{position:relative;overflow:hidden;background:var(--sand);padding:clamp(3.2rem,7vw,6.2rem) 0 7.5rem}
-.zitat-klee{position:absolute;width:4.25rem;right:.8rem;bottom:.7rem;height:auto;opacity:.18;pointer-events:none}
-@media (min-width:700px){
-  .zitat{padding-bottom:clamp(4.5rem,10vw,6.5rem)}
-  .zitat-klee{width:min(16vw,190px);right:1.25rem;bottom:1rem}
+/* Zitat: kleinere Karte mit dezenter Umrandung in den Markenfarben */
+.zitat{background:var(--sand);padding:clamp(2rem,5vw,3.4rem) 0}
+.zitat-inner{position:relative}
+.zitat blockquote{
+  margin:0 auto;max-width:34rem;
+  padding:1.15rem 1.2rem 1.25rem;
+  background:var(--creme);
+  border:2px solid rgba(7,79,55,.45);
+  border-radius:1.15rem;
+  box-shadow:0 0 0 5px rgba(146,203,13,.2),0 12px 28px rgba(7,79,55,.06);
 }
-.zitat-inner{position:relative;z-index:1}
-.zitat blockquote{margin:0 auto;max-width:20em}
-.zitat p{margin:0;text-align:center;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:92%;font-size:clamp(1.5rem,3vw,2.35rem);line-height:1.28;letter-spacing:-.02em;color:var(--gruen-dunkel)}
-.zitat p::before{content:"";display:block;width:42px;height:40px;margin:0 auto .9rem;background:url("../img/quaentchen-glueck-logo-bildmarke.svg") center/contain no-repeat;opacity:.9}
+.zitat blockquote::before{
+  content:"„";display:block;margin:0 0 .2rem;
+  font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);
+  font-size:1.7rem;line-height:1;text-align:center;color:var(--gruen-hell);
+}
+.zitat p{margin:0;text-align:center;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:92%;font-size:clamp(1.15rem,2.15vw,1.4rem);line-height:1.45;letter-spacing:-.015em;color:var(--gruen-dunkel)}
 
 /* Glücksmomente */
 .momente{background:var(--creme)}
@@ -167,6 +172,9 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .moment-foto picture{position:absolute;inset:0}
 .moment-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .moment-foto figcaption{position:absolute;z-index:1;left:0;right:0;bottom:0;margin:0;padding:2.4rem .85rem .7rem;background:linear-gradient(to top,rgba(4,37,25,.92) 10%,rgba(4,37,25,.62) 55%,rgba(4,37,25,0));color:#fff;font-size:.92rem;line-height:1.35}
+.moment-nur-text{grid-template-columns:1fr}
+.moment-nur-text .moment-text{max-width:46rem}
+#aktionen .moment-text{justify-content:center}
 .moment-fotos{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--gruen-dunkel);min-height:230px}
 .moment-fotos .moment-foto{min-height:200px}
 .foto-trikot img{object-position:center 18%}
@@ -174,6 +182,7 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .foto-scheck img{object-position:center 30%}
 @media (min-width:840px){
   .moment-grid{grid-template-columns:.92fr 1.08fr;min-height:390px}
+  .moment-nur-text{grid-template-columns:1fr;min-height:0}
   .moment-foto{min-height:100%}
   .moment:nth-child(even) .moment-foto,.moment:nth-child(even) .moment-fotos{order:2}
   .moment-fotos{height:100%}
@@ -245,7 +254,6 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 
 /* Gemeinsam Glück schenken */
 .mitmachen{position:relative;overflow:hidden;background:linear-gradient(165deg,#F8F3EA 0%,#F3E6CF 42%,#E7F0D4 100%);padding-bottom:3.4rem}
-.mitmachen::before{content:"";position:absolute;width:min(48vw,380px);aspect-ratio:1;right:-6%;top:-4%;background:url("../img/quaentchen-glueck-logo-bildmarke.svg") center/contain no-repeat;opacity:.14;pointer-events:none}
 .mitmachen .wrap{position:relative;z-index:1}
 .mitmachen .lead-stark{font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);font-size:clamp(1.25rem,2vw,1.55rem);line-height:1.3;color:var(--gruen-dunkel);margin:0 0 .7rem}
 .mitmachen .einleitung{max-width:40rem;color:var(--text-2)}
@@ -266,6 +274,9 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .pfad-sponsoring{background:var(--ton);border-radius:1.5rem 2.2rem 1.4rem 2.5rem}
 .pfad-hand{border-radius:2rem 1.4rem 2.6rem 1.5rem}
 .pfad a:not(.btn){font-weight:600}
+.paten-beispiel{grid-column:1 / -1;justify-self:center;width:min(100%,640px);margin:.45rem 0 .15rem;background:var(--weiss);border-radius:1.35rem;overflow:hidden;box-shadow:0 10px 26px rgba(7,79,55,.06);min-width:0}
+.paten-beispiel img{width:100%;height:auto;display:block}
+.paten-beispiel figcaption{margin:0;padding:.7rem 1rem .85rem;color:var(--text-2);font-size:.98rem;line-height:1.4}
 .mitmachen-schluss{margin:1.7rem 0 .8rem;max-width:16em;font-family:var(--font-head);font-weight:var(--head-weight);font-stretch:var(--head-stretch);font-size:clamp(1.4rem,2.4vw,1.85rem);line-height:1.25;color:var(--gruen-dunkel)}
 .mitmachen-hinweis,.patenschaft-hinweis{max-width:40rem;color:var(--text-2)}
 .patenschaft-hinweis{font-size:.98rem}
@@ -285,8 +296,7 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .aktuelles .intro{max-width:36rem;color:var(--text-2)}
 .aktuell-liste{list-style:none;margin:1.35rem 0 0;padding:0;display:grid;gap:.8rem}
 .aktuell-liste li{background:var(--weiss);border-radius:1.3rem 2rem 1.3rem 1.15rem;padding:1.05rem 1.1rem .95rem}
-.aktuell-liste h3{font-size:1.25rem;display:flex;align-items:center;gap:.5rem}
-.aktuell-liste h3::before{content:"";flex:none;width:22px;height:21px;background:url("../img/quaentchen-glueck-logo-bildmarke.svg") center/contain no-repeat}
+.aktuell-liste h3{font-size:1.25rem}
 .aktuell-liste p{margin:0;color:var(--text-2)}
 @media (min-width:720px){.aktuell-liste{grid-template-columns:1fr 1fr;gap:1rem}}
 
@@ -343,4 +353,16 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 @media (max-width:899px){
   .abschnitt{padding:2.7rem 0}
   .ueber-text p{font-size:1.05rem}
+}
+@media (max-width:414px){
+  .kopf-inner{gap:.4rem}
+  .marke{gap:.35rem}
+  .marke .marke-wort{height:20px}
+  .zitat blockquote{padding:1rem .9rem 1.05rem;box-shadow:0 0 0 4px rgba(146,203,13,.2),0 8px 20px rgba(7,79,55,.05)}
+  .zitat p{font-size:1.15rem;line-height:1.45}
+  .ueber-bilder{height:268px}
+  .paten-beispiel figcaption,.bild-hinweis{overflow-wrap:anywhere}
+  .kontakt a[href^="mailto:"],.recht-liste a[href^="mailto:"]{overflow-wrap:anywhere}
+  .pfad .btn,.hero .btn,.leiste-unterstuetzen .btn{max-width:100%;white-space:normal;text-align:center}
+  .moment-foto{min-height:210px}
 }

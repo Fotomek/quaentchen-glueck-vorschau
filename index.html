@@ -3,48 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>
-/* Erstlade-Kleeblatt: bei jedem Aufruf, höchstens 1 s, ohne Cookie und ohne Speicher.
-   Ohne dieses Script bleibt die Seite sichtbar (.qg-lader ist per CSS ausgeblendet).
-   reduced-motion: kein Overlay. Es wird nicht auf Bilder oder Schriften gewartet. */
-(function(){
-  var root=document.documentElement,fertig=false;
-  function weg(){
-    if(fertig)return;
-    fertig=true;
-    try{root.classList.remove('qg-erstladen')}catch(e){}
-    function wegEl(){try{var el=document.querySelector('.qg-lader');if(el&&el.parentNode)el.parentNode.removeChild(el)}catch(e){}}
-    if(document.body)wegEl();else document.addEventListener('DOMContentLoaded',wegEl);
-    try{performance.mark('qg-lader-ende');performance.measure('qg-lader','qg-lader-start','qg-lader-ende')}catch(e){}
-  }
-  try{
-    if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    try{performance.mark('qg-lader-start')}catch(e){}
-    root.classList.add('qg-erstladen');
-    var t0=Date.now();
-    setTimeout(weg,1000);
-    document.addEventListener('visibilitychange',function(){
-      if(document.visibilityState==='visible'&&Date.now()-t0>=1000)weg();
-    });
-    window.addEventListener('pageshow',function(ev){
-      if(ev.persisted||Date.now()-t0>=1000)weg();
-    });
-  }catch(e){weg()}
-})();
-</script>
-<style>
-/* Kritisch im Kopf, damit das Kleeblatt vor dem ersten Paint fest liegt und ohne Script keinen Platz einnimmt. */
-.qg-lader{display:none}
-html.qg-erstladen .qg-lader{
-  display:flex;position:fixed;inset:0;z-index:80;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;
-  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  background:#FCFCF7;pointer-events:none;animation:qg-lader-aus 1s linear forwards;
-}
-html.qg-erstladen .qg-lader .qg-klee{flex:none;width:clamp(4.25rem,20vw,6.75rem);max-width:42vw;min-width:0;height:auto;animation:qg-klee-hauch 1s ease-out}
-@keyframes qg-lader-aus{0%,62%{opacity:1;visibility:visible}88%,100%{opacity:0;visibility:hidden}}
-@keyframes qg-klee-hauch{from{transform:rotate(-7deg) scale(.94)}to{transform:rotate(6deg) scale(1)}}
-@media (prefers-reduced-motion:reduce){html.qg-erstladen .qg-lader{display:none!important;animation:none!important}}
-</style>
 <title>Quäntchen Glück e.V. | Gemeinsam statt einsam</title>
 <meta name="description" content="Gemeinsam statt einsam. Quäntchen Glück ist für alle Menschen da, unabhängig von Alter oder Lebenssituation. Manchmal kann schon ein kleiner Anstoß viel verändern.">
 <meta name="robots" content="noindex, nofollow">
@@ -57,11 +15,10 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 <link rel="preload" href="assets/fonts/Asap-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Asap-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/KaushanScript-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/base.css?v=ofl">
-<link rel="stylesheet" href="assets/css/entwurf.css?v=redesign-4">
+<link rel="stylesheet" href="assets/css/base.css?v=ofl-2">
+<link rel="stylesheet" href="assets/css/entwurf.css?v=redesign-5">
 </head>
 <body>
-<div class="qg-lader" aria-hidden="true"><img class="qg-klee" src="assets/img/quaentchen-glueck-logo-bildmarke.svg" width="755" height="712" alt="" decoding="sync" fetchpriority="high"></div>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
 <div class="entwurf-leiste" role="region" aria-label="Entwurfsansicht">
   <div class="wrap entwurf-inner">
@@ -108,7 +65,6 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
       <div class="ueber-bild ueber-bild-haende">
         <img alt="Hände verschiedenen Alters liegen übereinander, dahinter lächeln Menschen im warmen Licht." width="2048" height="1152" src="assets/img/ki/ueber-uns/gemeinsam-stark-haende-der-einheit-1024.webp" srcset="assets/img/ki/ueber-uns/gemeinsam-stark-haende-der-einheit-640.webp 640w, assets/img/ki/ueber-uns/gemeinsam-stark-haende-der-einheit-1024.webp 1024w, assets/img/ki/ueber-uns/gemeinsam-stark-haende-der-einheit-1600.webp 1600w" sizes="(min-width: 960px) 280px, 54vw">
       </div>
-      <img class="ueber-siegel" src="assets/img/quaentchen-glueck-logo-bildmarke.svg" width="755" height="712" alt="">
       </div>
       <figcaption class="bild-hinweis">Beispielbilder, KI-bearbeitet.</figcaption>
     </figure>
@@ -126,10 +82,10 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 
 <div class="bruecke">
   <p>Wir helfen dort, wo Hilfe benötigt wird.</p>
+  <p class="bild-hinweis">Beispielbilder, KI-bearbeitet.</p>
 </div>
 
 <section class="zitat erscheint" aria-labelledby="zitat-text">
-  <img class="zitat-klee" src="assets/img/quaentchen-glueck-logo-bildmarke.svg" width="755" height="712" alt="">
   <div class="wrap zitat-inner">
     <blockquote>
       <p id="zitat-text">Wir möchten nicht nur helfen, wenn etwas fehlt. Sondern auch ermöglichen, was sonst vielleicht niemals möglich wäre.</p>
@@ -143,14 +99,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
     <div class="momente-liste">
 
       <article class="moment" id="geschichte-kalkbrenner">
-        <div class="moment-grid">
-          <figure class="moment-foto">
-            <picture>
-              <source type="image/webp" srcset="assets/img/verein/patenschaft-kalkbrenner.webp">
-              <img src="assets/img/verein/patenschaft-kalkbrenner.jpg" width="1200" height="890" loading="lazy" decoding="async" alt="Paul Kalkbrenner hält eine Patenurkunde von Quäntchen Glück e.V.; daneben eine Frau.">
-            </picture>
-            <figcaption>Ein Quäntchen Glück, das verbindet</figcaption>
-          </figure>
+        <div class="moment-grid moment-nur-text">
           <div class="moment-text on-dark">
             <p class="moment-kicker">Patenschaft</p>
             <h3>Ein Quäntchen Glück, das verbindet</h3>
@@ -212,16 +161,8 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
           </figure>
           <div class="moment-text on-dark">
             <p class="moment-kicker">Aktion</p>
-            <h3>Gemeinsam für Mattis: ein Quäntchen Hoffnung</h3>
-            <p>Ein schwerer Schicksalsschlag, der viele Menschen bewegt hat.</p>
-            <details class="geschichte">
-              <summary><span class="lbl-zu">Geschichte entdecken</span><span class="lbl-auf">Geschichte einklappen</span><svg class="icon pfeil" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></summary>
-              <div class="geschichte-inhalt">
-                <p>Im Juni 2026 erkrankte der zwölfjährige Mattis aus Mühlenbeck an einer lebensbedrohlichen Sepsis, infolge derer ihm beide Hände und Füße amputiert werden mussten.</p>
-                <p>Auch Quäntchen Glück e.V. beteiligte sich an der großen Hilfsaktion und sammelte Spenden, um Mattis und seine Familie bei den bevorstehenden Herausforderungen zu unterstützen.</p>
-                <p>Denn manchmal kann ein Quäntchen Glück einen großen Unterschied machen.</p>
-              </div>
-            </details>
+            <h3>Gemeinsam für Mattis</h3>
+            <p>Quäntchen Glück e.V. hat sich an einer Hilfsaktion für Mattis und seine Familie beteiligt und Spenden gesammelt.</p>
           </div>
         </div>
       </article>
@@ -315,6 +256,13 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
         </div></details>
         <a class="btn btn-hell" href="#kontakt" data-anliegen="patenschaft">Ich habe Interesse</a>
       </article>
+      <figure class="paten-beispiel">
+        <picture>
+          <source type="image/webp" srcset="assets/img/verein/patenschaft-kalkbrenner.webp">
+          <img src="assets/img/verein/patenschaft-kalkbrenner.jpg" width="1200" height="890" loading="lazy" decoding="async" alt="Paul Kalkbrenner hält eine Patenurkunde von Quäntchen Glück e.V.; daneben eine Frau.">
+        </picture>
+        <figcaption>Beispiel einer Patenschaft</figcaption>
+      </figure>
       <article class="pfad pfad-sponsoring" id="sponsoring">
         <span class="pfad-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" focusable="false"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4"/><path d="M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4"/><path d="M8.5 20.5h7"/><path d="M10 17h4v3.5h-4z"/></svg></span>
         <h3>Sponsoring</h3>
@@ -389,7 +337,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
     <h2 id="kontakt-h">Kontakt</h2>
     <p>Quäntchen Glück e.V.<br>Gerstenweg 84<br>12683 Berlin</p>
     <p><a href="tel:+491797656862">+49 179 765 68 62</a></p>
-    <p>E-Mail: Vorschau, Angaben werden vor Veröffentlichung ergänzt.</p>
+    <p>E-Mail: <a href="mailto:info@xn--quntchenglck-hcb85a.de">info@quäntchenglück.de</a></p>
     <form class="kontakt-form" id="kontakt-form" onsubmit="return false" novalidate>
       <p id="kontakt-status" class="kontakt-status" role="status">Diese Vorschau auf GitHub Pages verschickt keine Nachricht. Das Formular ist für einen späteren PHP-Server vorbereitet. Empfänger und Absender sind noch nicht eingerichtet.</p>
       <div id="kontakt-fehler" class="kontakt-fehler" role="alert" hidden></div>
@@ -419,7 +367,7 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
         <dt>Anschrift</dt><dd>Gerstenweg 84, 12683 Berlin</dd>
         <dt>Vertreten durch den Vorstand</dt><dd>Vorschau: Angaben werden vor Veröffentlichung ergänzt.</dd>
         <dt>Registereintrag</dt><dd>Vorschau: Angaben werden vor Veröffentlichung ergänzt.</dd>
-        <dt>Elektronische Kontaktaufnahme</dt><dd><a href="tel:+491797656862">+49 179 765 68 62</a><br>E-Mail: Vorschau: Angaben werden vor Veröffentlichung ergänzt.</dd>
+        <dt>Elektronische Kontaktaufnahme</dt><dd><a href="tel:+491797656862">+49 179 765 68 62</a><br>E-Mail: <a href="mailto:info@xn--quntchenglck-hcb85a.de">info@quäntchenglück.de</a></dd>
         <dt>Domain</dt><dd>www.quäntchenglück.de. Diese Vorschau wird über GitHub Pages ausgeliefert.</dd>
         <dt>Verantwortlich für den Inhalt</dt><dd>Vorschau: Angaben werden vor Veröffentlichung ergänzt.</dd>
         <dt>Diese Vorschau</dt><dd>Nicht für Suchmaschinen vorgesehen. Auslieferung: GitHub Pages.</dd>
@@ -431,12 +379,12 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
       
       <p>Dieser Text beschreibt nur die hier sichtbare Vorschau und das vorbereitete, hier nicht aktive Formular. Er ist keine Rechtsberatung. Quellen: <a href="https://www.gesetze-im-internet.de/ddg/__5.html">§ 5 DDG</a>, <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679">DSGVO</a>, <a href="https://www.gesetze-im-internet.de/ttdsg/__25.html">§ 25 TDDDG</a>.</p>
       <h3>Verantwortlicher</h3>
-      <p>Quäntchen Glück e.V., Gerstenweg 84, 12683 Berlin. Datenschutzadresse: Vorschau: Angaben werden vor Veröffentlichung ergänzt.</p>
+      <p>Quäntchen Glück e.V., Gerstenweg 84, 12683 Berlin. Datenschutzadresse: <a href="mailto:info@xn--quntchenglck-hcb85a.de">info@quäntchenglück.de</a></p>
       <h3>Diese Vorschau</h3>
       <p>Die Seitenfassung wird über GitHub Pages ausgeliefert. GitHub Pages ist ein statischer Host. Die Dokumentation „What is GitHub Pages“ sagt: beim Besuch wird die IP-Adresse protokolliert und zu Sicherheitszwecken gespeichert, auch ohne Anmeldung bei GitHub. Quelle: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">What is GitHub Pages</a>, Abschnitt Data collection. Dieselbe Seite nennt keine feste Aufbewahrungsdauer für diese Sicherheitsprotokolle. Eine Frist wird hier nicht angegeben. Die <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">allgemeine Datenschutzerklärung von GitHub</a> beschreibt eine internationale Verarbeitung, einschließlich der USA, und Transfermechanismen. Vertragsrolle für diesen Auftritt: Vorschau: Angaben werden vor Veröffentlichung ergänzt.</p>
       <p>Die Seite setzt keine Cookies und kein Tracking. Schriften und Bilder liegen auf demselben Host. Es gibt keine Verbindung zu Google Fonts und keine Analysewerkzeuge. Die Domain bei STRATO ist nicht der Host dieser Fassung. Angaben zu STRATO gelten erst, wenn der Versand dort tatsächlich läuft.</p>
       <h3>Ladezeichen</h3>
-      <p>Das Kleeblatt beim Öffnen bleibt sichtbar, höchstens eine Sekunde, bei jedem Aufruf. Es speichert nichts: kein Cookie, kein sessionStorage, kein localStorage. Bei reduzierter Bewegung und ohne Skript erscheint es nicht. Eine Ausnahme nach § 25 Abs. 2 TDDDG wird dafür nicht in Anspruch genommen, weil kein Speicherzugriff mehr stattfindet.</p>
+      <p>Beim Öffnen erscheint kein Ladezeichen. Die Seite speichert nichts: kein Cookie, kein sessionStorage, kein localStorage. Eine Ausnahme nach § 25 Abs. 2 TDDDG wird nicht in Anspruch genommen, weil kein Speicherzugriff stattfindet.</p>
       <h3>Kontaktformular</h3>
       <p>In dieser Vorschau wird keine Nachricht verschickt. GitHub Pages führt das vorgesehene PHP-Skript nicht aus. Empfänger und Absender sind serverseitig noch leer. Solange das so bleibt, nimmt auch das Skript selbst keine Nachricht an.</p>
       <p>Wenn der Versand später auf einem PHP-Server aktiv ist, sind E-Mail, Anliegen und Nachricht nötig. Name und Telefon sind freiwillig. Dateien werden nicht hochgeladen. Bitte keine Gesundheitsdaten senden. Der Zweck ist, die Anfrage zu beantworten. Grundlage ist für eine allgemeine Anfrage Art. 6 Abs. 1 lit. f DSGVO, das Interesse des Vereins, auf die Anfrage zu reagieren. Art. 6 Abs. 1 lit. b DSGVO nur, wenn die Anfrage tatsächlich einen Vertrag betrifft. Eine Einwilligung wird dafür nicht abgefragt und ersetzt die Grundlage nicht.</p>
@@ -452,9 +400,6 @@ if(q.get('entwurf')==='aus')d.setAttribute('data-entwurf','aus');})();</script>
 
 <footer class="fuss on-dark">
   <div class="wrap fuss-grid">
-    <div>
-      <img class="fuss-logo" src="assets/img/quaentchen-glueck-logo.svg" width="320" height="284" alt="Logo Quäntchen Glück e.V., Gemeinsam statt einsam">
-    </div>
     <nav aria-label="Seiten im Fußbereich"><ul><li><a href="#inhalt">Startseite</a></li><li><a href="#ueber-uns">Über uns</a></li><li><a href="#gluecksmomente">Glücksmomente</a></li><li><a href="#wen-wir-unterstuetzen">Wen wir unterstützen</a></li><li><a href="#mitmachen">Mitmachen</a></li><li><a href="#aktuelles">Aktuelles</a></li><li><a href="#fragen">Gut zu wissen</a></li><li><a href="#kontakt">Kontakt</a></li><li><a href="#impressum">Impressum</a></li><li><a href="#datenschutz">Datenschutz</a></li></ul></nav>
     <div id="anschrift">
       <p class="claim">Gemeinsam statt einsam</p>
