@@ -132,11 +132,10 @@ body{padding-bottom:80px}
 .fuss{background:var(--gruen-tief);color:#E9F2E2;padding:3rem 0 2.5rem}
 .fuss a{color:#fff}
 .fuss .fuss-grid{display:grid;gap:2rem}
-.fuss-logo{background:#fff;border-radius:16px;padding:.8rem;width:180px}
 .fuss ul{list-style:none;padding:0;margin:0;display:grid;gap:.45rem}
 .fuss .claim{font-family:var(--font-claim);font-weight:400;font-size:1.4rem;color:var(--gruen-hell);letter-spacing:.03em;text-transform:uppercase;margin-top:1rem}
 .fuss .ph,.fuss .ph-block{color:#3B2F00}
-@media (min-width:800px){.fuss .fuss-grid{grid-template-columns:1.1fr 1fr 1.2fr;align-items:start}}
+@media (min-width:800px){.fuss .fuss-grid{grid-template-columns:1fr 1.15fr;align-items:start}}
 
 .icon{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
