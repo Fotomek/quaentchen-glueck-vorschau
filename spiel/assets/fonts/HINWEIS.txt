@@ -1,0 +1,8 @@
+Schriften im Prototyp „Quäntchen Glück Spiel“
+
+Asap Regular und Asap SemiBold: SIL Open Font License 1.1, siehe OFL-Asap.txt.
+
+Quaentchen Sans Bold, Quaentchen Script Regular und Quaentchen Sans Claim Regular:
+Hausschrift des Vereins Quäntchen Glück e. V., Version 1.100.
+Eigenentwicklung aus dem Logo. Die Nutzungsrechte liegen beim Verein.
+Keine Weitergabe außerhalb des Projekts ohne Abstimmung.

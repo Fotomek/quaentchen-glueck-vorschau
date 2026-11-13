@@ -1,0 +1,509 @@
+@font-face{font-family:"Quaentchen Sans";src:url("../assets/fonts/QuaentchenSans-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Script";src:url("../assets/fonts/QuaentchenScript-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Quaentchen Claim";src:url("../assets/fonts/QuaentchenSansClaim-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Asap";src:url("../assets/fonts/Asap-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Asap";src:url("../assets/fonts/Asap-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+
+:root{
+  --gruen-hell:#92CB0D;
+  --gruen-dunkel:#074F37;
+  --gruen-tief:#043525;
+  --gruen-zart:#EEF6DC;
+  --creme:#FCFCF7;
+  --weiss:#FFFFFF;
+  --text:#14231C;
+  --text-2:#3A4A42;
+  --linie:#D9E2CF;
+  --glueck:#3F7A05;
+  --hover-hell:#A3D82A;
+  --schatten:0 10px 30px rgba(7,79,55,.10);
+  --radius:18px;
+  --wange:#E8A090;
+  --max:430px;
+  --leiste:calc(88px + env(safe-area-inset-bottom, 0px));
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;background:var(--creme);color:var(--text);
+  font-family:"Asap",system-ui,sans-serif;font-weight:400;font-size:16px;line-height:1.45;
+  -webkit-text-size-adjust:100%}
+body{min-height:100dvh;overflow:hidden}
+button,a{font-family:inherit}
+img,svg{display:block;max-width:100%}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gruen-dunkel);outline-offset:3px;border-radius:6px}
+html[data-phase="nacht"] :focus-visible{outline-color:var(--gruen-hell)}
+
+/* Schale: Mobil zuerst, Desktop als zentrierte Telefonspalte */
+.app{
+  width:min(100%, var(--max));
+  margin-inline:auto;
+  min-height:100dvh;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  position:relative;
+  background:
+    linear-gradient(180deg, var(--creme) 0%, var(--creme) 38%, var(--gruen-zart) 100%);
+  overflow:hidden;
+}
+@media (min-width: 500px){
+  body{
+    background:
+      radial-gradient(ellipse at 50% 0%, #f4f7e8, var(--creme) 55%);
+  }
+  .app{
+    min-height:min(100dvh, 900px);
+    margin-top:0;
+    border-left:1px solid var(--linie);
+    border-right:1px solid var(--linie);
+    box-shadow:var(--schatten);
+  }
+}
+
+html[data-phase="abend"] .app{
+  background:linear-gradient(180deg, #F7F1E3 0%, #E7EFC8 55%, #C9D996 100%);
+}
+html[data-phase="nacht"]{
+  background:var(--gruen-tief);
+}
+html[data-phase="nacht"] body{background:var(--gruen-tief);color:#E9F2E2}
+html[data-phase="nacht"] .app{
+  background:linear-gradient(180deg, #021a12 0%, #043525 55%, #074F37 100%);
+  color:#E9F2E2;
+}
+
+/* Wiesen-Hügel, neu in Creme/Zartgrün, keine KI-Wiese */
+.wiese-grund{
+  position:absolute;inset:auto 0 0 0;height:42%;pointer-events:none;z-index:0;
+}
+.wiese-grund svg{width:100%;height:100%}
+html[data-phase="nacht"] .wiese-grund{opacity:.45}
+
+.sterne{
+  position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease;z-index:0;
+}
+html[data-phase="nacht"] .sterne{opacity:1}
+.stern{
+  position:absolute;width:3px;height:3px;border-radius:50%;background:#E9F2E2;
+  box-shadow:0 0 6px #E9F2E2;
+}
+
+.kopf{
+  position:relative;z-index:5;
+  display:flex;align-items:center;gap:.7rem;
+  padding:.7rem 1rem .55rem;
+  padding-top:calc(.7rem + env(safe-area-inset-top, 0px));
+  background:rgba(252,252,247,.88);
+  border-bottom:1px solid var(--linie);
+  backdrop-filter:saturate(1.2) blur(8px);
+  -webkit-backdrop-filter:saturate(1.2) blur(8px);
+}
+html[data-phase="nacht"] .kopf{
+  background:rgba(4,53,37,.88);
+  border-bottom-color:#16513c;
+}
+.marke{width:44px;height:44px;flex:none}
+.marke img,.marke svg{width:44px;height:44px}
+.titel{display:flex;flex-direction:column;min-width:0}
+.titel strong{
+  font-family:"Quaentchen Sans","Asap",sans-serif;font-weight:700;
+  font-size:1.15rem;color:var(--gruen-dunkel);letter-spacing:-.02em;line-height:1.1;
+}
+.titel strong .akzent{font-family:"Quaentchen Script",cursive;font-weight:400;color:var(--glueck);font-size:1.12em}
+.titel small{color:var(--text-2);font-size:.78rem}
+html[data-phase="nacht"] .titel strong{color:#E9F2E2}
+html[data-phase="nacht"] .titel strong .akzent{color:var(--gruen-hell)}
+html[data-phase="nacht"] .titel small{color:#C5D6C8}
+
+.buehne{
+  position:relative;z-index:2;
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:3.2rem .6rem .6rem;
+  min-height:0;
+}
+.spruch{
+  position:absolute;top:.25rem;left:.8rem;right:.8rem;z-index:3;
+  min-height:0;max-width:22rem;width:auto;
+  text-align:center;margin:0 auto;
+  font-size:.98rem;color:var(--text);
+}
+.spruch .satz{
+  display:inline-block;
+  background:var(--weiss);
+  border:1px solid var(--linie);
+  border-radius:16px;
+  padding:.45rem .85rem;
+  box-shadow:var(--schatten);
+  font-family:"Quaentchen Script",cursive;
+  font-size:1.15rem;line-height:1.3;color:var(--glueck);
+}
+.spruch .satz.alltag{font-family:"Asap",sans-serif;font-size:.95rem;color:var(--text);font-style:normal}
+html[data-phase="nacht"] .spruch .satz{
+  background:rgba(7,79,55,.7);border-color:#16513c;color:var(--gruen-hell);
+}
+html[data-phase="nacht"] .spruch .satz.alltag{color:#E9F2E2}
+
+.figur-wrap{
+  position:relative;
+  width:min(94%, 360px);
+  aspect-ratio:1 / 1;
+  margin:0 auto;
+  cursor:pointer;
+  flex:none;
+}
+.figur-wrap svg.klee,
+.figur-wrap svg.funkeln{width:100%;height:100%;overflow:visible;position:relative;z-index:1}
+.figur-wrap svg.funkeln{
+  position:absolute;inset:0;pointer-events:none;z-index:2;
+}
+.figur-schatten{
+  position:absolute;left:50%;bottom:10%;z-index:0;
+  width:46%;height:10%;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse, rgba(7,79,55,.22) 0%, rgba(7,79,55,0) 70%);
+  pointer-events:none;
+}
+.figur-wrap:has(.klee[data-stufe="0"]) .figur-schatten{width:28%;bottom:28%}
+.figur-wrap:has(.klee[data-stufe="1"]) .figur-schatten{width:38%;bottom:22%}
+.figur-wrap:has(.klee[data-stufe="2"]) .figur-schatten{width:42%;bottom:16%}
+.tropfen,.schein{
+  position:absolute;inset:0;pointer-events:none;
+}
+
+/* Bedürfnisse */
+.werte{
+  position:relative;z-index:3;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem;
+  width:100%;padding:.2rem 1rem .5rem;
+}
+.wert{
+  background:var(--weiss);border:1px solid var(--linie);border-radius:14px;
+  padding:.4rem .45rem .45rem;box-shadow:var(--schatten);
+}
+html[data-phase="nacht"] .wert{background:rgba(7,79,55,.55);border-color:#16513c}
+.wert-kopf{display:flex;justify-content:space-between;align-items:baseline;gap:.2rem;margin-bottom:.25rem}
+.wert-name{font-weight:600;font-size:.72rem;color:var(--gruen-dunkel);text-transform:uppercase;letter-spacing:.04em}
+html[data-phase="nacht"] .wert-name{color:#E9F2E2}
+.wert-zahl{font-size:.72rem;color:var(--text-2);font-weight:600}
+html[data-phase="nacht"] .wert-zahl{color:#C5D6C8}
+.leiste{height:8px;border-radius:999px;background:var(--gruen-zart);overflow:hidden}
+html[data-phase="nacht"] .leiste{background:#043525}
+.leiste > span{display:block;height:100%;width:0;border-radius:inherit;background:var(--gruen-dunkel);
+  transition:width .45s ease}
+.wert[data-niedrig="1"] .leiste > span{background:#5A7A22}
+
+.werkzeuge{
+  position:relative;z-index:3;
+  display:flex;justify-content:space-between;gap:.6rem;
+  padding:0 1rem .45rem;
+}
+.icon-btn{
+  min-height:48px;padding:.4rem .85rem;border-radius:999px;
+  border:2px solid var(--gruen-dunkel);background:transparent;color:var(--gruen-dunkel);
+  font-weight:600;font-size:.92rem;
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+html[data-phase="nacht"] .icon-btn{border-color:#E9F2E2;color:#E9F2E2}
+.punkte{
+  margin-left:auto;align-self:center;font-size:.85rem;color:var(--text-2);font-weight:600;
+}
+html[data-phase="nacht"] .punkte{color:#C5D6C8}
+.punkte b{color:var(--glueck);font-weight:600}
+html[data-phase="nacht"] .punkte b{color:var(--gruen-hell)}
+
+.aktionen{
+  position:relative;z-index:6;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;
+  padding:.65rem 1rem calc(.7rem + env(safe-area-inset-bottom, 0px));
+  background:rgba(252,252,247,.97);
+  border-top:1px solid var(--linie);
+}
+html[data-phase="nacht"] .aktionen{
+  background:rgba(2,26,18,.96);
+  border-top-color:#16513c;
+}
+.aktion{
+  min-height:52px;border-radius:999px;border:2px solid transparent;
+  font-weight:600;font-size:.92rem;line-height:1.15;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.05rem;
+  transition:transform .15s ease, background-color .15s ease;
+  padding:.35rem .3rem;
+}
+.aktion:hover{transform:translateY(-1px)}
+.aktion:disabled{opacity:.55;transform:none;cursor:default}
+.aktion-giessen{background:var(--gruen-dunkel);color:#fff}
+.aktion-giessen:hover{background:var(--gruen-tief)}
+.aktion-licht{background:var(--gruen-hell);color:var(--gruen-tief)}
+.aktion-licht:hover{background:var(--hover-hell)}
+.aktion-freude{background:transparent;color:var(--gruen-dunkel);border-color:var(--gruen-dunkel)}
+.aktion-freude:hover{background:var(--gruen-zart)}
+html[data-phase="nacht"] .aktion-freude{color:#fff;border-color:#fff}
+html[data-phase="nacht"] .aktion-freude:hover{background:#074F37}
+
+/* Overlays */
+.overlay{
+  position:absolute;inset:0;z-index:20;
+  background:var(--creme);
+  display:flex;flex-direction:column;
+  padding:1.2rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  overflow:auto;
+}
+.overlay[hidden]{display:none !important}
+html[data-phase="nacht"] .overlay{background:var(--gruen-tief);color:#E9F2E2}
+
+.willkommen{text-align:center;justify-content:center;align-items:center;gap:.6rem}
+.willkommen .logo-lg{width:150px;height:auto;margin:0 auto .4rem}
+.willkommen h1{
+  font-family:"Quaentchen Sans","Asap",sans-serif;font-weight:700;
+  font-size:1.85rem;line-height:1.15;color:var(--gruen-dunkel);letter-spacing:-.02em;margin:0;
+}
+.willkommen h1 .akzent{font-family:"Quaentchen Script",cursive;font-weight:400;color:var(--glueck)}
+.willkommen .claim{
+  font-family:"Quaentchen Claim","Asap",sans-serif;font-size:.95rem;
+  letter-spacing:.08em;color:var(--gruen-dunkel);margin:.2rem 0 .6rem;
+}
+.willkommen p{margin:0;max-width:22rem;color:var(--text)}
+.badge{
+  display:inline-block;margin:.7rem 0 1rem;padding:.4rem .9rem;
+  background:var(--gruen-zart);color:var(--gruen-dunkel);border-radius:999px;
+  font-weight:600;font-size:.9rem;border:1px solid var(--linie);
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;padding:.75rem 1.5rem;border-radius:999px;border:2px solid transparent;
+  font-weight:600;font-size:1.05rem;text-decoration:none;
+}
+.btn-dunkel{background:var(--gruen-dunkel);color:#fff}
+.btn-dunkel:hover{background:var(--gruen-tief)}
+.btn-rand{background:transparent;color:var(--gruen-dunkel);border-color:var(--gruen-dunkel)}
+html[data-phase="nacht"] .willkommen h1, html[data-phase="nacht"] .willkommen .claim{color:#E9F2E2}
+html[data-phase="nacht"] .willkommen h1 .akzent{color:var(--gruen-hell)}
+html[data-phase="nacht"] .willkommen p{color:#E9F2E2}
+html[data-phase="nacht"] .badge{background:#074F37;color:#E9F2E2;border-color:#16513c}
+
+.overlay h2{
+  font-family:"Quaentchen Sans","Asap",sans-serif;font-weight:700;
+  font-size:1.45rem;color:var(--gruen-dunkel);margin:0 0 .6rem;letter-spacing:-.02em;
+}
+html[data-phase="nacht"] .overlay h2{color:#E9F2E2}
+.overlay .lead{margin:0 0 1rem;color:var(--text-2)}
+html[data-phase="nacht"] .overlay .lead{color:#C5D6C8}
+.karten{
+  display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin:0 0 1.1rem;
+}
+.karte{
+  background:var(--weiss);border:1px solid var(--linie);border-radius:var(--radius);
+  padding:.55rem .7rem .65rem;min-height:5.2rem;
+}
+html[data-phase="nacht"] .karte{background:rgba(7,79,55,.5);border-color:#16513c}
+.karte h3{margin:0 0 .25rem;font-size:.95rem;color:var(--gruen-dunkel)}
+html[data-phase="nacht"] .karte h3{color:#E9F2E2}
+.karte p{margin:0;font-size:.8rem;color:var(--text-2)}
+html[data-phase="nacht"] .karte p{color:#C5D6C8}
+.karte[data-offen="0"]{opacity:.55}
+.karte[data-offen="0"] h3::after{content:"noch nicht";display:block;font-weight:400;color:var(--text-2);font-size:.75rem;margin-top:.1rem}
+.saetze{list-style:none;padding:0;margin:0 0 1rem}
+.saetze li{
+  background:var(--weiss);border:1px solid var(--linie);border-radius:12px;
+  padding:.5rem .7rem;margin:0 0 .4rem;
+  font-family:"Quaentchen Script",cursive;color:var(--glueck);font-size:1.05rem;
+}
+html[data-phase="nacht"] .saetze li{background:rgba(7,79,55,.5);border-color:#16513c;color:var(--gruen-hell)}
+.overlay .oben-zu{align-self:flex-start;min-height:44px;padding:.45rem 1rem;margin:0 0 .8rem;font-size:.92rem}
+.overlay .zurueck{margin-top:auto;align-self:stretch;flex:none}
+.karte{min-height:5.4rem}
+
+.info p{margin:0 0 .75rem}
+.info a{color:var(--gruen-dunkel);font-weight:600}
+html[data-phase="nacht"] .info a{color:var(--gruen-hell)}
+.zeile-opt{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:0 0 .8rem;
+  background:var(--weiss);border:1px solid var(--linie);border-radius:14px;padding:.65rem .8rem}
+html[data-phase="nacht"] .zeile-opt{background:rgba(7,79,55,.5);border-color:#16513c}
+.zeile-opt label{font-weight:600}
+.switch{appearance:none;width:44px;height:26px;border-radius:999px;background:var(--linie);position:relative;border:0;flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .15s}
+.switch:checked{background:var(--gruen-dunkel)}
+.switch:checked::after{left:21px}
+
+/* Testleiste nur bei ?test=1 */
+.testleiste{
+  position:absolute;left:0;right:0;top:0;z-index:40;
+  background:#043525;color:#E9F2E2;font-size:11px;line-height:1.3;
+  padding:.3rem .5rem;
+  display:flex;flex-wrap:nowrap;gap:.3rem;align-items:center;
+  overflow-x:auto;white-space:nowrap;
+  height:40px;
+}
+.testleiste[hidden]{display:none !important}
+.testleiste strong{color:var(--gruen-hell);margin-right:.3rem;font-size:10px;letter-spacing:.04em;text-transform:uppercase;flex:none}
+.testleiste button{
+  background:#074F37;color:#fff;border:1px solid #16513c;border-radius:999px;
+  min-height:28px;padding:.15rem .5rem;font-size:11px;font-weight:600;flex:none;
+}
+.testleiste button:hover{background:#0a6244}
+.app.test-aktiv .kopf{margin-top:40px}
+
+/* Figur: Vektor, Stufen, Stimmungen, Bewegung */
+#kleeblatt{
+  transform-origin:512px 512px;
+  transform-box:view-box;
+  transition:transform .55s ease;
+}
+.klee[data-stufe="0"] #kleeblatt{transform:scale(.74)}
+.klee[data-stufe="1"] #kleeblatt{transform:scale(.86)}
+.klee[data-stufe="2"] #kleeblatt{transform:scale(.94)}
+.klee[data-stufe="3"] #kleeblatt{transform:scale(1)}
+
+#blatt-oben,#blatt-rechts,#blatt-unten,#blatt-links{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .7s ease;
+}
+.klee[data-stufe="1"] #blatt-links,
+.klee[data-stufe="1"] #blatt-rechts{opacity:1;pointer-events:auto}
+.klee[data-stufe="2"] #blatt-links,
+.klee[data-stufe="2"] #blatt-rechts,
+.klee[data-stufe="2"] #blatt-oben{opacity:1;pointer-events:auto}
+.klee[data-stufe="3"] #blatt-oben,
+.klee[data-stufe="3"] #blatt-rechts,
+.klee[data-stufe="3"] #blatt-unten,
+.klee[data-stufe="3"] #blatt-links{opacity:1;pointer-events:auto}
+
+/* Blätter wiegen sich einzeln und zeitversetzt um ihre Drehpunkte */
+#blatt-oben{animation:wiegen-oben 3.4s ease-in-out infinite}
+#blatt-rechts{animation:wiegen-rechts 3.9s ease-in-out infinite .35s}
+#blatt-unten{animation:wiegen-unten 4.3s ease-in-out infinite .7s}
+#blatt-links{animation:wiegen-links 3.7s ease-in-out infinite 1.05s}
+@keyframes wiegen-oben{
+  0%,100%{transform:rotate(-2.4deg)}
+  50%{transform:rotate(2.6deg)}
+}
+@keyframes wiegen-rechts{
+  0%,100%{transform:rotate(2.2deg)}
+  50%{transform:rotate(-2.5deg)}
+}
+@keyframes wiegen-unten{
+  0%,100%{transform:rotate(-2deg)}
+  50%{transform:rotate(2.3deg)}
+}
+@keyframes wiegen-links{
+  0%,100%{transform:rotate(-2.3deg)}
+  50%{transform:rotate(2.4deg)}
+}
+
+.klee[data-stimmung="durstig"] #blatt-oben,
+.klee[data-stimmung="sehnt"] #blatt-oben{animation:haengen-oben 4.2s ease-in-out infinite}
+.klee[data-stimmung="durstig"] #blatt-rechts,
+.klee[data-stimmung="sehnt"] #blatt-rechts{animation:haengen-rechts 4.4s ease-in-out infinite .2s}
+.klee[data-stimmung="durstig"] #blatt-unten,
+.klee[data-stimmung="sehnt"] #blatt-unten{animation:haengen-unten 4.6s ease-in-out infinite .4s}
+.klee[data-stimmung="durstig"] #blatt-links,
+.klee[data-stimmung="sehnt"] #blatt-links{animation:haengen-links 4.3s ease-in-out infinite .15s}
+@keyframes haengen-oben{
+  0%,100%{transform:rotate(5deg)}
+  50%{transform:rotate(8deg)}
+}
+@keyframes haengen-rechts{
+  0%,100%{transform:rotate(-6deg)}
+  50%{transform:rotate(-9deg)}
+}
+@keyframes haengen-unten{
+  0%,100%{transform:rotate(6deg)}
+  50%{transform:rotate(9deg)}
+}
+@keyframes haengen-links{
+  0%,100%{transform:rotate(6deg)}
+  50%{transform:rotate(9deg)}
+}
+
+.klee[data-stimmung="schlaeft"] #blatt-oben,
+.klee[data-stimmung="schlaeft"] #blatt-rechts,
+.klee[data-stimmung="schlaeft"] #blatt-unten,
+.klee[data-stimmung="schlaeft"] #blatt-links{animation:none}
+
+/* Münder: genau einer sichtbar */
+#mund-lachen,#mund-laecheln,#mund-staunen,#mund-traurig,#mund-schlafend{display:none}
+.klee[data-stimmung="gluecklich"] #mund-lachen,
+.klee[data-stimmung="freudig"] #mund-lachen,
+.klee[data-stimmung="willkommen"] #mund-lachen{display:inline}
+.klee[data-stimmung="zufrieden"] #mund-laecheln,
+.klee[data-stimmung="muede"] #mund-laecheln{display:inline}
+.klee[data-stimmung="staunt"] #mund-staunen{display:inline}
+.klee[data-stimmung="durstig"] #mund-traurig,
+.klee[data-stimmung="braucht-licht"] #mund-traurig,
+.klee[data-stimmung="zuwendung"] #mund-traurig,
+.klee[data-stimmung="sehnt"] #mund-traurig{display:inline}
+.klee[data-stimmung="schlaeft"] #mund-schlafend{display:inline}
+
+/* Augen */
+#auge-links-offen,#auge-rechts-offen{display:inline}
+#lid-links-blinzeln,#lid-rechts-blinzeln,
+#lid-links-schlafend,#lid-rechts-schlafend{display:none}
+.klee.is-blinzeln #auge-links-offen,
+.klee.is-blinzeln #auge-rechts-offen{display:none}
+.klee.is-blinzeln #lid-links-blinzeln,
+.klee.is-blinzeln #lid-rechts-blinzeln{display:inline}
+.klee[data-stimmung="schlaeft"] #auge-links-offen,
+.klee[data-stimmung="schlaeft"] #auge-rechts-offen{display:none}
+.klee[data-stimmung="schlaeft"] #lid-links-schlafend,
+.klee[data-stimmung="schlaeft"] #lid-rechts-schlafend{display:inline}
+.klee[data-stimmung="schlaeft"] #lid-links-blinzeln,
+.klee[data-stimmung="schlaeft"] #lid-rechts-blinzeln{display:none}
+.klee[data-stimmung="schlaeft"] #augenbrauen{
+  transform:translateY(10px);
+  transition:transform .4s ease;
+}
+#augenbrauen{transition:transform .4s ease}
+
+.klee[data-stimmung="braucht-licht"] #blatt-oben,
+.klee[data-stimmung="braucht-licht"] #blatt-rechts,
+.klee[data-stimmung="braucht-licht"] #blatt-unten,
+.klee[data-stimmung="braucht-licht"] #blatt-links{filter:saturate(.55) brightness(1.12)}
+
+svg.klee{
+  transform-origin:50% 55%;
+  animation:atmen 3.6s ease-in-out infinite;
+}
+@keyframes atmen{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+.klee[data-stimmung="freudig"],
+.klee[data-stimmung="staunt"]{animation:huepfen .55s ease}
+@keyframes huepfen{
+  0%,100%{transform:translateY(0) scale(1)}
+  40%{transform:translateY(-12px) scale(1.03)}
+  70%{transform:translateY(-3px) scale(1.01)}
+}
+.klee[data-stimmung="schlaeft"]{animation:schlaf 4.6s ease-in-out infinite}
+@keyframes schlaf{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+
+.funkeln{opacity:0;transition:opacity .25s ease}
+.klee[data-stimmung="freudig"] ~ .funkeln,
+.klee[data-stimmung="staunt"] ~ .funkeln{opacity:1}
+
+@media (prefers-reduced-motion: reduce){
+  svg.klee,.klee[data-stimmung="freudig"],.klee[data-stimmung="staunt"],.klee[data-stimmung="schlaeft"],
+  #blatt-oben,#blatt-rechts,#blatt-unten,#blatt-links,
+  #kleeblatt,#augenbrauen,.leiste > span{animation:none;transition:none}
+}
+html[data-bewegung="aus"] svg.klee,
+html[data-bewegung="aus"] .klee[data-stimmung="freudig"],
+html[data-bewegung="aus"] .klee[data-stimmung="staunt"],
+html[data-bewegung="aus"] .klee[data-stimmung="schlaeft"],
+html[data-bewegung="aus"] #blatt-oben,
+html[data-bewegung="aus"] #blatt-rechts,
+html[data-bewegung="aus"] #blatt-unten,
+html[data-bewegung="aus"] #blatt-links,
+html[data-bewegung="aus"] #kleeblatt,
+html[data-bewegung="aus"] #augenbrauen,
+html[data-bewegung="aus"] .leiste > span{animation:none;transition:none}
+
+.skip{
+  position:absolute;left:.6rem;top:-4rem;z-index:50;
+  background:var(--gruen-dunkel);color:#fff;padding:.6rem .8rem;border-radius:10px;font-weight:600;
+}
+.skip:focus{top:.6rem}

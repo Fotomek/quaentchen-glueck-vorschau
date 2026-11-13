@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Vorschau: Quäntchen Glück Spiel.">
+  <title>Quäntchen Glück Spiel</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/spiel.css">
+</head>
+<body>
+  <a class="skip" href="#buehne">Zum Spiel</a>
+
+  <div class="app" id="app">
+    <div class="testleiste" id="testleiste" hidden data-testid="testleiste">
+      <strong>Test</strong>
+      <button type="button" data-test="phase" data-wert="morgen">Morgen</button>
+      <button type="button" data-test="phase" data-wert="tag">Tag</button>
+      <button type="button" data-test="phase" data-wert="abend">Abend</button>
+      <button type="button" data-test="phase" data-wert="nacht">Nacht</button>
+      <button type="button" data-test="spulen" data-ms="3600000">+1 Std</button>
+      <button type="button" data-test="spulen" data-ms="21600000">+6 Std</button>
+      <button type="button" data-test="spulen" data-ms="172800000">+2 Tage</button>
+      <button type="button" data-test="werte" data-wert="voll">Werte voll</button>
+      <button type="button" data-test="werte" data-wert="mittel">Mittel</button>
+      <button type="button" data-test="werte" data-wert="schlaff">Schlaff</button>
+      <button type="button" data-test="glueck" data-wert="30">+30 Glück</button>
+      <button type="button" data-test="glueck" data-wert="160">Vierblatt</button>
+      <button type="button" data-test="willkommen">Willkommen</button>
+      <button type="button" data-test="reset">Reset</button>
+    </div>
+
+    <header class="kopf">
+      <div class="marke" aria-hidden="true">
+        <img src="assets/img/bildmarke.svg" width="44" height="44" alt="">
+      </div>
+      <div class="titel">
+        <strong>Quäntchen <span class="akzent">Glück</span> Spiel</strong>
+        <small id="untertitel">dein Kleeblatt</small>
+      </div>
+    </header>
+
+    <div class="wiese-grund" aria-hidden="true">
+      <svg viewBox="0 0 430 260" preserveAspectRatio="none">
+        <path fill="#E5F0C8" d="M0 120 C70 90 110 150 180 120 C250 90 300 140 360 110 C400 92 420 100 430 108 L430 260 L0 260 Z"/>
+        <path fill="#EEF6DC" d="M0 160 C80 130 140 190 220 155 C300 120 350 180 430 150 L430 260 L0 260 Z"/>
+        <path fill="#E2EFC4" d="M0 200 C90 180 200 230 430 190 L430 260 L0 260 Z"/>
+      </svg>
+    </div>
+    <div class="sterne" id="sterne" aria-hidden="true"></div>
+
+    <main class="buehne" id="buehne">
+      <div class="spruch" id="spruch" aria-live="polite"></div>
+
+      <div class="figur-wrap" id="figur-wrap" data-testid="figur">
+        <span class="figur-schatten" aria-hidden="true"></span>
+        <svg class="klee" id="klee" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 1024 1024"
+                  overflow="visible"
+                  role="img"
+                  aria-labelledby="klee-titel klee-desc"
+                  data-stufe="0"
+                  data-stimmung="zufrieden">
+              <title id="klee-titel">dein Kleeblatt</title>
+              <desc id="klee-desc">Ein freundliches Kleeblatt ohne Hände und Füße.</desc>
+          <defs>
+            <radialGradient id="wange-grad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#F0A090" stop-opacity="0.90"/>
+              <stop offset="55%" stop-color="#F0A090" stop-opacity="0.50"/>
+              <stop offset="100%" stop-color="#F0A090" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="gesicht-glanz-grad" cx="38%" cy="32%" r="60%">
+              <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.18"/>
+              <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="iris-grad" cx="42%" cy="38%" r="65%">
+              <stop offset="0%" stop-color="#2E8A4E"/>
+              <stop offset="70%" stop-color="#1A6B3C"/>
+              <stop offset="100%" stop-color="#074F37"/>
+            </radialGradient>
+            <clipPath id="clip-auge-links">
+              <ellipse cx="428.0" cy="458.0" rx="50.0" ry="58.0"
+                       transform="rotate(16.0 428.0 458.0)"/>
+            </clipPath>
+            <clipPath id="clip-auge-rechts">
+              <ellipse cx="596.0" cy="458.0" rx="50.0" ry="58.0"
+                       transform="rotate(-16.0 596.0 458.0)"/>
+            </clipPath>
+          </defs>
+          <g id="kleeblatt">
+          <g id="blatt-unten"
+             data-pivot="512.0 710.0"
+             style="transform-box:view-box; transform-origin:512.0px 710.0px">
+            <path id="blatt-unten-fuellung"
+                  d="M 772.22 772.22 C 775.28 787.62 776.17 808.95 774.26 824.55 C 772.21 841.21 766.39 863.28 759.16 878.43 C 751.25 895.04 738.73 917.38 724.47 928.99 C 711.19 939.80 688.15 946.45 671.38 949.90 C 658.92 952.46 641.53 950.74 628.99 948.60 C 615.88 946.37 598.17 942.14 586.67 935.47 C 577.06 929.89 567.29 918.00 560.75 909.02 C 553.47 899.03 545.79 884.24 541.03 872.83 C 536.54 862.06 532.53 846.91 530.09 835.49 C 527.69 824.31 526.17 809.08 524.97 797.71 C 523.91 787.56 528.37 772.16 522.55 763.78 C 518.94 758.58 505.06 758.58 501.45 763.78 C 495.63 772.16 500.09 787.56 499.03 797.71 C 497.83 809.08 496.31 824.31 493.91 835.49 C 491.47 846.91 487.46 862.06 482.97 872.83 C 478.21 884.24 470.53 899.03 463.25 909.02 C 456.71 918.00 446.94 929.89 437.33 935.47 C 425.83 942.14 408.12 946.37 395.01 948.60 C 382.47 950.74 365.08 952.46 352.62 949.90 C 335.85 946.45 312.81 939.80 299.53 928.99 C 285.27 917.38 272.75 895.04 264.84 878.43 C 257.61 863.28 251.79 841.21 249.74 824.55 C 247.83 808.95 248.72 787.62 251.78 772.22 C 253.51 763.54 259.74 752.87 265.37 746.04 C 278.74 729.83 299.11 710.41 314.53 696.14 C 329.97 681.85 350.64 662.62 368.13 650.93 C 380.26 642.82 397.80 631.44 412.37 630.74 C 442.49 629.29 481.85 644.00 512.00 644.00 C 542.15 644.00 581.51 629.29 611.63 630.74 C 626.20 631.44 643.74 642.82 655.87 650.93 C 673.36 662.62 694.03 681.85 709.47 696.14 C 724.89 710.41 745.26 729.83 758.63 746.04 C 764.26 752.87 770.49 763.54 772.22 772.22 Z"
+                  fill="#92CB0D" stroke="none"/>
+            <path id="blatt-unten-kontur"
+                  d="M 772.22 772.22 C 772.83 787.91 776.17 808.95 774.26 824.55 C 772.21 841.21 766.39 863.28 759.16 878.43 C 751.25 895.04 738.73 917.38 724.47 928.99 C 711.19 939.80 688.15 946.45 671.38 949.90 C 658.92 952.46 641.53 950.74 628.99 948.60 C 615.88 946.37 598.17 942.14 586.67 935.47 C 577.06 929.89 567.29 918.00 560.75 909.02 C 553.47 899.03 545.79 884.24 541.03 872.83 C 536.54 862.06 532.53 846.91 530.09 835.49 C 527.69 824.31 526.17 809.08 524.97 797.71 C 523.91 787.56 528.37 772.16 522.55 763.78 C 518.94 758.58 505.06 758.58 501.45 763.78 C 495.63 772.16 500.09 787.56 499.03 797.71 C 497.83 809.08 496.31 824.31 493.91 835.49 C 491.47 846.91 487.46 862.06 482.97 872.83 C 478.21 884.24 470.53 899.03 463.25 909.02 C 456.71 918.00 446.94 929.89 437.33 935.47 C 425.83 942.14 408.12 946.37 395.01 948.60 C 382.47 950.74 365.08 952.46 352.62 949.90 C 335.85 946.45 312.81 939.80 299.53 928.99 C 285.27 917.38 272.75 895.04 264.84 878.43 C 257.61 863.28 251.79 841.21 249.74 824.55 C 247.83 808.95 251.17 787.91 251.78 772.22"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+            <path id="blatt-unten-falte"
+                  d="M 512.00 724.00 L 512.00 754.00"
+                  fill="none" stroke="#074F37" stroke-width="8"
+                  stroke-linecap="round"/>
+          </g>
+          <g id="blatt-links"
+             data-pivot="314.0 512.0"
+             style="transform-box:view-box; transform-origin:314.0px 512.0px">
+            <path id="blatt-links-fuellung"
+                  d="M 251.78 772.22 C 236.38 775.28 215.05 776.17 199.45 774.26 C 182.79 772.21 160.72 766.39 145.57 759.16 C 128.96 751.25 106.62 738.73 95.01 724.47 C 84.20 711.19 77.55 688.15 74.10 671.38 C 71.54 658.92 73.26 641.53 75.40 628.99 C 77.63 615.88 81.86 598.17 88.53 586.67 C 94.11 577.06 106.00 567.29 114.98 560.75 C 124.97 553.47 139.76 545.79 151.17 541.03 C 161.94 536.54 177.09 532.53 188.51 530.09 C 199.69 527.69 214.92 526.17 226.29 524.97 C 236.44 523.91 251.84 528.37 260.22 522.55 C 265.42 518.94 265.42 505.06 260.22 501.45 C 251.84 495.63 236.44 500.09 226.29 499.03 C 214.92 497.83 199.69 496.31 188.51 493.91 C 177.09 491.47 161.94 487.46 151.17 482.97 C 139.76 478.21 124.97 470.53 114.98 463.25 C 106.00 456.71 94.11 446.94 88.53 437.33 C 81.86 425.83 77.63 408.12 75.40 395.01 C 73.26 382.47 71.54 365.08 74.10 352.62 C 77.55 335.85 84.20 312.81 95.01 299.53 C 106.62 285.27 128.96 272.75 145.57 264.84 C 160.72 257.61 182.79 251.79 199.45 249.74 C 215.05 247.83 236.38 248.72 251.78 251.78 C 260.46 253.51 271.13 259.74 277.96 265.37 C 294.17 278.74 313.59 299.11 327.86 314.53 C 342.15 329.97 361.38 350.64 373.07 368.13 C 381.18 380.26 392.56 397.80 393.26 412.37 C 394.71 442.49 380.00 481.85 380.00 512.00 C 380.00 542.15 394.71 581.51 393.26 611.63 C 392.56 626.20 381.18 643.74 373.07 655.87 C 361.38 673.36 342.15 694.03 327.86 709.47 C 313.59 724.89 294.17 745.26 277.96 758.63 C 271.13 764.26 260.46 770.49 251.78 772.22 Z"
+                  fill="#92CB0D" stroke="none"/>
+            <path id="blatt-links-kontur"
+                  d="M 251.78 772.22 C 236.09 772.83 215.05 776.17 199.45 774.26 C 182.79 772.21 160.72 766.39 145.57 759.16 C 128.96 751.25 106.62 738.73 95.01 724.47 C 84.20 711.19 77.55 688.15 74.10 671.38 C 71.54 658.92 73.26 641.53 75.40 628.99 C 77.63 615.88 81.86 598.17 88.53 586.67 C 94.11 577.06 106.00 567.29 114.98 560.75 C 124.97 553.47 139.76 545.79 151.17 541.03 C 161.94 536.54 177.09 532.53 188.51 530.09 C 199.69 527.69 214.92 526.17 226.29 524.97 C 236.44 523.91 251.84 528.37 260.22 522.55 C 265.42 518.94 265.42 505.06 260.22 501.45 C 251.84 495.63 236.44 500.09 226.29 499.03 C 214.92 497.83 199.69 496.31 188.51 493.91 C 177.09 491.47 161.94 487.46 151.17 482.97 C 139.76 478.21 124.97 470.53 114.98 463.25 C 106.00 456.71 94.11 446.94 88.53 437.33 C 81.86 425.83 77.63 408.12 75.40 395.01 C 73.26 382.47 71.54 365.08 74.10 352.62 C 77.55 335.85 84.20 312.81 95.01 299.53 C 106.62 285.27 128.96 272.75 145.57 264.84 C 160.72 257.61 182.79 251.79 199.45 249.74 C 215.05 247.83 236.09 251.17 251.78 251.78"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+            <path id="blatt-links-falte"
+                  d="M 300.00 512.00 L 270.00 512.00"
+                  fill="none" stroke="#074F37" stroke-width="8"
+                  stroke-linecap="round"/>
+          </g>
+          <g id="blatt-oben"
+             data-pivot="512.0 314.0"
+             style="transform-box:view-box; transform-origin:512.0px 314.0px">
+            <path id="blatt-oben-fuellung"
+                  d="M 251.78 251.78 C 248.72 236.38 247.83 215.05 249.74 199.45 C 251.79 182.79 257.61 160.72 264.84 145.57 C 272.75 128.96 285.27 106.62 299.53 95.01 C 312.81 84.20 335.85 77.55 352.62 74.10 C 365.08 71.54 382.47 73.26 395.01 75.40 C 408.12 77.63 425.83 81.86 437.33 88.53 C 446.94 94.11 456.71 106.00 463.25 114.98 C 470.53 124.97 478.21 139.76 482.97 151.17 C 487.46 161.94 491.47 177.09 493.91 188.51 C 496.31 199.69 497.83 214.92 499.03 226.29 C 500.09 236.44 495.63 251.84 501.45 260.22 C 505.06 265.42 518.94 265.42 522.55 260.22 C 528.37 251.84 523.91 236.44 524.97 226.29 C 526.17 214.92 527.69 199.69 530.09 188.51 C 532.53 177.09 536.54 161.94 541.03 151.17 C 545.79 139.76 553.47 124.97 560.75 114.98 C 567.29 106.00 577.06 94.11 586.67 88.53 C 598.17 81.86 615.88 77.63 628.99 75.40 C 641.53 73.26 658.92 71.54 671.38 74.10 C 688.15 77.55 711.19 84.20 724.47 95.01 C 738.73 106.62 751.25 128.96 759.16 145.57 C 766.39 160.72 772.21 182.79 774.26 199.45 C 776.17 215.05 775.28 236.38 772.22 251.78 C 770.49 260.46 764.26 271.13 758.63 277.96 C 745.26 294.17 724.89 313.59 709.47 327.86 C 694.03 342.15 673.36 361.38 655.87 373.07 C 643.74 381.18 626.20 392.56 611.63 393.26 C 581.51 394.71 542.15 380.00 512.00 380.00 C 481.85 380.00 442.49 394.71 412.37 393.26 C 397.80 392.56 380.26 381.18 368.13 373.07 C 350.64 361.38 329.97 342.15 314.53 327.86 C 299.11 313.59 278.74 294.17 265.37 277.96 C 259.74 271.13 253.51 260.46 251.78 251.78 Z"
+                  fill="#92CB0D" stroke="none"/>
+            <path id="blatt-oben-kontur"
+                  d="M 251.78 251.78 C 251.17 236.09 247.83 215.05 249.74 199.45 C 251.79 182.79 257.61 160.72 264.84 145.57 C 272.75 128.96 285.27 106.62 299.53 95.01 C 312.81 84.20 335.85 77.55 352.62 74.10 C 365.08 71.54 382.47 73.26 395.01 75.40 C 408.12 77.63 425.83 81.86 437.33 88.53 C 446.94 94.11 456.71 106.00 463.25 114.98 C 470.53 124.97 478.21 139.76 482.97 151.17 C 487.46 161.94 491.47 177.09 493.91 188.51 C 496.31 199.69 497.83 214.92 499.03 226.29 C 500.09 236.44 495.63 251.84 501.45 260.22 C 505.06 265.42 518.94 265.42 522.55 260.22 C 528.37 251.84 523.91 236.44 524.97 226.29 C 526.17 214.92 527.69 199.69 530.09 188.51 C 532.53 177.09 536.54 161.94 541.03 151.17 C 545.79 139.76 553.47 124.97 560.75 114.98 C 567.29 106.00 577.06 94.11 586.67 88.53 C 598.17 81.86 615.88 77.63 628.99 75.40 C 641.53 73.26 658.92 71.54 671.38 74.10 C 688.15 77.55 711.19 84.20 724.47 95.01 C 738.73 106.62 751.25 128.96 759.16 145.57 C 766.39 160.72 772.21 182.79 774.26 199.45 C 776.17 215.05 772.83 236.09 772.22 251.78"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+            <path id="blatt-oben-falte"
+                  d="M 512.00 300.00 L 512.00 270.00"
+                  fill="none" stroke="#074F37" stroke-width="8"
+                  stroke-linecap="round"/>
+          </g>
+          <g id="blatt-rechts"
+             data-pivot="710.0 512.0"
+             style="transform-box:view-box; transform-origin:710.0px 512.0px">
+            <path id="blatt-rechts-fuellung"
+                  d="M 772.22 251.78 C 787.62 248.72 808.95 247.83 824.55 249.74 C 841.21 251.79 863.28 257.61 878.43 264.84 C 895.04 272.75 917.38 285.27 928.99 299.53 C 939.80 312.81 946.45 335.85 949.90 352.62 C 952.46 365.08 950.74 382.47 948.60 395.01 C 946.37 408.12 942.14 425.83 935.47 437.33 C 929.89 446.94 918.00 456.71 909.02 463.25 C 899.03 470.53 884.24 478.21 872.83 482.97 C 862.06 487.46 846.91 491.47 835.49 493.91 C 824.31 496.31 809.08 497.83 797.71 499.03 C 787.56 500.09 772.16 495.63 763.78 501.45 C 758.58 505.06 758.58 518.94 763.78 522.55 C 772.16 528.37 787.56 523.91 797.71 524.97 C 809.08 526.17 824.31 527.69 835.49 530.09 C 846.91 532.53 862.06 536.54 872.83 541.03 C 884.24 545.79 899.03 553.47 909.02 560.75 C 918.00 567.29 929.89 577.06 935.47 586.67 C 942.14 598.17 946.37 615.88 948.60 628.99 C 950.74 641.53 952.46 658.92 949.90 671.38 C 946.45 688.15 939.80 711.19 928.99 724.47 C 917.38 738.73 895.04 751.25 878.43 759.16 C 863.28 766.39 841.21 772.21 824.55 774.26 C 808.95 776.17 787.62 775.28 772.22 772.22 C 763.54 770.49 752.87 764.26 746.04 758.63 C 729.83 745.26 710.41 724.89 696.14 709.47 C 681.85 694.03 662.62 673.36 650.93 655.87 C 642.82 643.74 631.44 626.20 630.74 611.63 C 629.29 581.51 644.00 542.15 644.00 512.00 C 644.00 481.85 629.29 442.49 630.74 412.37 C 631.44 397.80 642.82 380.26 650.93 368.13 C 662.62 350.64 681.85 329.97 696.14 314.53 C 710.41 299.11 729.83 278.74 746.04 265.37 C 752.87 259.74 763.54 253.51 772.22 251.78 Z"
+                  fill="#92CB0D" stroke="none"/>
+            <path id="blatt-rechts-kontur"
+                  d="M 772.22 251.78 C 787.91 251.17 808.95 247.83 824.55 249.74 C 841.21 251.79 863.28 257.61 878.43 264.84 C 895.04 272.75 917.38 285.27 928.99 299.53 C 939.80 312.81 946.45 335.85 949.90 352.62 C 952.46 365.08 950.74 382.47 948.60 395.01 C 946.37 408.12 942.14 425.83 935.47 437.33 C 929.89 446.94 918.00 456.71 909.02 463.25 C 899.03 470.53 884.24 478.21 872.83 482.97 C 862.06 487.46 846.91 491.47 835.49 493.91 C 824.31 496.31 809.08 497.83 797.71 499.03 C 787.56 500.09 772.16 495.63 763.78 501.45 C 758.58 505.06 758.58 518.94 763.78 522.55 C 772.16 528.37 787.56 523.91 797.71 524.97 C 809.08 526.17 824.31 527.69 835.49 530.09 C 846.91 532.53 862.06 536.54 872.83 541.03 C 884.24 545.79 899.03 553.47 909.02 560.75 C 918.00 567.29 929.89 577.06 935.47 586.67 C 942.14 598.17 946.37 615.88 948.60 628.99 C 950.74 641.53 952.46 658.92 949.90 671.38 C 946.45 688.15 939.80 711.19 928.99 724.47 C 917.38 738.73 895.04 751.25 878.43 759.16 C 863.28 766.39 841.21 772.21 824.55 774.26 C 808.95 776.17 787.91 772.83 772.22 772.22"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+            <path id="blatt-rechts-falte"
+                  d="M 724.00 512.00 L 754.00 512.00"
+                  fill="none" stroke="#074F37" stroke-width="8"
+                  stroke-linecap="round"/>
+          </g>
+          <g id="gesicht">
+            <circle id="gesicht-fuellung"
+                    cx="512" cy="512" r="198"
+                    fill="#92CB0D" stroke="#074F37" stroke-width="15"/>
+            <circle id="gesicht-glanz"
+                    cx="512" cy="512" r="198"
+                    fill="url(#gesicht-glanz-grad)"/>
+          </g>
+          <g id="wangen">
+            <ellipse id="wange-links"
+                     cx="384.0" cy="560.0"
+                     rx="38.0" ry="24.0"
+                     transform="rotate(-20.0 384.0 560.0)"
+                     fill="url(#wange-grad)"/>
+            <ellipse id="wange-rechts"
+                     cx="640.0" cy="560.0"
+                     rx="38.0" ry="24.0"
+                     transform="rotate(20.0 640.0 560.0)"
+                     fill="url(#wange-grad)"/>
+          </g>
+          <g id="nase">
+            <ellipse id="nase-schatten"
+                     cx="513.0" cy="542.0"
+                     rx="22.0" ry="17.0"
+                     fill="#074F37" opacity="0.18"/>
+            <ellipse id="nase-fuellung"
+                     cx="512.0" cy="536.0"
+                     rx="24.0" ry="21.0"
+                     fill="#92CB0D" stroke="#074F37" stroke-width="3"/>
+            <ellipse id="nase-glanz"
+                     cx="505.0" cy="530.0"
+                     rx="7" ry="5.5"
+                     fill="#FFFFFF" opacity="0.28"/>
+          </g>
+          <g id="augenbrauen">
+            <path id="augenbraue-links" d="M 374 428 C 390 400 428 390 466 410"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linecap="round"/>
+            <path id="augenbraue-rechts" d="M 650 428 C 634 400 596 390 558 410"
+                  fill="none" stroke="#074F37" stroke-width="15"
+                  stroke-linecap="round"/>
+          </g>
+          <g id="augen">
+            <g id="auge-links">
+              <g id="auge-links-offen">
+                <ellipse id="auge-links-weiss"
+                         cx="428.0" cy="458.0" rx="50.0" ry="58.0"
+                         transform="rotate(16.0 428.0 458.0)"
+                         fill="#FFFFFF" stroke="#043525" stroke-width="6"/>
+                <g id="iris-links-gruppe" clip-path="url(#clip-auge-links)">
+                  <ellipse id="iris-links"
+                           cx="442.0" cy="484.0"
+                           rx="40.0" ry="48.0"
+                           fill="url(#iris-grad)"/>
+                  <ellipse id="pupille-links"
+                           cx="442.0" cy="486.0"
+                           rx="24.0" ry="30.0"
+                           fill="#043525"/>
+                  <circle id="glanz-links"
+                          cx="453.0" cy="470.0" r="10.0"
+                          fill="#FFFFFF"/>
+                  <circle id="glanz-links-klein"
+                          cx="434.0" cy="494.0" r="4.5"
+                          fill="#FFFFFF" opacity="0.9"/>
+                </g>
+              </g>
+              <g id="lid-links-blinzeln" display="none">
+                <path id="lid-links-blinzeln-linie"
+                      d="M 388 468 Q 430 492 476 470"
+                      fill="none" stroke="#043525" stroke-width="10"
+                      stroke-linecap="round"/>
+              </g>
+              <g id="lid-links-schlafend" display="none">
+                <path id="lid-links-schlafend-linie"
+                      d="M 384 472 Q 430 500 480 474"
+                      fill="none" stroke="#043525" stroke-width="11"
+                      stroke-linecap="round"/>
+              </g>
+            </g>
+            <g id="auge-rechts">
+              <g id="auge-rechts-offen">
+                <ellipse id="auge-rechts-weiss"
+                         cx="596.0" cy="458.0" rx="50.0" ry="58.0"
+                         transform="rotate(-16.0 596.0 458.0)"
+                         fill="#FFFFFF" stroke="#043525" stroke-width="6"/>
+                <g id="iris-rechts-gruppe" clip-path="url(#clip-auge-rechts)">
+                  <ellipse id="iris-rechts"
+                           cx="582.0" cy="484.0"
+                           rx="40.0" ry="48.0"
+                           fill="url(#iris-grad)"/>
+                  <ellipse id="pupille-rechts"
+                           cx="582.0" cy="486.0"
+                           rx="24.0" ry="30.0"
+                           fill="#043525"/>
+                  <circle id="glanz-rechts"
+                          cx="594.0" cy="470.0" r="10.0"
+                          fill="#FFFFFF"/>
+                  <circle id="glanz-rechts-klein"
+                          cx="574.0" cy="494.0" r="4.5"
+                          fill="#FFFFFF" opacity="0.9"/>
+                </g>
+              </g>
+              <g id="lid-rechts-blinzeln" display="none">
+                <path id="lid-rechts-blinzeln-linie"
+                      d="M 548 470 Q 594 492 636 468"
+                      fill="none" stroke="#043525" stroke-width="10"
+                      stroke-linecap="round"/>
+              </g>
+              <g id="lid-rechts-schlafend" display="none">
+                <path id="lid-rechts-schlafend-linie"
+                      d="M 544 474 Q 594 500 640 472"
+                      fill="none" stroke="#043525" stroke-width="11"
+                      stroke-linecap="round"/>
+              </g>
+            </g>
+          </g>
+          <g id="muender">
+            <g id="mund-lachen" >
+              <path id="mund-lachen-oeffnung" d="M 418 568 C 448 588 476 596 512 596 C 548 596 576 588 606 568 C 624 598 622 634 600 652 C 576 672 546 678 512 678 C 478 678 448 672 424 652 C 402 634 400 598 418 568 Z"
+                    fill="#043525" stroke="#074F37" stroke-width="3"
+                    stroke-linejoin="round"/>
+              <ellipse id="zunge" cx="512" cy="658" rx="40" ry="17" fill="#F48B7A"/>
+              <path id="zunge-linie" d="M 512 648 L 512 670"
+                    fill="none" stroke="#E07068" stroke-width="2"
+                    stroke-linecap="round" opacity="0.55"/>
+            </g>
+            <g id="mund-laecheln" display="none">
+              <path id="mund-laecheln-form" d="M 432 598 Q 512 644 592 598"
+                    fill="none" stroke="#043525" stroke-width="11"
+                    stroke-linecap="round"/>
+            </g>
+            <g id="mund-staunen" display="none">
+              <ellipse id="mund-staunen-oeffnung" cx="512" cy="620" rx="28" ry="38"
+                       fill="#043525" stroke="#074F37" stroke-width="3"/>
+              <ellipse id="mund-staunen-glanz" cx="504" cy="604" rx="9" ry="12"
+                       fill="#FFFFFF" opacity="0.18"/>
+            </g>
+            <g id="mund-traurig" display="none">
+              <path id="mund-traurig-form" d="M 446 632 Q 512 608 578 632"
+                    fill="none" stroke="#043525" stroke-width="10"
+                    stroke-linecap="round"/>
+            </g>
+            <g id="mund-schlafend" display="none">
+              <path id="mund-schlafend-linie" d="M 468 618 Q 512 636 556 618"
+                    fill="none" stroke="#043525" stroke-width="8"
+                    stroke-linecap="round"/>
+            </g>
+          </g>
+          </g>
+        </svg>
+        <svg class="funkeln" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+          <g fill="#3F7A05">
+            <circle cx="120" cy="220" r="10"/>
+            <circle cx="900" cy="180" r="8"/>
+            <circle cx="940" cy="420" r="10"/>
+            <circle cx="90" cy="480" r="7"/>
+            <circle cx="200" cy="140" r="5"/>
+            <circle cx="820" cy="820" r="6"/>
+          </g>
+        </svg>
+      </div>
+    </main>
+
+    <section class="werte" aria-label="Bedürfnisse">
+      <div class="wert" id="wert-wasser" data-testid="wert-wasser">
+        <div class="wert-kopf"><span class="wert-name">Wasser</span><span class="wert-zahl"></span></div>
+        <div class="leiste" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="wert" id="wert-licht" data-testid="wert-licht">
+        <div class="wert-kopf"><span class="wert-name">Licht</span><span class="wert-zahl"></span></div>
+        <div class="leiste" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="wert" id="wert-freude" data-testid="wert-freude">
+        <div class="wert-kopf"><span class="wert-name">Freude</span><span class="wert-zahl"></span></div>
+        <div class="leiste" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <div class="werkzeuge">
+      <button type="button" class="icon-btn" id="btn-buch" data-testid="btn-buch">Glücksbuch</button>
+      <div class="punkte">Glück: <b id="glueck-zahl">0</b></div>
+      <button type="button" class="icon-btn" id="btn-info" data-testid="btn-info">Info</button>
+    </div>
+
+    <nav class="aktionen" aria-label="Pflege">
+      <button type="button" class="aktion aktion-giessen" id="btn-wasser" data-testid="btn-wasser">Gießen</button>
+      <button type="button" class="aktion aktion-licht" id="btn-licht" data-testid="btn-licht">Licht schenken</button>
+      <button type="button" class="aktion aktion-freude" id="btn-freude" data-testid="btn-freude">Zuwendung</button>
+    </nav>
+
+    <section class="overlay willkommen" id="screen-willkommen" data-testid="willkommen" hidden>
+      <img class="logo-lg" src="assets/img/bildmarke.svg" width="150" height="141" alt="Bildmarke Quäntchen Glück">
+      <h1>Quäntchen <span class="akzent">Glück</span> Spiel</h1>
+      <p class="claim">GEMEINSAM STATT EINSAM</p>
+      <p>Pflege dein Kleeblatt mit Wasser, Licht und ein bisschen Zuwendung. Kleine Gesten machen einen großen Unterschied.</p>
+      <p class="badge">Für Kinder und Familien</p>
+      <button type="button" class="btn btn-dunkel" id="btn-start" data-testid="btn-start">Los geht’s</button>
+    </section>
+
+    <section class="overlay" id="screen-buch" data-testid="gluecksbuch" hidden>
+      <button type="button" class="btn btn-rand oben-zu" id="btn-buch-zu">Zurück zur Wiese</button>
+      <h2>Glücksbuch</h2>
+      <p class="lead" id="buch-lead"></p>
+      <div class="karten" id="karten"></div>
+      <h2>Glückssätze</h2>
+      <ul class="saetze" id="saetze"></ul>
+      <button type="button" class="btn btn-dunkel zurueck" id="btn-buch-zu-unten">Zurück zur Wiese</button>
+    </section>
+
+    <section class="overlay info" id="screen-info" data-testid="info" hidden>
+      <button type="button" class="btn btn-rand oben-zu" id="btn-info-zu">Zurück zur Wiese</button>
+      <h2>Über das Spiel</h2>
+      <p>Das Quäntchen Glück Spiel ist ein ruhiges Browserspiel. Du pflegst dein Kleeblatt, und es wächst mit deiner Fürsorge. Es stirbt nicht, und es gibt nichts zu kaufen.</p>
+      <p>Quäntchen Glück e. V. hilft mit kleinen Gesten Kindern und Familien und allen, die Unterstützung brauchen. Gemeinsam statt einsam.</p>
+      <p><a id="link-verein" href="https://fotomek.github.io/quaentchen-glueck-vorschau/" target="_blank" rel="noopener noreferrer">Mehr über den Verein</a></p>
+      <p><strong>Datenschutz.</strong> Dein Spielstand bleibt auf diesem Gerät, in deinem Browser. Wir legen kein Konto an und schicken keine Daten weg.</p>
+      <div class="zeile-opt">
+        <label for="opt-bewegung">Weniger Bewegung</label>
+        <input class="switch" type="checkbox" id="opt-bewegung">
+      </div>
+      <button type="button" class="btn btn-rand" id="btn-reset-info" style="margin-bottom:1rem">Stand zurücksetzen</button>
+      <p style="color:var(--text-2);font-size:.85rem">Ein Spiel von Quäntchen Glück e. V. Vorschau, noch nicht öffentlich beworben.</p>
+      <button type="button" class="btn btn-dunkel zurueck" id="btn-info-zu-unten">Zurück zur Wiese</button>
+    </section>
+  </div>
+
+  <script src="js/spiel.js" defer></script>
+</body>
+</html>
