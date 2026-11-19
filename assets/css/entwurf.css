@@ -1,5 +1,5 @@
 /* Ein Entwurf. Ersetzt die Varianten A/B/C.
-   Vereinsfarben, Asap und Kaushan bleiben in base.css. */
+   Vereinsfarben bleiben in base.css. Fließtext ist Poppins, Akzent ist Dancing Script. */
 
 :root{
   --sand:#F7F1E6;
@@ -283,6 +283,11 @@ html[data-entwurf="aus"] .entwurf-leiste{display:none}
 .mitmachen-extra{max-width:22rem;margin-top:1.2rem}
 .mitmachen-extra summary{width:auto;padding-inline:1.15rem}
 .geschichte summary:focus-visible{outline-offset:-3px}
+/* Poppins ist breiter: nur so weit knapper, dass die Zeile auf schmalen Screens nicht umbricht. */
+@media (max-width:400px){
+  .pfad .btn{font-size:.95rem;padding-inline:1.05rem}
+  .faq summary{font-size:1.02rem}
+}
 @media (min-width:840px){
   .pfade{grid-template-columns:1fr 1fr;gap:1rem 1rem}
   .pfad-pate{margin-top:.4rem}
